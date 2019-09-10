@@ -1,110 +1,55 @@
-﻿import React, { Component } from "react";
-import classnames from "classnames";
+﻿import classnames from "classnames";
 import WarningMessage from "../WarningMessage";
 import MasterDetailPage from "./MasterDetailPage";
 import MasterDetailSideBarTab from "./MasterDetailSideBarTab";
 import GreyAvatar from "../../images/GreyAvatar.svg";
-import styles from "./masterdetail.module.css";
+import styles from "./masterdetail.module.scss";
 import CONSTANTS from "../../constants";
+import React, { useState, useEffect } from 'react';
+import "./masterdetail.module.scss";
 
-export default class Master_Detail3 extends Component {
-  constructor(props) {
-    super(props);
+export default function Master_Detail3() {
+  
+  var [clinics, setClinics] = useState(0);
+  var [hasError, setErrors] = useState(false);
 
-    this.state = {
-      currentDisplayTabIndex: 0,
-      masterDetailText: [
-        {
-          shortDescription: "",
-          longDescription: "",
-          title: "",
-          status: "",
-          shipTo: "",
-          orderTotal: 0.0,
-          orderDate: "",
-          id: 0
-        }
-      ]
-    };
-    this.handleDisplayTabClick = this.handleDisplayTabClick.bind(this);
-    this.handleWarningClose = this.handleWarningClose.bind(this);
+  var result = [];
+  
+
+  useEffect (() => {
+    async function fetchData() {
+      const res = await fetch(CONSTANTS.ENDPOINT.MASTERDETAIL);
+      res
+        .json()
+        .then(res => setClinics(res[0]))
+        .catch(err => setErrors(err));
+    }
+
+    
+
+    fetchData();
+    
+
+  },[]);
+
+  process.on('uncaughtException', function (err) {
+    console.log(err);
+},[]); 
+
+
+
+  function handleItemClick (e) {
+    console.log('item clicked');
+    
   }
 
-  // Get the sample data from the back end
-  componentDidMount() {
-    fetch(CONSTANTS.ENDPOINT.MASTERDETAIL)
-      .then(response => {
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-        return response.json();
-      })
-      .then(result => {
-        this.setState({ masterDetailText: result });
-      })
-      .catch(error =>
-        this.setState({
-          WarningMessageOpen: true,
-          WarningMessageText: `${
-            CONSTANTS.ERROR_MESSAGE.MASTERDETAIL_GET
-          } ${error}`
-        })
-      );
-  }
+  return (
+    <div style={{width: '400px'}}>
+    
+    <MasterDetailPage key={clinics.id} onClick={handleItemClick} {...clinics}/>
 
-  handleWarningClose() {
-    this.setState({
-      WarningMessageOpen: false,
-      WarningMessageText: ""
-    });
-  }
-
-  handleDisplayTabClick(id) {
-    this.setState({ currentDisplayTabIndex: id });
-  }
-
-  render() {
-    const {
-      masterDetailText,
-      currentDisplayTabIndex,
-      WarningMessageOpen,
-      WarningMessageText
-    } = this.state;
-    return (
-      <main id="mainContent">
-        <div className="container-fluid">
-          <div className="row">
-            <div
-              className={classnames(
-                "col-2",
-                "p-0",
-                "border-right",
-                styles.sidebar
-              )}
-            >
-              <div className="list-group list-group-flush border-bottom">
-                {masterDetailText.map((textAssets, index) => (
-                  <MasterDetailSideBarTab
-                    onDisplayTabClick={this.handleDisplayTabClick}
-                    tabText={textAssets.title}
-                    image={GreyAvatar}
-                    index={index}
-                    key={textAssets.id}
-                  />
-                ))}
-              </div>
-            </div>
-            <MasterDetailPage
-              textSampleData={masterDetailText[currentDisplayTabIndex]}
-            />
-          </div>
-        </div>
-        <WarningMessage
-          open={WarningMessageOpen}
-          text={WarningMessageText}
-          onWarningClose={this.handleWarningClose}
-        />
-      </main>
+    </div>
     );
+  
   }
-}
+  

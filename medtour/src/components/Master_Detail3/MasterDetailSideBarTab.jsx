@@ -1,6 +1,6 @@
 ﻿import React from "react";
 import classnames from "classnames";
-import styles from "./masterdetail.module.css";
+import styles from "./masterdetail.module.scss";
 
 export default function MasterDetailSideBarTab(props) {
   const { index, image, tabText, onDisplayTabClick } = props;
