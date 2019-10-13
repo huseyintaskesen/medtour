@@ -19,3 +19,11 @@
   background-color: #cecece;
   padding-top: 18em;
 }
+
+
+
+.card{
+  margin-top: 30px !important;
+  width: 1000px;
+  margin-left: 20px;
+}
