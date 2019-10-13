@@ -13,40 +13,39 @@ export default function Master_Detail3() {
   var [clinics, setClinics] = useState(0);
   var [hasError, setErrors] = useState(false);
 
-  var result = [];
+  var clinicList = [];
   
 
-  useEffect (() => {
+   useEffect (() => {
     async function fetchData() {
       const res = await fetch(CONSTANTS.ENDPOINT.MASTERDETAIL);
       res
         .json()
-        .then(res => setClinics(res[0]))
+        .then(res => handleDataFetch(res))
         .catch(err => setErrors(err));
     }
-
-    
-
-    fetchData();
-    
-
+     fetchData();
   },[]);
 
   process.on('uncaughtException', function (err) {
     console.log(err);
 },[]); 
 
-
-
   function handleItemClick (e) {
     console.log('item clicked');
     
   }
 
+  function handleDataFetch(res){
+    clinicList = res;
+    setClinics(clinicList);
+    console.log(clinicList);
+  }
+
   return (
     <div style={{width: '400px'}}>
-    
-    <MasterDetailPage key={clinics.id} onClick={handleItemClick} {...clinics}/>
+    {clinicList}
+    <MasterDetailPage key={clinics.id} onClick={handleItemClick} {...clinicList[0]}/>
 
     </div>
     );

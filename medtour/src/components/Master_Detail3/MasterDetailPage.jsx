@@ -2,10 +2,12 @@
 import './masterdetail.module.scss'
 
 const Clinic = (props) => {
+    
 
     const { children, className = '', shortDescription, title,
         orderTotal, id, onClick } = props;
     const toolCls = 'item-tools-left';
+    
         return (
             <div
               className={`list-item ${className} ${toolCls}`}
@@ -24,6 +26,6 @@ const Clinic = (props) => {
               <div className="tools">{children}</div>
             </div>
           );
-        };
-
+        }
+        
 export default Clinic;
