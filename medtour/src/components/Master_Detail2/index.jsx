@@ -61,4 +61,4 @@ export default class Master_Detail2 extends Component {
             </div>
         );
     }
-}
+  }
