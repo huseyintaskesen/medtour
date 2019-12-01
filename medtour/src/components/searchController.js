@@ -21,8 +21,8 @@
 //         type: 'Hair transparant'
 //     }
 //   ]
-//   SearchResultsView = (this.clinicData) => {
 
-//   }
+
+  
 
 // }

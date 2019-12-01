@@ -6,7 +6,6 @@ import MasterDetailSideBarTab from "./MasterDetailSideBarTab";
 import GreyAvatar from "../../images/GreyAvatar.svg";
 import styles from "./masterdetail.module.css";
 import CONSTANTS from "../../constants";
-import ClinicWrapper from "./ClinicWrapperComponent";
 import ClinicCardComponent from "../ClinicCard/ClinicCardComponent"
 
 export default class SearchResultsView extends Component {
@@ -46,7 +45,10 @@ export default class SearchResultsView extends Component {
         'date': '20.09.2017',
         'title': 'satisfied, highly recommended',
         'description': 'everything was ok.'
-      }
+      },
+      rating: 2,
+      avatar: "http://placekitten.com/50/50"
+
     },
     {
         name: 'Aura',
@@ -70,7 +72,9 @@ export default class SearchResultsView extends Component {
             'date': '20.09.2017',
             'title': 'clean clinic but very expensive',
             'description': ''
-          }
+          },
+          rating: 5,
+          avatar:"http://placekitten.com/49/50"
         
     },
     {
@@ -95,14 +99,16 @@ export default class SearchResultsView extends Component {
           'date': '20.09.2017',
           'title': 'clean clinic with experienced doctors',
           'description': 'i was very pleased during my treatment.'
-        }
+        },
+        rating: 4,
+        avatar: "http://placekitten.com/50/51"
     }
   ]
   createCardComponents(){
     var nodes = this.clinicData.map(function (clinic){
       return (
         <div>
-          <ClinicCardComponent name={clinic.name} type={clinic.type} location={clinic.location} address={clinic.address} treatments = {clinic.treatments} review={clinic.review}></ClinicCardComponent>
+          <ClinicCardComponent name={clinic.name} type={clinic.type} location={clinic.location} address={clinic.address} treatments = {clinic.treatments} review={clinic.review} avatar={clinic.avatar} rating={clinic.rating}></ClinicCardComponent>
         </div>
       );
     });

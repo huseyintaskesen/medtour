@@ -50,7 +50,7 @@ export default function ClinicCardComponent (props) {
                                 </div>
                             </div>
                             <div class="col-4 borderLeft">
-                                <ClinicCardImageAndRating> </ClinicCardImageAndRating>
+                                <ClinicCardImageAndRating rating={props.rating} avatar={props.avatar}> </ClinicCardImageAndRating>
                             </div>
                             
                         </div>
