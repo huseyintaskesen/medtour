@@ -11,31 +11,47 @@ const CONSTANTS = require("./constants");
 const dbpass = "bilkentbitirme";
 var MongoClient = require('mongodb').MongoClient;
 
+
 // Connect to the db
 MongoClient
 .connect("mongodb://Qikabodi:bilkentbitirme@cluster0-shard-00-00-mezhk.mongodb.net:27017,cluster0-shard-00-01-mezhk.mongodb.net:27017,cluster0-shard-00-02-mezhk.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority",
 { useUnifiedTopology: true },
  function (err, client) {
-   
     if(err) 
       throw err;
     else
       console.log("Connected")
       const db = client.db('MedTourDB')
 
-      const collection = db.collection('Doctor')
+      const collection = db.collection('Clinic')
 
-      collection.insertOne({id: 999, rating: 9, name:'test doctor', location:'Istanbul'}, (err, result) => {
+
+      collection.insertOne({id: 999, rating: 9, name:'test clinic', location:'Ankara'}, (err, result) => {
+      })
+      
+
+      // collection.find({location: 'Ankara'}).toArray((err, items) => {
+      //   console.log(items)
+      // })
+      app.use(function(req,res,next) {
+        req.db = db
+        next();
       })
 
-      collection.find({location: 'Ankara'}).toArray((err, items) => {
-        console.log(items)
-      })
+      module.exports.find_by_location = function(req,res)
+      {
+        collection.find({location: 'Ankara'}).toArray((err, items) => {
+          console.log(items)
+        })
+      }
+
+      
 
 
      //Write databse Insert/Update/Query code here..
      //console.log(db.collection('Doctor'))    
 });
+
 
 
 
@@ -116,3 +132,4 @@ function onListening() {
   const bind = typeof addr === "string" ? `pipe ${addr}` : `port ${addr.port}`;
   debug(`Listening on ${bind}`);
 }
+

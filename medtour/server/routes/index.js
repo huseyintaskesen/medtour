@@ -14,5 +14,14 @@ router.get(CONSTANTS.ENDPOINT.MASTERDETAIL, (req, res) => {
   res.json(sampleData.textAssets);
 });
 
+router.get('/clinic/:location',(req, res) => {
+  var db = req.db
+  var collection = db.get('Clinic')
+ var clinics =  collection.find({location: req.params.location}).toArray((err, items) => {
+    console.log(items)
+  })
+  res.json(clinics);
+})
+
 
 module.exports = router;
