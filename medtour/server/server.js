@@ -30,7 +30,7 @@ class Server{
 }
 
 // Connect to the db
-MongoClient
+var databaseInstance = MongoClient
 .connect("mongodb://Qikabodi:bilkentbitirme@cluster0-shard-00-00-mezhk.mongodb.net:27017,cluster0-shard-00-01-mezhk.mongodb.net:27017,cluster0-shard-00-02-mezhk.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority",
 { useUnifiedTopology: true },
  function (err, client) {
@@ -42,7 +42,7 @@ MongoClient
       db = client.db('MedTourDB')
       collection = db.collection('Clinic')
       server_object = new Server(client.db, db.collection)
-            
+
       //collection = db.collection('Clinic')
 
 
@@ -58,16 +58,18 @@ MongoClient
         next();
       })
 
-      module.exports.find_by_location = function(req,res)
-      {
-        collection.find({location: 'Ankara'}).toArray((err, items) => {
-          console.log(items)
-        })
-      }
+      // module.exports.find_by_location = function(req,res)
+      // {
+      //   collection.find({location: 'Ankara'}).toArray((err, items) => {
+      //     console.log(items)
+      //   })
+      // }
       
      //Write databse Insert/Update/Query code here..
      //console.log(db.collection('Doctor'))    
 });
+
+ 
 /**
  * Get port from environment and store in Express.
  */
@@ -153,6 +155,4 @@ function onListening() {
   debug(`Listening on ${bind}`);
 }
 
-
-
-//export default {getClinicByLocation}
+module.exports = databaseInstance

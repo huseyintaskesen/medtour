@@ -1,4 +1,8 @@
-﻿//import getClinicByLocation from "../server"
+﻿//import getDB from "../server"
+//import * as serv from '../server'
+
+const databaseInstance = require("../server")
+
 const CONSTANTS = require("../constants");
 const express = require("express");
 const sampleData = require("../sampleData");
@@ -21,6 +25,8 @@ router.get('/clinic/?:location',(req, res) => {
 //   })
 //   res.json(clinics);
   var location = req.params.location
+
+  console.log(databaseInstance.db)
   //getClinicByLocation(location)
   res.json(location)
 })
