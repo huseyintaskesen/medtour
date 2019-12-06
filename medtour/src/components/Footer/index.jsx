@@ -1,38 +1,39 @@
-﻿import React from "react";
-import styles from "./footer.module.css";
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import "./footer.css";
 
-export default function Footer() {
-  return (
-    <footer className={styles.footer}>
-      <div className="container-fluid">
-        <div className="row justify-content-around">
-          <div className="col-8 col-md-5">
-            <h5 className={styles.title}>medtour</h5>
-            <p className={styles.description}>
-              This is placeholder text. Your web app description goes here.
-            </p>
-          </div>
-          <div className="col-2">
-            <ul className="list-unstyled">
-              <li>
-                <a className={styles.footerlink} href="/">
-                  Example Link
-                </a>
-              </li>
-              <li>
-                <a className={styles.footerlink} href="/">
-                  Example Link
-                </a>
-              </li>
-              <li>
-                <a className={styles.footerlink} href="/">
-                  Example Link
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
+class Footer extends Component {
+    render() {
+        return (
+            <div className="footer">
+                <div className="footer-left">
+                    <p id="footer-left-info">
+                        Bilkent University <br />
+                        <br /> Computer Engineering <br />
+                        <br /> CS492 Senior Design Project
+                    </p>
+                </div>
+                <div className="footer-right">
+                    <p id="footer-right-info">Follow us on social media</p>
+                    <img
+                        id="facebook"
+                        src={require("../../assets/icons8-facebook-50-white.png")}
+                        alt="facebook"
+                    ></img>
+                    <img
+                        id="instagram"
+                        src={require("../../assets/icons8-instagram-50-white.png")}
+                        alt="facebook"
+                    ></img>
+                    <img
+                        id="twitter"
+                        src={require("../../assets/icons8-twitter-50-white.png")}
+                        alt="facebook"
+                    ></img>
+                </div>
+            </div>
+        );
+    }
 }
+
+export default Footer;
