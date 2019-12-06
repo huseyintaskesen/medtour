@@ -1,27 +1,69 @@
-﻿import React, { Component } from "react";
-import classnames from "classnames";
-import WarningMessage from "../WarningMessage";
-import MasterDetailPage from "./MasterDetailPage";
-import MasterDetailSideBarTab from "./MasterDetailSideBarTab";
-import GreyAvatar from "../../images/GreyAvatar.svg";
-import styles from "./masterdetail.module.css";
-import CONSTANTS from "../../constants";
-import ClinicCardComponent from "../ClinicCard/ClinicCardComponent"
+﻿import React, { useState, useEffect, Component } from 'react';import ClinicCardComponent from "../ClinicCard/ClinicCardComponent"
+import Select, { components } from 'react-select';
+const options = [
+  { value: 'ankara', label: 'Ankara' },
+  { value: 'istanbul', label: 'Istanbul' },
+  { value: 'izmir', label: 'Izmir' },
+];
+const indicatorSeparatorStyle = {
+  alignSelf: 'stretch',
+  backgroundColor: 'purple',
+  marginBottom: 8,
+  marginTop: 8,
+  width: 1,
+};
+const IndicatorSeparator = ({ innerProps }) => {
+  return <span style={indicatorSeparatorStyle} {...innerProps} />;
+};
+//const [selectedOption, setSelectedOption] = useState('');
+
+
 
 export default class SearchResultsView extends Component {
   
   constructor(props) {
     super(props);
-
     this.state = {
-      clinics: props.clinics
+      clinics: props.clinics,
+      selectedOption: null
     }
+    
+    
   }
+   get_clinics = () =>{
+     var dummy_dat = [
+       {
+         location: 'ankara',
+         name: 'ankara-muayene'
+       },
+       {
+        location: 'istanbul',
+        name: 'istanbul-muayene'
+       }
+      ]
+    // setSelectedOption(dummy_dat)
+    
+  }
+  my_array = ['hey', 'hello']
+  
+  
+  // handleChange = selectedOption => {
+  //   //setSelectedOption(selectedOption)
+  //   this.setState(
+  //     { selectedOption },
+  //     () => console.log(`Option selected:`, this.state.selectedOption)
+  //   );
+  //   useEffect((selectedOption) => {
+  //     setSelectedOption(selectedOption)
+  //     });
+    
+
+  // };
   
   clinicData = [
     {
       name: 'Akyaka',
-      location: 'Ankara',
+      city: 'Ankara',
       type: 'Dentist',
       address: '1.sokak',
       treatments: [
@@ -52,7 +94,7 @@ export default class SearchResultsView extends Component {
     },
     {
         name: 'Aura',
-        location: 'Istanbul',
+        city: 'Istanbul',
         type: 'Laser Eye',
         address: '2.sokak',
         treatments: [
@@ -79,7 +121,7 @@ export default class SearchResultsView extends Component {
     },
     {
         name: 'Guven',
-        location: 'Ankara',
+        city: 'Ankara',
         type: 'Hair transparant',
         address: '3.sokak',
         treatments: [
@@ -105,6 +147,7 @@ export default class SearchResultsView extends Component {
     }
   ]
   createCardComponents(){
+
     var nodes = this.clinicData.map(function (clinic){
       return (
         <div>
@@ -121,8 +164,23 @@ export default class SearchResultsView extends Component {
 
   }
   render(){
+    const { selectedOption } = this.state;
       return(
       <div>
+        {/* style={{width:'200px',marginTop:'15px'}} */}
+        <div >
+        <p>Filter by city:</p>
+        {/* style={{float:"left", marginRight:'9px'}} */}
+        <Select
+        closeMenuOnSelect={true}
+        components={{ IndicatorSeparator }}
+        value={selectedOption}
+        onChange={this.handleChange}
+        // defaultValue={['purple', 'yellow']}
+        isMulti
+        options={options}
+      />
+        </div>
       {this.createCardComponents()}
       </div>
       );
