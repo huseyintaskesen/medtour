@@ -8,7 +8,27 @@ const debug = require("debug")("WebTemplateStudioExpress:server");
 const http = require("http");
 const app = require("./app");
 const CONSTANTS = require("./constants");
+const dbpass = "bilkentbitirme";
+var MongoClient = require('mongodb').MongoClient;
 
+// Connect to the db
+MongoClient
+.connect("mongodb://Qikabodi:bilkentbitirme@cluster0-shard-00-00-mezhk.mongodb.net:27017,cluster0-shard-00-01-mezhk.mongodb.net:27017,cluster0-shard-00-02-mezhk.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority",
+{ useUnifiedTopology: true },
+ function (err, db) {
+   
+    if(err) 
+      throw err;
+    else
+      console.log("Connected")
+
+     //Write databse Insert/Update/Query code here..
+     console.log(db.collection('Doctor'))    
+});
+
+
+
+console.log("Connected")
 /**
  * Get port from environment and store in Express.
  */
