@@ -1,5 +1,4 @@
 ﻿import React, { useState, useEffect, Component } from 'react';
-import ClinicCardComponent from "../ClinicCard/ClinicCardComponent"
 import Select, { components } from 'react-select';
 import ClinicCardAsaf from "../ClinicCardAsaf"
 const options = [

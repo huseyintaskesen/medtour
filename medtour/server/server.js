@@ -4,12 +4,18 @@
  * Module dependencies.
  */
 
+
+
+
 const debug = require("debug")("WebTemplateStudioExpress:server");
 const http = require("http");
 const app = require("./app");
 const CONSTANTS = require("./constants");
 const dbpass = "bilkentbitirme";
 var MongoClient = require('mongodb').MongoClient;
+var db;
+var collection;
+
 
 
 // Connect to the db
@@ -21,12 +27,13 @@ MongoClient
       throw err;
     else
       console.log("Connected")
-      const db = client.db('MedTourDB')
+      db = client.db('MedTourDB')
 
-      const collection = db.collection('Clinic')
+      
+      //collection = db.collection('Clinic')
 
 
-      collection.insertOne({id: 999, rating: 9, name:'test clinic', location:'Ankara'}, (err, result) => {
+      collection.insertOne({id: 999, rating: 9, name:'test clinic', location:'Istanbul'}, (err, result) => {
       })
       
 
@@ -44,18 +51,10 @@ MongoClient
           console.log(items)
         })
       }
-
       
-
-
      //Write databse Insert/Update/Query code here..
      //console.log(db.collection('Doctor'))    
 });
-
-
-
-
-console.log("Connected")
 /**
  * Get port from environment and store in Express.
  */
@@ -97,6 +96,14 @@ function normalizePort(val) {
   return false;
 }
 
+  function getClinicByLocation (location){
+  collection = db.collection('Clinic')
+  collection.find({location: location}).toArray((err, items) => {
+    return items;
+  })
+
+}
+
 /**
  * Event listener for HTTP server "error" event.
  */
@@ -133,3 +140,4 @@ function onListening() {
   debug(`Listening on ${bind}`);
 }
 
+export default {getClinicByLocation}

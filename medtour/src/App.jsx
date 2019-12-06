@@ -15,9 +15,6 @@ import Master_Detail5 from "./components/Master_Detail5";
 import Grid from "./components/Grid";
 import ProfilePagePatientView from "./components/ProfilePagePatientView";
 import ProfilePageClinic from "./components/ProfilePageClinicView/ProfilePageClinic";
-import ClinicCardComponent from "./components/ClinicCard"
-import ClinicProfileView from "./components/ClinicProfileView/ClinicProfileView";
-import ClinicCardAsaf from "./components/ClinicCardAsaf"
 //TODO Web Template Studio: Add routes for your new pages here.
 class App extends Component {
   render() {
@@ -34,8 +31,6 @@ class App extends Component {
           <Route path = "/Grid" component = { Grid } />
           <Route path = "/profile" component = { ProfilePagePatientView } />
           <Route path = "/clinicprofile" component = { ProfilePageClinic } />
-          <Route path = "/ClinicProfileView" component = { ClinicProfileView } />
-          <Route path = "/ClinicCard" component = { ClinicCardComponent } />
           <Route path = "/search" component = { SearchResultsView } />
           
 
