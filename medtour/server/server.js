@@ -15,15 +15,26 @@ var MongoClient = require('mongodb').MongoClient;
 MongoClient
 .connect("mongodb://Qikabodi:bilkentbitirme@cluster0-shard-00-00-mezhk.mongodb.net:27017,cluster0-shard-00-01-mezhk.mongodb.net:27017,cluster0-shard-00-02-mezhk.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority",
 { useUnifiedTopology: true },
- function (err, db) {
+ function (err, client) {
    
     if(err) 
       throw err;
     else
       console.log("Connected")
+      const db = client.db('MedTourDB')
+
+      const collection = db.collection('Doctor')
+
+      collection.insertOne({id: 999, rating: 9, name:'test doctor', location:'Istanbul'}, (err, result) => {
+      })
+
+      collection.find({location: 'Ankara'}).toArray((err, items) => {
+        console.log(items)
+      })
+
 
      //Write databse Insert/Update/Query code here..
-     console.log(db.collection('Doctor'))    
+     //console.log(db.collection('Doctor'))    
 });
 
 
