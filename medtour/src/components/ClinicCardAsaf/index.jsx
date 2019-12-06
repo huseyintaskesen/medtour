@@ -2,8 +2,17 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import "./clinic-card.css";
 
-class ClinicCard extends Component {
-    render() {
+export default function ClinicCardAsaf(props)  {
+    const treatment_details = props.treatments.map((treatment)=> {
+        return(
+            <div>
+                <li>
+                {treatment['treatment_name']} 
+                </li>
+             </div>
+        )
+        })
+
         return (
             <div className="page">
                 <link
@@ -17,27 +26,20 @@ class ClinicCard extends Component {
                     <div className="row no-gutters">
                         <div className="col-md-4">
                             <img
-                                src={require("../../assets/clinic-default.jpg")}
+                                src={props.avatar}
                                 class="card-img"
                                 alt="clinic default"
                             />
                         </div>
                         <div className="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">Clinic Name</h5>
+                                <h5 class="card-title">{props.name}</h5>
                                 <p class="card-text">
-                                    Explanation about the clinics. Could be
-                                    brief or long. It is best to keep it simple.
-                                    This is just to fill the card. We have the
-                                    best treatments. We have great doctors. For
-                                    more information please visit our detailed
-                                    clinic page. It would be a more detailed
-                                    page if you want to be informed more about
-                                    the treatments and the operators.
+                                    {props.location}
                                 </p>
                             </div>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
+                                <li class="list-group-item">    
                                     <span class="fa fa-star checked"></span>
                                     <span class="fa fa-star checked"></span>
                                     <span class="fa fa-star checked"></span>
@@ -46,9 +48,7 @@ class ClinicCard extends Component {
                                 </li>
                                 <li class="list-group-item">
                                     <ul className="list-unstyled clinic-treatments">
-                                        <li>Treatment 1</li>
-                                        <li>Treatment 2</li>
-                                        <li>Treatment 3</li>
+                                        {treatment_details}
                                     </ul>
                                 </li>
                             </ul>
@@ -65,7 +65,6 @@ class ClinicCard extends Component {
                 </div>
             </div>
         );
-    }
+    
 }
 
-export default ClinicCard;

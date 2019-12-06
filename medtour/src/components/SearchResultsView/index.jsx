@@ -1,5 +1,7 @@
-﻿import React, { useState, useEffect, Component } from 'react';import ClinicCardComponent from "../ClinicCard/ClinicCardComponent"
+﻿import React, { useState, useEffect, Component } from 'react';
+import ClinicCardComponent from "../ClinicCard/ClinicCardComponent"
 import Select, { components } from 'react-select';
+import ClinicCardAsaf from "../ClinicCardAsaf"
 const options = [
   { value: 'ankara', label: 'Ankara' },
   { value: 'istanbul', label: 'Istanbul' },
@@ -105,6 +107,10 @@ export default class SearchResultsView extends Component {
           {
             'treatment_name' : 'göz muayenesi',
             'treatment_price' : 500
+          },
+          {
+            'treatment_name' : 'dolgu',
+            'treatment_price' : 1500
           }
         ],
         review: 
@@ -132,6 +138,10 @@ export default class SearchResultsView extends Component {
           {
             'treatment_name' : 'saç bakımı',
             'treatment_price' : 500
+          },
+          {
+            'treatment_name' : 'dolgu',
+            'treatment_price' : 1500
           }
         ],
         review: 
@@ -151,7 +161,8 @@ export default class SearchResultsView extends Component {
     var nodes = this.clinicData.map(function (clinic){
       return (
         <div>
-          <ClinicCardComponent name={clinic.name} type={clinic.type} location={clinic.location} address={clinic.address} treatments = {clinic.treatments} review={clinic.review} avatar={clinic.avatar} rating={clinic.rating}></ClinicCardComponent>
+          <ClinicCardAsaf name={clinic.name} treatments={clinic.treatments} avatar={clinic.avatar} rating={clinic.rating} location={clinic.address} ></ClinicCardAsaf>
+          {/* <ClinicCardComponent name={clinic.name} type={clinic.type} location={clinic.location} address={clinic.address} treatments = {clinic.treatments} review={clinic.review} avatar={clinic.avatar} rating={clinic.rating}></ClinicCardComponent> */}
         </div>
       );
     });
