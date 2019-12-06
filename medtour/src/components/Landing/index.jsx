@@ -40,7 +40,7 @@ class Landing extends Component {
                     <div className="buttons">
                         <button className="btn btn-primary shadow">
                             <img
-                                src={require("../../assets/icons8-doctor-50-white.png")}
+                                src={require("../../images/icons8-doctor-50-white.png")}
                                 alt="doctor-icon"
                             ></img>
                             &nbsp;&nbsp;&nbsp;&nbsp; Contact Doctors
@@ -48,7 +48,7 @@ class Landing extends Component {
                         <Link to="/exploreClinics">
                             <button className="btn btn-primary shadow">
                                 <img
-                                    src={require("../../assets/icons8-clinic-50-white.png")}
+                                    src={require("../../images/icons8-clinic-50-white.png")}
                                     alt="clinic-icon"
                                 ></img>
                                 &nbsp;&nbsp;&nbsp;&nbsp; Explore Clinics
@@ -56,14 +56,14 @@ class Landing extends Component {
                         </Link>
                         <button className="btn btn-primary shadow">
                             <img
-                                src={require("../../assets/icons8-plane-50-white.png")}
+                                src={require("../../images/icons8-plane-50-white.png")}
                                 alt="flight-icon"
                             ></img>
                             &nbsp;&nbsp;&nbsp;&nbsp; Look up for Flights
                         </button>
                         <button className="btn btn-primary shadow">
                             <img
-                                src={require("../../assets/icons8-hotel-50-white.png")}
+                                src={require("../../images/icons8-hotel-50-white.png")}
                                 alt="accomodation-icon"
                             ></img>
                             &nbsp;&nbsp;&nbsp;&nbsp; Find the best places to
@@ -72,7 +72,7 @@ class Landing extends Component {
                     </div>
                     <img
                         id="Istanbul"
-                        src={require("../../assets/istanbul_skyline.svg.png")}
+                        src={require("../../images/istanbul_skyline.svg.png")}
                         alt="Istanbul"
                     ></img>
                     <div className="landing-second">
@@ -98,7 +98,7 @@ class Landing extends Component {
                         </div>
                         <div className="landing-second-right">
                             <img
-                                src={require("../../assets/countries.jpg")}
+                                src={require("../../images/countries.jpg")}
                                 alt="countries"
                             ></img>
                         </div>
@@ -111,17 +111,17 @@ class Landing extends Component {
                         <div className="landing-third-images">
                             <img
                                 id="istanbul"
-                                src={require("../../assets/istanbul.jpg")}
+                                src={require("../../images/istanbul.jpg")}
                                 alt="Istanbul"
                             ></img>
                             <img
                                 id="izmir"
-                                src={require("../../assets/izmir.jpg")}
+                                src={require("../../images/izmir.jpg")}
                                 alt="Izmir"
                             ></img>
                             <img
                                 id="ankara"
-                                src={require("../../assets/ankara.jpg")}
+                                src={require("../../images/ankara.jpg")}
                                 alt="Ankara"
                             ></img>
                         </div>
