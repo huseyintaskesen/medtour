@@ -15,21 +15,34 @@ const dbpass = "bilkentbitirme";
 var MongoClient = require('mongodb').MongoClient;
 var db;
 var collection;
+var server_object;
 
 
+
+
+class Server{
+  
+  Server(db, collection){
+    this.db = db;
+    this.collection = collection;
+  }
+
+}
 
 // Connect to the db
 MongoClient
 .connect("mongodb://Qikabodi:bilkentbitirme@cluster0-shard-00-00-mezhk.mongodb.net:27017,cluster0-shard-00-01-mezhk.mongodb.net:27017,cluster0-shard-00-02-mezhk.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority",
 { useUnifiedTopology: true },
  function (err, client) {
+
     if(err) 
       throw err;
     else
       console.log("Connected")
       db = client.db('MedTourDB')
       collection = db.collection('Clinic')
-      
+      server_object = new Server(client.db, db.collection)
+            
       //collection = db.collection('Clinic')
 
 
@@ -139,5 +152,7 @@ function onListening() {
   const bind = typeof addr === "string" ? `pipe ${addr}` : `port ${addr.port}`;
   debug(`Listening on ${bind}`);
 }
+
+
 
 //export default {getClinicByLocation}

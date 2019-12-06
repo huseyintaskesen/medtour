@@ -1,11 +1,11 @@
-﻿
+﻿/* 
 html {
   position: relative;
   min-height: 100%;
 }
 
 body {
-  margin-bottom: 160px !important; /* Height of the footer */
+  margin-bottom: 160px !important; 
   padding: 0;
 }
 
@@ -13,10 +13,9 @@ footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 160px; /* Set the fixed height of the footer here */
+  height: 160px; 
 }
 
-/* Override Bootstrap Styling */
 
 .btn-primary {
   background-color: #025fce !important;
@@ -95,7 +94,7 @@ body {
   color: darkred;
   font-weight: 500;
 }
-.profile-page-container{
+.profile-page-container{  
   margin: 30px !important;
 }
 .form-control{
@@ -103,4 +102,4 @@ body {
 }
 .delete-button{
   margin-bottom:18px !important;
-}
+} */

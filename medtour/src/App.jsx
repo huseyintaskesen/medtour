@@ -4,7 +4,6 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import "./App.css";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
-import $ from "jquery";
 
 import Master_Detail from "./components/Master_Detail";
 import Master_Detail2 from "./components/Master_Detail2";
