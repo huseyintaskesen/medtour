@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
 
-import LandingNav from "../LandingNav";
 import Footer from "../Footer";
 import "./landing.css";
 
@@ -10,7 +9,6 @@ class Landing extends Component {
     render() {
         return (
             <div>
-                <LandingNav />
                 <div className="landing-page">
                     <div className="heading">
                         <h4 className="display-4">

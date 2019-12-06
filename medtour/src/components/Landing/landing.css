@@ -4,7 +4,7 @@ body {
             rgba(0, 0, 0, 0.534),
             rgba(0, 0, 0, 0.486)
         ),
-        url(../../assets/landingPage-wallpaper.jpg) no-repeat center center
+        url(../../images/landingPage-wallpaper.jpg) no-repeat center center
             fixed #000;
 }
 

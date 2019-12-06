@@ -17,17 +17,17 @@ class Footer extends Component {
                     <p id="footer-right-info">Follow us on social media</p>
                     <img
                         id="facebook"
-                        src={require("../../assets/icons8-facebook-50-white.png")}
+                        src={require("../../images/icons8-facebook-50-white.png")}
                         alt="facebook"
                     ></img>
                     <img
                         id="instagram"
-                        src={require("../../assets/icons8-instagram-50-white.png")}
+                        src={require("../../images/icons8-instagram-50-white.png")}
                         alt="facebook"
                     ></img>
                     <img
                         id="twitter"
-                        src={require("../../assets/icons8-twitter-50-white.png")}
+                        src={require("../../images/icons8-twitter-50-white.png")}
                         alt="facebook"
                     ></img>
                 </div>
