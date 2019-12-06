@@ -1,4 +1,4 @@
-﻿import getClinicByLocation from "../server"
+﻿//import getClinicByLocation from "../server"
 const CONSTANTS = require("../constants");
 const express = require("express");
 const sampleData = require("../sampleData");
@@ -21,7 +21,7 @@ router.get('/clinic/?:location',(req, res) => {
 //   })
 //   res.json(clinics);
   var location = req.params.location
-  getClinicByLocation(location)
+  //getClinicByLocation(location)
   res.json(location)
 })
 

@@ -28,7 +28,7 @@ MongoClient
     else
       console.log("Connected")
       db = client.db('MedTourDB')
-
+      collection = db.collection('Clinic')
       
       //collection = db.collection('Clinic')
 
@@ -140,4 +140,4 @@ function onListening() {
   debug(`Listening on ${bind}`);
 }
 
-export default {getClinicByLocation}
+//export default {getClinicByLocation}
