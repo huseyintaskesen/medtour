@@ -1,29 +1,31 @@
 ﻿.sidebar {
-  /* full height - footer height - navbar height */
-  min-height: calc(100vh - 160px - 57px);
+    /* full height - footer height - navbar height */
+    min-height: calc(100vh - 160px - 57px);
 }
 .sidebarText {
-  font-weight: 500;
+    font-weight: 500;
 }
 
 .title {
-  font-weight: 700;
-  margin-bottom: 0;
+    font-weight: 700;
+    margin-bottom: 0;
 }
 
 .breadCrumbLink {
-  color: #025fce;
+    color: #025fce;
 }
 
 .heading {
-  background-color: #cecece;
-  padding-top: 18em;
+    background-color: #cecece;
+    padding-top: 18em;
 }
 
+.card {
+    margin-top: 30px !important;
+    width: 1000px;
+    margin-left: 20px;
+}
 
-
-.card{
-  margin-top: 30px !important;
-  width: 1000px;
-  margin-left: 20px;
+.search-bar {
+    color: light;
 }
