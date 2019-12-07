@@ -11,7 +11,7 @@ body {
 .landing-page {
     position: absolute;
     width: 100%;
-    height: 260%;
+    height: 295%;
 }
 
 .heading {
@@ -32,15 +32,13 @@ body {
 }
 
 .buttons {
+    position: absolute;
+    width: 100%;
+    display: flex;
     margin-top: 7%;
-    display: block;
-    justify-content: space-evenly;
-    margin-left: 10%;
-}
-
-.buttons button {
-    margin-right: 6.7%;
-    padding-right: 1%;
+    justify-content: space-between;
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 .buttons img {
@@ -48,29 +46,28 @@ body {
 }
 
 #Istanbul {
-    margin-top: 10%;
+    margin-top: 22%;
     width: 100%;
 }
 
 .landing-second {
-    background: white;
+    position: absolute;
     width: 100%;
-    height: 21%;
+    background: white;
+    height: 32rem;
 }
 
 .landing-second-left {
     position: absolute;
     width: 50%;
-    height: inherit;
-    background-color: white;
+    height: fit-content;
 }
 
 .landing-second-right {
     position: absolute;
     width: 50%;
     left: 50%;
-    height: inherit;
-    background-color: white;
+    height: fit-content;
 }
 
 .landing-second-left h2 {
@@ -87,7 +84,14 @@ body {
 .landing-second-right img {
     padding-top: 5%;
     padding-left: 15%;
-    height: 95%;
+    height: 470px;
+    width: 580px;
+}
+
+.landing-third {
+    position: absolute;
+    width: 100%;
+    margin-top: 32rem;
 }
 
 .landing-third h2 {
