@@ -19,15 +19,21 @@ const indicatorSeparatorStyle = {
 const IndicatorSeparator = ({ innerProps }) => {
     return <span style={indicatorSeparatorStyle} {...innerProps} />;
 };
-//const [selectedOption, setSelectedOption] = useState('');
-
 export default class SearchResultsView extends Component {
     constructor(props) {
         super(props);
         this.state = {
             clinics: props.clinics,
-            selectedOption: null
+            selectedOption: null,
+            treatment: ''
         };
+    }
+    componentDidMount() {
+        var treatment_type = this.props.location.data
+        this.setState({
+            treatment: treatment_type
+          });
+        console.log('DATA IS:' + treatment_type)
     }
     get_clinics = () => {
         var dummy_dat = [
@@ -41,20 +47,7 @@ export default class SearchResultsView extends Component {
             }
         ];
         // setSelectedOption(dummy_dat)
-    };
-    my_array = ["hey", "hello"];
-
-    // handleChange = selectedOption => {
-    //   //setSelectedOption(selectedOption)
-    //   this.setState(
-    //     { selectedOption },
-    //     () => console.log(`Option selected:`, this.state.selectedOption)
-    //   );
-    //   useEffect((selectedOption) => {
-    //     setSelectedOption(selectedOption)
-    //     });
-
-    // };
+    };    
 
     clinicData = [
         {
@@ -164,11 +157,11 @@ export default class SearchResultsView extends Component {
     }
     render() {
         const { selectedOption } = this.state;
+        
         return (
             <div>
-                {/* style={{width:'200px',marginTop:'15px'}} */}
                 <div>
-                    <p>Filter by city:</p>
+                    <p>Filter by city:{this.state.treatment}</p>
                     {/* style={{float:"left", marginRight:'9px'}} */}
                     <Select
                         theme={theme => ({
@@ -191,6 +184,7 @@ export default class SearchResultsView extends Component {
                     />
                 </div>
                 {this.createCardComponents()}
+                
             </div>
         );
     }

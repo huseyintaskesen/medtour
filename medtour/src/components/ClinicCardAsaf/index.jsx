@@ -18,41 +18,41 @@ export default function ClinicCardAsaf(props) {
                 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
             ></link>
             <div
-                class="card border-primary clinic-card"
+                className="card border-primary clinic-card"
                 style={{ width: "60rem" }}
             >
                 <div className="row no-gutters">
                     <div className="col-md-4">
                         <img
                             src={props.avatar}
-                            class="card-img"
+                            className="card-img"
                             alt="clinic default"
                         />
                     </div>
                     <div className="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">{props.name}</h5>
-                            <p class="card-text">{props.location}</p>
+                        <div className="card-body">
+                            <h5 className="card-title">{props.name}</h5>
+                            <p className="card-text">{props.location}</p>
                         </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
+                        <ul className="list-group list-group-flush">
+                            <li className="list-group-item">
+                                <span className="fa fa-star checked"></span>
+                                <span className="fa fa-star checked"></span>
+                                <span className="fa fa-star checked"></span>
+                                <span className="fa fa-star checked"></span>
+                                <span className="fa fa-star"></span>
                             </li>
-                            <li class="list-group-item">
+                            <li className="list-group-item">
                                 <ul className="list-unstyled clinic-treatments">
                                     {treatment_details}
                                 </ul>
                             </li>
                         </ul>
-                        <div class="card-body">
-                            <a href="#" class="card-link">
+                        <div className="card-body">
+                            <a href="#" className="card-link">
                                 Enquire
                             </a>
-                            <a href="#" class="card-link">
+                            <a href="#" className="card-link">
                                 Detailed Info
                             </a>
                         </div>

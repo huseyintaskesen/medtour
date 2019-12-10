@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import "./footer.css";
 
+
+
+
 class Footer extends Component {
     render() {
         return (

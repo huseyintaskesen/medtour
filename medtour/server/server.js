@@ -20,11 +20,13 @@ var server_object;
 
 
 
+
 class Server{
   
   Server(db, collection){
     this.db = db;
     this.collection = collection;
+
   }
 
 }
@@ -50,9 +52,9 @@ var databaseInstance = MongoClient
       })
       
 
-      // collection.find({location: 'Ankara'}).toArray((err, items) => {
-      //   console.log(items)
-      // })
+      collection.find({location: 'Istanbul'}).toArray((err, items) => {
+        console.log(items)
+       })
       app.use(function(req,res,next) {
         req.db = db
         next();
