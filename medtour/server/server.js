@@ -4,9 +4,6 @@
  * Module dependencies.
  */
 
-
-
-
 const debug = require("debug")("WebTemplateStudioExpress:server");
 const http = require("http");
 const app = require("./app");
@@ -16,10 +13,6 @@ var MongoClient = require('mongodb').MongoClient;
 var db;
 var collection;
 var server_object;
-
-
-
-
 
 class Server{
   
