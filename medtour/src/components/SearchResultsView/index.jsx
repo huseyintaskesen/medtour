@@ -27,6 +27,7 @@ export default class SearchResultsView extends Component {
             selectedOption: null,
             treatment: ''
         };
+        this.handleChange = this.handleChange.bind(this)
     }
     componentDidMount() {
         var treatment_type = this.props.location.data
@@ -34,25 +35,21 @@ export default class SearchResultsView extends Component {
             treatment: treatment_type
           });
         console.log('DATA IS:' + treatment_type)
-    }
-    get_clinics = () => {
-        var dummy_dat = [
-            {
-                location: "ankara",
-                name: "ankara-muayene"
-            },
-            {
-                location: "istanbul",
-                name: "istanbul-muayene"
-            }
-        ];
-        // setSelectedOption(dummy_dat)
-    };    
+    } 
+
+    handleChange = selectedOption => {
+        this.setState(
+          { selectedOption },
+          () => console.log(`Option selected:`, this.state.selectedOption)
+        );
+
+        // let clinics = this.state.clinics
+      };
 
     clinicData = [
         {
             name: "Akyaka",
-            city: "Ankara",
+            city: "ankara",
             type: "Dentist",
             address: "1.sokak",
             treatments: [
@@ -81,7 +78,7 @@ export default class SearchResultsView extends Component {
         },
         {
             name: "Aura",
-            city: "Istanbul",
+            city: "istanbul",
             type: "Laser Eye",
             address: "2.sokak",
             treatments: [
@@ -110,7 +107,7 @@ export default class SearchResultsView extends Component {
         },
         {
             name: "Guven",
-            city: "Ankara",
+            city: "ankara",
             type: "Hair transparant",
             address: "3.sokak",
             treatments: [
