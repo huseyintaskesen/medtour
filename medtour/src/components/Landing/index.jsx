@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import Autosuggest from 'react-autosuggest';
 import Footer from "../Footer";
 import "./landing.css";
-import SearchResultsView from "../SearchResultsView"
 
 
 const languages = [
@@ -146,9 +145,6 @@ const renderSuggestion = suggestion => (
 </div>
 );
 
-
-
-
 class Landing extends Component {
     constructor() {
         super();
@@ -229,7 +225,6 @@ class Landing extends Component {
                             ></img>
                             &nbsp;&nbsp;&nbsp;&nbsp; Contact Doctors
                         </button>
-                        <Link to="/exploreClinics">
                             <button className="btn btn-primary shadow">
                                 <img
                                     src={require("../../images/icons8-clinic-50-white.png")}
@@ -237,7 +232,6 @@ class Landing extends Component {
                                 ></img>
                                 &nbsp;&nbsp;&nbsp;&nbsp; Explore Clinics
                             </button>
-                        </Link>
                         <button className="btn btn-primary shadow">
                             <img
                                 src={require("../../images/icons8-plane-50-white.png")}
