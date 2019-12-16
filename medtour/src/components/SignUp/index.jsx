@@ -4,6 +4,21 @@ import LandingNav from "../LandingNav";
 import "./signUp.css";
 
 class SignUp extends Component {
+
+    // constructor(){
+    //     super();
+    //     this.handleClick = this.handleClick(bind);
+    // }
+
+    // handleClick() {
+        
+    // }
+
+
+
+
+
+
     render() {
         return (
             <div>
@@ -61,7 +76,7 @@ class SignUp extends Component {
                             </div>
                         </form>
                         <div className="row justify-content-center">
-                            <button className="btn btn-primary mt-4">
+                            <button type="submit" className="btn btn-primary mt-4">
                                 Sign Up
                             </button>
                         </div>
