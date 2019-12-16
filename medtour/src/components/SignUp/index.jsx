@@ -2,14 +2,10 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import LandingNav from "../LandingNav";
 import "./signUp.css";
-
-
-import axios from 'axios';
-
+import axios from "axios";
 
 class SignUp extends Component {
-
-    constructor(){
+    constructor() {
         super();
         this.name_input = React.createRef();
         this.surname_input = React.createRef();
@@ -21,39 +17,39 @@ class SignUp extends Component {
     }
 
     handleSubmit(event) {
-        console.log('A name was submitted: ' + this.name_input.current.value);
+        console.log("A name was submitted: " + this.name_input.current.value);
         event.preventDefault();
 
-        var name = this.name_input.current.value
-        var surname = this.surname_input.current.value
-        var password = this.password_input.current.value
-        var userName = this.username_input.current.value
-        var email = this.email_input.current.value
+        var name = this.name_input.current.value;
+        var surname = this.surname_input.current.value;
+        var password = this.password_input.current.value;
+        var userName = this.username_input.current.value;
+        var email = this.email_input.current.value;
 
         this.userRegister(name, surname, password, userName, email);
     }
 
-    userRegister(name, surname, userName, password, email)  {
-        const body = JSON.stringify({name, surname, userName, password, email});
-        console.log(body)
+    userRegister(name, surname, userName, password, email) {
+        const body = JSON.stringify({
+            name,
+            surname,
+            userName,
+            password,
+            email
+        });
+        console.log(body);
         //Headers
         const config = {
-            headers:{
-                "Content-type":"application/json"
+            headers: {
+                "Content-type": "application/json"
             }
-        }
+        };
         //Request body
-        axios.post('/api/users', body, config)
-        .then( res => ({
+        axios.post("/api/users", body, config).then(res => ({
             payload: res.data
-        }))
-        console.log('user created')
+        }));
+        console.log("user created");
     }
-
-
-
-
-
 
     render() {
         return (
@@ -70,7 +66,7 @@ class SignUp extends Component {
                                     <div className="form-group singUp">
                                         <label>Name</label>
                                         <input
-                                            ref = {this.name_input}
+                                            ref={this.name_input}
                                             type="text"
                                             className="form-control"
                                             id="left"
@@ -78,7 +74,7 @@ class SignUp extends Component {
                                         ></input>
                                         <label>Surname</label>
                                         <input
-                                            ref = {this.surname_input}
+                                            ref={this.surname_input}
                                             type="text"
                                             className="form-control"
                                             id="left"
@@ -86,20 +82,19 @@ class SignUp extends Component {
                                         ></input>
                                         <label>E-Mail</label>
                                         <input
-                                            ref = {this.email_input}
+                                            ref={this.email_input}
                                             type="email"
                                             className="form-control"
                                             id="left"
                                             placeholder="email"
                                         ></input>
-                                        
                                     </div>
                                 </div>
                                 <div className="col-6">
                                     <div className="form-group singUp">
                                         <label>Password</label>
                                         <input
-                                            ref = {this.password_input}
+                                            ref={this.password_input}
                                             type="password"
                                             className="form-control"
                                             id="right"
@@ -114,7 +109,7 @@ class SignUp extends Component {
                                         ></input>
                                         <label>Username</label>
                                         <input
-                                            ref = {this.username_input}
+                                            ref={this.username_input}
                                             type="text"
                                             className="form-control"
                                             id="left"
@@ -125,7 +120,11 @@ class SignUp extends Component {
                             </div>
                         </form>
                         <div className="row justify-content-center">
-                            <button onClick={this.handleSubmit} type="submit" className="btn btn-primary mt-4">
+                            <button
+                                onClick={this.handleSubmit}
+                                type="submit"
+                                className="btn btn-primary mt-4"
+                            >
                                 Sign Up
                             </button>
                         </div>
