@@ -1,8 +1,9 @@
 ﻿import React, { useState, useEffect, Component } from "react";
 import Select, { components } from "react-select";
 import ClinicCardAsaf from "../ClinicCardAsaf";
+import LandingNav from "../LandingNav";
 
-const clinicData =  [
+const clinicData = [
     {
         name: "Akyaka",
         city: "ankara",
@@ -116,46 +117,41 @@ export default class SearchResultsView extends Component {
             clinics: [],
             // props.clinics,
             selectedOption: null,
-            treatment: ''
+            treatment: ""
         };
-        this.handleChange = this.handleChange.bind(this)
+        this.handleChange = this.handleChange.bind(this);
     }
     componentDidMount() {
-        var treatment_type = this.props.location.data
+        var treatment_type = this.props.location.data;
         this.setState({
             treatment: treatment_type,
             clinics: clinicData
-          });
-        console.log('DATA IS:' + treatment_type)
-    } 
+        });
+        console.log("DATA IS:" + treatment_type);
+    }
 
     handleChange = selectedOption => {
-
-        this.setState(
-          { selectedOption },
-          () => 
-          {
-            console.log(`Option selected:`, this.state.selectedOption)
-          }
-        );
+        this.setState({ selectedOption }, () => {
+            console.log(`Option selected:`, this.state.selectedOption);
+        });
 
         var clinics_array = [];
-          
+
         for (let step = 0; step < this.state.clinics.length; step++) {
             // Runs 5 times, with values of step 0 through 4.
             // console.log(this.state.clinics[step].city.includes('ankara'));
-            
-            if(this.state.clinics[step].city.includes(selectedOption[0].value)){
-                clinics_array.push(this.state.clinics[step])
+
+            if (
+                this.state.clinics[step].city.includes(selectedOption[0].value)
+            ) {
+                clinics_array.push(this.state.clinics[step]);
             }
-          }
-          this.setState({
+        }
+        this.setState({
             clinics: clinics_array
-        })
+        });
+    };
 
-      };
-
-    
     createCardComponents() {
         var nodes = this.state.clinics.map(function(clinic) {
             return (
@@ -175,9 +171,10 @@ export default class SearchResultsView extends Component {
     }
     render() {
         const { selectedOption } = this.state;
-        
+
         return (
             <div>
+                <LandingNav />
                 <div>
                     <p>Filter by city:{this.state.treatment}</p>
                     {/* style={{float:"left", marginRight:'9px'}} */}
@@ -202,7 +199,6 @@ export default class SearchResultsView extends Component {
                     />
                 </div>
                 {this.createCardComponents()}
-                
             </div>
         );
     }
