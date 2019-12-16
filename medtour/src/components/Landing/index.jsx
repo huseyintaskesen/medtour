@@ -237,13 +237,15 @@ class Landing extends Component {
                             ></img>
                             &nbsp;&nbsp;&nbsp;&nbsp; Contact Doctors
                         </button>
-                        <button className="btn btn-primary shadow">
-                            <img
-                                src={require("../../images/icons8-clinic-50-white.png")}
-                                alt="clinic-icon"
-                            ></img>
-                            &nbsp;&nbsp;&nbsp;&nbsp; Explore Clinics
-                        </button>
+                        <Link to="/search">
+                            <button className="btn btn-primary shadow">
+                                <img
+                                    src={require("../../images/icons8-clinic-50-white.png")}
+                                    alt="clinic-icon"
+                                ></img>
+                                &nbsp;&nbsp;&nbsp;&nbsp; Explore Clinics
+                            </button>
+                        </Link>
                         <button className="btn btn-primary shadow">
                             <img
                                 src={require("../../images/icons8-plane-50-white.png")}
