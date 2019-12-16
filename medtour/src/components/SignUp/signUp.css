@@ -1,0 +1,17 @@
+.signUp {
+    margin-top: 9%;
+    padding: 2% 2% 2% 2%;
+    border-radius: 10px;
+}
+
+.singupText {
+    color: darkred;
+}
+
+.singUp label {
+    padding-top: 5%;
+}
+
+.borderUp {
+    border: 2px solid red;
+}
