@@ -7,8 +7,7 @@
 // 	"rating":"5",
 // 	"email":"newClinic@gmail.com",
 // 	"bio":"very very gooooooood clinic"
-// }
-
+// }s
 
 const express = require('express');
 const router = express.Router();
@@ -29,12 +28,25 @@ router.get('/', (req, res) =>{
 });
 
 
-router.get("/search/:type" , (req, res) => {
+router.get("/search/:treatmentType" , (req, res) => {
     
-    var clinicType = req.params.type;
-    Treatment.find({"type": clinicType })
-            .then( treatments => res.json({ clinics, treatments, ratings }) );
+    var treatmentType = req.params.treatmentType.replace("_"," ");
+    Treatment.find({"name": treatmentType })
+            .select("c_id")
+            .then( treatments => {
+                
+                var adTimes = [];
+                treatments.forEach(function(treatment) {
+                    console.log( treatment.c_id );
+                       
+                });
+
+                res.send(adTimes);
+                
+            });
 });
+
+
 
 
 // @route   Get api/clinics/id
