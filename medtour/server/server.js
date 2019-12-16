@@ -23,6 +23,8 @@ mongoose
 app.use('/api/clinics', require('./routes/api/clinics'));
 app.use('/api/treatments', require('./routes/api/treatments'));
 app.use('/api/ratings', require('./routes/api/ratings'));
+app.use('/api/users', require('./routes/api/users'));
+app.use('/api/auth', require('./routes/api/auth'));
 
 const port = process.env.PORT || 4910;
 
