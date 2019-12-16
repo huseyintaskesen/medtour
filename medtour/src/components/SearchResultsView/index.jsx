@@ -2,6 +2,96 @@
 import Select, { components } from "react-select";
 import ClinicCardAsaf from "../ClinicCardAsaf";
 
+const clinicData = [
+    {
+        name: "Akyaka",
+        city: "ankara",
+        type: "Dentist",
+        address: "1.sokak",
+        treatments: [
+            {
+                treatment_name: "diş çekimi",
+                treatment_price: 350
+            },
+            {
+                treatment_name: "tel",
+                treatment_price: 2000
+            },
+            {
+                treatment_name: "dolgu",
+                treatment_price: 1500
+            }
+        ],
+        review: {
+            author: "asaf",
+            stars: 4,
+            date: "20.09.2017",
+            title: "satisfied, highly recommended",
+            description: "everything was ok."
+        },
+        rating: 2,
+        avatar: "http://placekitten.com/50/50"
+    },
+    {
+        name: "Aura",
+        city: "istanbul",
+        type: "Laser Eye",
+        address: "2.sokak",
+        treatments: [
+            {
+                treatment_name: "goz ameliyati",
+                treatment_price: 9000
+            },
+            {
+                treatment_name: "göz muayenesi",
+                treatment_price: 500
+            },
+            {
+                treatment_name: "dolgu",
+                treatment_price: 1500
+            }
+        ],
+        review: {
+            author: "asaf",
+            stars: 4,
+            date: "20.09.2017",
+            title: "clean clinic but very expensive",
+            description: ""
+        },
+        rating: 5,
+        avatar: "http://placekitten.com/49/50"
+    },
+    {
+        name: "Guven",
+        city: "ankara",
+        type: "Hair transparant",
+        address: "3.sokak",
+        treatments: [
+            {
+                treatment_name: "saç ekimi",
+                treatment_price: 4500
+            },
+            {
+                treatment_name: "saç bakımı",
+                treatment_price: 500
+            },
+            {
+                treatment_name: "dolgu",
+                treatment_price: 1500
+            }
+        ],
+        review: {
+            author: "asaf",
+            stars: 5,
+            date: "20.09.2017",
+            title: "clean clinic with experienced doctors",
+            description: "i was very pleased during my treatment."
+        },
+        rating: 4,
+        avatar: "http://placekitten.com/50/51"
+    }
+];
+
 const options = [
     { value: "ankara", label: "Ankara" },
     { value: "istanbul", label: "Istanbul" },
@@ -23,7 +113,8 @@ export default class SearchResultsView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            clinics: props.clinics,
+            clinics: [],
+            // props.clinics,
             selectedOption: null,
             treatment: ''
         };
@@ -32,7 +123,8 @@ export default class SearchResultsView extends Component {
     componentDidMount() {
         var treatment_type = this.props.location.data
         this.setState({
-            treatment: treatment_type
+            treatment: treatment_type,
+            clinics: clinicData
           });
         console.log('DATA IS:' + treatment_type)
     } 
@@ -43,100 +135,27 @@ export default class SearchResultsView extends Component {
           () => console.log(`Option selected:`, this.state.selectedOption)
         );
 
+       //console.log(this.state.clinics[0])
+        
+        for (let step = 0; step < this.state.clinics.length; step++) {
+            // Runs 5 times, with values of step 0 through 4.
+            // console.log(this.state.clinics[step].city.includes('ankara'));
+            console.log(this.state.selectedOption)
+            if(this.state.clinics[step].city.includes('ankara')){
+                this.setState({
+                    clinics: this.state.clinics.splice(step, 1)
+                })
+                console.log('clinics:', this.state.clinics)
+            }
+          }
+
+
         // let clinics = this.state.clinics
       };
 
-    clinicData = [
-        {
-            name: "Akyaka",
-            city: "ankara",
-            type: "Dentist",
-            address: "1.sokak",
-            treatments: [
-                {
-                    treatment_name: "diş çekimi",
-                    treatment_price: 350
-                },
-                {
-                    treatment_name: "tel",
-                    treatment_price: 2000
-                },
-                {
-                    treatment_name: "dolgu",
-                    treatment_price: 1500
-                }
-            ],
-            review: {
-                author: "asaf",
-                stars: 4,
-                date: "20.09.2017",
-                title: "satisfied, highly recommended",
-                description: "everything was ok."
-            },
-            rating: 2,
-            avatar: "http://placekitten.com/50/50"
-        },
-        {
-            name: "Aura",
-            city: "istanbul",
-            type: "Laser Eye",
-            address: "2.sokak",
-            treatments: [
-                {
-                    treatment_name: "goz ameliyati",
-                    treatment_price: 9000
-                },
-                {
-                    treatment_name: "göz muayenesi",
-                    treatment_price: 500
-                },
-                {
-                    treatment_name: "dolgu",
-                    treatment_price: 1500
-                }
-            ],
-            review: {
-                author: "asaf",
-                stars: 4,
-                date: "20.09.2017",
-                title: "clean clinic but very expensive",
-                description: ""
-            },
-            rating: 5,
-            avatar: "http://placekitten.com/49/50"
-        },
-        {
-            name: "Guven",
-            city: "ankara",
-            type: "Hair transparant",
-            address: "3.sokak",
-            treatments: [
-                {
-                    treatment_name: "saç ekimi",
-                    treatment_price: 4500
-                },
-                {
-                    treatment_name: "saç bakımı",
-                    treatment_price: 500
-                },
-                {
-                    treatment_name: "dolgu",
-                    treatment_price: 1500
-                }
-            ],
-            review: {
-                author: "asaf",
-                stars: 5,
-                date: "20.09.2017",
-                title: "clean clinic with experienced doctors",
-                description: "i was very pleased during my treatment."
-            },
-            rating: 4,
-            avatar: "http://placekitten.com/50/51"
-        }
-    ];
+    
     createCardComponents() {
-        var nodes = this.clinicData.map(function(clinic) {
+        var nodes = this.state.clinics.map(function(clinic) {
             return (
                 <div>
                     <ClinicCardAsaf
