@@ -11,6 +11,7 @@
 
 const express = require('express');
 const router = express.Router();
+const { MongoClient } = require('mongodb');
 
 //Clinic Model
 const Clinic = require('../../models/Clinics');
@@ -31,22 +32,22 @@ router.get('/', (req, res) =>{
 router.get("/search/:treatmentType" , (req, res) => {
     
     var treatmentType = req.params.treatmentType.replace("_"," ");
-    Treatment.find({"name": treatmentType })
-            .select("c_id")
-            .then( treatments => {
-                
-                var adTimes = [];
-                treatments.forEach(function(treatment) {
-                    console.log( treatment.c_id );
-                       
-                });
 
-                res.send(adTimes);
+
+    // Treatment.find({"name": treatmentType })
+    //         .populate("clinics")
+    //         .exec(function (err, clinics) {
+    //             if (err) return handleError(err);
+    //             console.log('The author is %s', clinics.name);
+    //             // prints "The author is Ian Fleming"
+    //           });
+    //         // .then( treatments => {
                 
-            });
+    //         //     res.send(treatments);
+                
+    //         // });
+
 });
-
-
 
 
 // @route   Get api/clinics/id
@@ -62,7 +63,7 @@ router.get('/:id', (req, res) =>{
                 .then( treatments => {
 
                     Ratings.find({"c_id": clinicId })
-                        .then( ratings => res.json({ clinics, treatments, ratings }) );
+                        .then( ratings => res.send({ clinics, treatments, ratings }) );
 
                 })
     })
@@ -88,7 +89,7 @@ router.post('/', (req, res) =>{
 
 });
 
-// @route   POST api/clinics
+// @route   POST api/clinics/id
 // @desc    Delete a Clinics
 // @access  Private
 
