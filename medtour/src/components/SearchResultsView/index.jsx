@@ -2,7 +2,7 @@
 import Select, { components } from "react-select";
 import ClinicCardAsaf from "../ClinicCardAsaf";
 
-const clinicData = [
+const clinicData =  [
     {
         name: "Akyaka",
         city: "ankara",
@@ -130,27 +130,29 @@ export default class SearchResultsView extends Component {
     } 
 
     handleChange = selectedOption => {
+
         this.setState(
           { selectedOption },
-          () => console.log(`Option selected:`, this.state.selectedOption)
+          () => 
+          {
+            console.log(`Option selected:`, this.state.selectedOption)
+          }
         );
 
-       //console.log(this.state.clinics[0])
-        
+        var clinics_array = [];
+          
         for (let step = 0; step < this.state.clinics.length; step++) {
             // Runs 5 times, with values of step 0 through 4.
             // console.log(this.state.clinics[step].city.includes('ankara'));
-            console.log(this.state.selectedOption)
-            if(this.state.clinics[step].city.includes('ankara')){
-                this.setState({
-                    clinics: this.state.clinics.splice(step, 1)
-                })
-                console.log('clinics:', this.state.clinics)
+            
+            if(this.state.clinics[step].city.includes(selectedOption[0].value)){
+                clinics_array.push(this.state.clinics[step])
             }
           }
+          this.setState({
+            clinics: clinics_array
+        })
 
-
-        // let clinics = this.state.clinics
       };
 
     

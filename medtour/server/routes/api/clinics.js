@@ -28,6 +28,15 @@ router.get('/', (req, res) =>{
     .then( clinics => res.json(clinics) ) 
 });
 
+
+router.get("/search/:type" , (req, res) => {
+    
+    var clinicType = req.params.type;
+    Treatment.find({"type": clinicType })
+            .then( treatments => res.json({ clinics, treatments, ratings }) );
+});
+
+
 // @route   Get api/clinics/id
 // @desc    Get all Clinics matching id
 // @access  Public
