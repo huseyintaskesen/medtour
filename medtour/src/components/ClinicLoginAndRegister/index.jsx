@@ -16,12 +16,12 @@ class ClinicLoginAndRegister extends Component {
                 <LandingNav />
                 <div className="container-fluid">
                     <div className="col-6 offset-3 w3-animate-opacity bg-white top">
-                        <div className="row pl-4">
+                        <div className="row">
                             <div className="col-6">
                                 <h3 className="text-center txt-color">
                                     Clinic Login
                                 </h3>
-                                <div className="row col-12">
+                                <div className="row">
                                     <form className="col-12">
                                         <div
                                             className="form-group"
@@ -52,7 +52,7 @@ class ClinicLoginAndRegister extends Component {
                                 <h3 className="text-center txt-color">
                                     Clinic Register
                                 </h3>
-                                <div className="row col-12">
+                                <div className="row">
                                     <form className="col-12">
                                         <div
                                             className="form-group"
