@@ -32,7 +32,7 @@ const auth = require('../../middleware/auth');
 
 router.post('/', (req, res) =>{
     
-    const { password, email } = req.body;
+    const { email, password } = req.body;
 
     //Simple validation
 
