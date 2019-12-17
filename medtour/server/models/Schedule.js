@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const SchedulesSchema = new Schema({
     
     fk_id:{
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: "clinic_id",
         required: true
     },
     monday:{

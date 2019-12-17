@@ -19,6 +19,8 @@ mongoose
     .then( ()=> console.log('MongoDb Connected [' + dbName + ']...'))
     .catch( err => console.log(err));
 
+
+
 //Use routes
 app.use('/api/clinics', require('./routes/api/clinics'));
 app.use('/api/treatments', require('./routes/api/treatments'));

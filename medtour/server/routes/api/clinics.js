@@ -11,7 +11,10 @@
 
 const express = require('express');
 const router = express.Router();
-const { MongoClient } = require('mongodb');
+const config = require("config");
+
+const MongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
 
 //Clinic Model
 const Clinic = require('../../models/Clinics');
@@ -33,19 +36,47 @@ router.get("/search/:treatmentType" , (req, res) => {
     
     var treatmentType = req.params.treatmentType.replace("_"," ");
 
+    const client = new MongoClient( "mongodb+srv://Qikabodi:bilkentbitirme@cluster0-mezhk.mongodb.net/test?retryWrites=true&w=majority"  , { useUnifiedTopology: true });
+    
+    client.connect(function(err) {
+      assert.equal(null, err);
+      console.log("Connected successfully to server to fetch search result");
+    
+      const db = client.db("MedTourMain");
 
-    // Treatment.find({"name": treatmentType })
-    //         .populate("clinics")
-    //         .exec(function (err, clinics) {
-    //             if (err) return handleError(err);
-    //             console.log('The author is %s', clinics.name);
-    //             // prints "The author is Ian Fleming"
-    //           });
-    //         // .then( treatments => {
-                
-    //         //     res.send(treatments);
-                
-    //         // });
+       db.collection("treatments").aggregate(
+           [
+            {
+                $match:{
+                    name: treatmentType
+                }
+            },
+            {
+                $lookup:{
+                    from: "clinics",
+                    localField: "c_id",
+                    foreignField: "_id",
+                    as: "newClinic"
+                }
+            }
+        ]).toArray().then( result => {
+
+            var clinicsArr = [];
+            
+            result.forEach(resultTreatment => {
+                (resultTreatment.newClinic).forEach(clinic  => {
+                    console.log(" -[" + treatmentType + "][" +   clinic.name + "]");
+                    clinicsArr.push( clinic );
+                });
+            });
+
+            res.send( clinicsArr );
+
+            client.close();
+            console.log("Disconnected successfully from server after fetching search result");
+
+        });
+    });
 
 });
 

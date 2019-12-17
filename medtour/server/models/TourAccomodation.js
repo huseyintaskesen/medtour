@@ -4,11 +4,13 @@ const Schema = mongoose.Schema;
 const TourAccomodationsSchema = new Schema({
     
     u_id:{
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: "user_id",
         required:true
     },
     a_id:{
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: "accomodation_id",
         required:true
     },
     checkIn:{

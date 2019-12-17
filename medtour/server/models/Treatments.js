@@ -5,7 +5,7 @@ const TreatmentsSchema = new Schema({
     
     c_id:[{ 
         type: Schema.Types.ObjectId, 
-        ref: 'Clinics', 
+        ref: 'clinics', 
         required: true}],
     name:{
         type: String,
