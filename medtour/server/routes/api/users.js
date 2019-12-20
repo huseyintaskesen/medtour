@@ -76,14 +76,15 @@ router.post('/', (req, res) =>{
                                     throw err;
                                 res.json({
                                     token,
-                                    userr: {
+                                    user: {
                                         id: userr.id,
                                         name: userr.name,
                                         surname: userr.surname,
                                         userName: userr.userName,
                                         password: userr.password,
                                         email: userr.email
-                                    }
+                                    },
+                                    loggedIn: "User"
                                 });
                             }
                         )

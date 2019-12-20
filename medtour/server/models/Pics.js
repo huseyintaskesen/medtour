@@ -4,8 +4,9 @@ const Schema = mongoose.Schema;
 const PicsSchema = new Schema({
 
     fk_id:{
-        type:String,
-        required:true
+        type:Schema.Types.ObjectId,
+        ref: "doctor_id/clinic_id",
+        required: true
     },
     pic:{
         type:String,

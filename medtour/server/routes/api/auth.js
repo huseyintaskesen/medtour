@@ -81,7 +81,6 @@ router.post('/', (req, res) =>{
 });
 
 
-
 // @route   GET api/auth/user
 // @desc    Get user data with their ID 
 // @access  Private
@@ -97,7 +96,6 @@ router.get('/user', auth, (req, res) =>{
     .then( user =>{
         res.json(user);
     })
-
 });
 
      

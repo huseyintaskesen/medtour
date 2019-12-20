@@ -3,11 +3,13 @@ const Schema = mongoose.Schema;
 
 const FavToursSchema = new Schema({
     u_id:{
-        type:String,
+        type:Schema.Types.ObjectId,
+        ref: "user_id",
         required: true
     },
     t_id:{
-        type:String,
+        type:Schema.Types.ObjectId,
+        ref: "tour_id",
         required: true
     }
 });

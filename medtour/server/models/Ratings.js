@@ -4,11 +4,13 @@ const Schema = mongoose.Schema;
 const RatingsSchema = new Schema({
     
     u_id:{
-        type:String,
+        type:Schema.Types.ObjectId,
+        ref: "user_id",
         required: true
     },
     c_id:{
-        type:String,
+        type:Schema.Types.ObjectId,
+        ref: "clinics_id",
         required: true
     },
     comment:{

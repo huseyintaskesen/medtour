@@ -3,10 +3,6 @@ const Schema = mongoose.Schema;
 
 const TreatmentsSchema = new Schema({
     
-    c_id:{
-        type: String,
-        required: true
-    },
     name:{
         type: String,
         required: true

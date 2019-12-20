@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const ResumesSchema = new Schema({
 
     fk_id:{
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: "doctors_id",
         required: true
     },
     resume:{
