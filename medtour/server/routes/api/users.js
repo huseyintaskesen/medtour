@@ -14,13 +14,13 @@ const jwt = require('jsonwebtoken');
 
 // params 
 // Headers: Content-Type: application/json
-// {
-// 	"name": "test name",
-// 	"surname": "test surname",
-// 	"userName": "testt",
-// 	"password":"19191919230",
-// 	"email":"testemail@gmail.com"
-// }
+    // {
+    // 	"name": "test name",
+    // 	"surname": "test surname",
+    // 	"userName": "testt",
+    // 	"password":"19191919230",
+    // 	"email":"testemail@gmail.com"
+    // }
 // returns 
 // {
 //     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkZjdiZTRiMmVhYzVjNDkzNDMyMWI2OCIsImlhdCI6MTU3NjUxNzE5NSwiZXhwIjoxNTc2NTIwNzk1fQ._j0kzdX4CUKSK_REiaZmu3H_I2JpP-rvB_l0ca555ug",

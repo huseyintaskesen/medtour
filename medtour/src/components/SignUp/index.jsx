@@ -26,10 +26,10 @@ class SignUp extends Component {
         var userName = this.username_input.current.value;
         var email = this.email_input.current.value;
 
-        this.userRegister(name, surname, password, userName, email);
+        this.registerUser(name, surname, password, userName, email);
     }
 
-    userRegister(name, surname, userName, password, email) {
+    registerUser(name, surname, password, userName, email) {
         const body = JSON.stringify({
             name,
             surname,
@@ -46,9 +46,9 @@ class SignUp extends Component {
         };
         //Request body
         axios.post("/api/users", body, config).then(res => ({
-            payload: res.data
+            payload: res.data,
         }));
-        console.log("user created");
+        
     }
 
     render() {
