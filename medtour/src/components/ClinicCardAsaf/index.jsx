@@ -55,6 +55,9 @@ export default function ClinicCardAsaf(props) {
                             <a href="#" className="card-link">
                                 Detailed Info
                             </a>
+                            <button className="btn btn-success">
+                                Make a Reservation
+                            </button>
                         </div>
                     </div>
                 </div>
