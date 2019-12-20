@@ -65,7 +65,6 @@ router.post('/', (req, res) =>{
 });
 
 
-
 // @route   GET api/auth/user
 // @desc    Get user data
 // @access  Private

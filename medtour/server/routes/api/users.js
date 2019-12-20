@@ -61,7 +61,8 @@ router.post('/', (req, res) =>{
                                         userName: userr.userName,
                                         password: userr.password,
                                         email: userr.email
-                                    }
+                                    },
+                                    loggedIn: "User"
                                 });
                             }
                         )

@@ -2,11 +2,11 @@
 //  Posting to create new treatment, body content
 // {
 // 	"c_id": "5deea470fb5c5624244fbda2",
-// 	"name": "Teeth Removal",
-// 	"info": "Teeth removal with flamethrower",
-// 	"priceLow":"2000",
-// 	"priceHigh":"5000",
-// 	"currency":"TL"
+	// "name": "Teeth Removal",
+	// "info": "Teeth removal with flamethrower",
+	// "priceLow":"2000",
+	// "priceHigh":"5000",
+	// "currency":"TL"
 // }
 
 const express = require('express');
@@ -42,7 +42,6 @@ router.get('/:c_id', (req, res) =>{
 router.post('/', (req, res) =>{
 
     const newTreatment = new Treatment({
-        c_id: req.body.c_id,
         name: req.body.name,
         info: req.body.info,
         priceLow: req.body.priceLow,
@@ -50,7 +49,11 @@ router.post('/', (req, res) =>{
         currency: req.body.currency
     });
 
-    newTreatment.save().then(()=> res.json({insertion_for_treatment: true}));
+    newTreatment.save().then( newT => res.json({
+                                            insertion_for_treatment: true,
+                                            insertion_id: newT._id
+                                            })
+    );
 
 });
 
@@ -64,6 +67,19 @@ router.delete('/all/:c_id' , (req, res)=> {
     Treatment.remove({ "c_id" : c_id })
     .then( ()=> res.json({all_treatments_deletion:true}))
     .catch(err => res.status(404).json({all_treatments_deletion: false, error: err}));
+
+});
+
+// @route   POST api/treatments/deleteAll
+// @desc    Delete all treatments
+// @access  Private
+
+router.delete('/deleteAll' , (req, res)=> {
+    var c_id = req.params.c_id;
+    
+    Treatment.remove({  })
+    .then( ()=> res.json({all_treatments_deleted:true}))
+    .catch(err => res.status(404).json({all_treatments_deleted: false, error: err}));
 
 });
 
