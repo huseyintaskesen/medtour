@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
 import Autosuggest from "react-autosuggest";
 import Footer from "../Footer";
-import "./landing.css";
 import LandingNav from "../LandingNav";
+import "./landing.css";
 
 const languages = [
     {
@@ -322,9 +322,9 @@ class Landing extends Component {
                             <h3 id="izmir">Izmir</h3>
                             <h3 id="ankara">Ankara</h3>
                         </div>
+                        <Footer />
                     </div>
                 </div>
-                <Footer />
             </div>
         );
     }
