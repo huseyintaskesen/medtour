@@ -96,6 +96,7 @@ const hotelData = [{
     const [treatment, setTreatmentValue] = React.useState('');
     const [expanded, setExpanded] = React.useState(false);
     const [startDate, setStartDate] = useState(new Date());
+    const [hotelID, setHotelID] = useState(0)
     const treatments = [
         {
           value: '$199 ',
@@ -158,7 +159,9 @@ const hotelData = [{
         setExpanded(!expanded);
       };
       const handleFavoriteClick  = id => {
-        console.log(id)
+        setHotelID(id)
+        
+        console.log('selected hotels index is:' + hotelID)
       }
 
     return(
@@ -238,7 +241,7 @@ const hotelData = [{
             </CardContent>
             <CardActions disableSpacing>
               <IconButton aria-label="add to favorites">
-                <FavoriteIcon onClick={handleFavoriteClick(1)} />
+                <FavoriteIcon  onClick={() => handleFavoriteClick(0)} />
               </IconButton>
               <IconButton aria-label="share">
                 <ShareIcon />
@@ -312,7 +315,7 @@ const hotelData = [{
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+          <FavoriteIcon  onClick={() => handleFavoriteClick(1)}/>
         </IconButton>
         <IconButton aria-label="share">
           <ShareIcon />
