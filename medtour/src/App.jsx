@@ -15,6 +15,7 @@ import Grid from "./components/Grid";
 import ProfilePagePatientView from "./components/ProfilePagePatientView";
 import ProfilePageClinic from "./components/ProfilePageClinicView/ProfilePageClinic";
 import LandingPage from "./components/Landing";
+import ReservationPageView from "./components/ReservationPageView";
 
 //TODO Web Template Studio: Add routes for your new pages here.
 class App extends Component {
@@ -43,6 +44,7 @@ class App extends Component {
                     />
                     <Route path="/search" component={SearchResultsView} />
                     <Route path="/landing" component={LandingPage} />
+                    <Route path="/reservation" component={ReservationPageView} />
                 </Switch>
             </React.Fragment>
         );
