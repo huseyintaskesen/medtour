@@ -9,7 +9,7 @@ body {
 }
 
 .landing-page {
-    position: absolute;
+    position: relative;
     width: 100%;
     height: 295%;
 }
@@ -121,6 +121,7 @@ body {
 
 .landing-third-picture-tags h3 {
     color: white;
+    margin-bottom: 5%;
 }
 
 .landing-third-picture-tags #istanbul {

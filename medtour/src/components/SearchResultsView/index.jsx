@@ -1,6 +1,6 @@
 ﻿import React, { useState, useEffect, Component } from "react";
 import Select, { components } from "react-select";
-import ClinicCardAsaf from "../ClinicCardAsaf";
+import ClinicCard from "../ClinicCard";
 import LandingNav from "../LandingNav";
 
 const clinicData = [
@@ -125,10 +125,34 @@ export default class SearchResultsView extends Component {
         var treatment_type = this.props.location.data;
         this.setState({
             treatment: treatment_type,
-            clinics: clinicData
         });
-        console.log("DATA IS:" + treatment_type);
+       
+        const options = {
+            headers: {'content-type': 'application/json'}
+        };
+
+        fetch("http://localhost:3001/api/clinics", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        }).then(response => {
+            return response.json();
+        }).then(muutuja => {
+            //let results_from_API = JSON.stringify(muutuja)
+            // this.setState({
+            //     clinics: results_from_API,
+            // });
+            console.log(muutuja[0])
+            this.setState({
+                clinics: muutuja
+            })
+            
+        });
+        
+        
     }
+    
 
     handleChange = selectedOption => {
         this.setState({ selectedOption }, () => {
@@ -138,8 +162,6 @@ export default class SearchResultsView extends Component {
         var clinics_array = [];
 
         for (let step = 0; step < this.state.clinics.length; step++) {
-            // Runs 5 times, with values of step 0 through 4.
-            // console.log(this.state.clinics[step].city.includes('ankara'));
 
             if (
                 this.state.clinics[step].city.includes(selectedOption[0].value)
@@ -156,13 +178,14 @@ export default class SearchResultsView extends Component {
         var nodes = this.state.clinics.map(function(clinic) {
             return (
                 <div>
-                    <ClinicCardAsaf
+                    <ClinicCard
                         name={clinic.name}
-                        treatments={clinic.treatments}
+                        treatments = {[]}
+                        // {clinic.treatments}
                         avatar={clinic.avatar}
                         rating={clinic.rating}
                         location={clinic.address}
-                    ></ClinicCardAsaf>
+                    ></ClinicCard>
                     {/* <ClinicCardComponent name={clinic.name} type={clinic.type} location={clinic.location} address={clinic.address} treatments = {clinic.treatments} review={clinic.review} avatar={clinic.avatar} rating={clinic.rating}></ClinicCardComponent> */}
                 </div>
             );

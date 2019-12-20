@@ -11,10 +11,11 @@ import SignUp from "./components/SignUp";
 import ClinicLoginAndRegister from "./components/ClinicLoginAndRegister";
 import Contact from "./components/Contact";
 import SearchResultsView from "./components/SearchResultsView";
-import Grid from "./components/Grid";
 import ProfilePagePatientView from "./components/ProfilePagePatientView";
 import ProfilePageClinic from "./components/ProfilePageClinicView/ProfilePageClinic";
 import LandingPage from "./components/Landing";
+import ClinicProfilePatient from "./components/ClinicProfilePatient";
+import ReservationPageView from "./components/ReservationPageView";
 
 //TODO Web Template Studio: Add routes for your new pages here.
 class App extends Component {
@@ -35,7 +36,6 @@ class App extends Component {
                         path="/SearchResultsView"
                         component={SearchResultsView}
                     />
-                    <Route path="/Grid" component={Grid} />
                     <Route path="/profile" component={ProfilePagePatientView} />
                     <Route
                         path="/clinicprofile"
@@ -43,6 +43,14 @@ class App extends Component {
                     />
                     <Route path="/search" component={SearchResultsView} />
                     <Route path="/landing" component={LandingPage} />
+                    <Route
+                        path="/clinic-profile-patient"
+                        component={ClinicProfilePatient}
+                    />
+                    <Route
+                        path="/reservation"
+                        component={ReservationPageView}
+                    />
                 </Switch>
             </React.Fragment>
         );
