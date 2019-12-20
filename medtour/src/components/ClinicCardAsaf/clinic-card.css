@@ -11,3 +11,7 @@
 .checked {
     color: orange;
 }
+
+.card-body button {
+    float: right;
+}
