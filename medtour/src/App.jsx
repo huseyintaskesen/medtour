@@ -51,6 +51,10 @@ class App extends Component {
                         path="/reservation"
                         component={ReservationPageView}
                     />
+                    <Route
+                        path="/reservation"
+                        component={ReservationPageView}
+                    />
                 </Switch>
             </React.Fragment>
         );
