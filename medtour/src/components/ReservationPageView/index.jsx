@@ -1,11 +1,17 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import ReservationUI from "./ReservationUI"
+import ReservationUI from "./ReservationUI";
+import LandingNav from "../LandingNav";
+import Footer from "../Footer";
 
 export default class ReservationPageView extends Component {
     render() {
         return (
-           <ReservationUI></ReservationUI>
+            <div>
+                <LandingNav />
+                <ReservationUI></ReservationUI>
+                <Footer />
+            </div>
         );
     }
-  }
+}

@@ -199,9 +199,7 @@ router.post('/newClinic', (req, res) =>{
                     });
                 })
             })
-            .catch(err =>{
-                console.log( err );
-            })
+           
         }
     })
 
