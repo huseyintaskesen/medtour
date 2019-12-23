@@ -97,7 +97,32 @@ router.post('/', (req, res) =>{
 
 });
 
-     
+
+// @route   Get api/users/'whatToChange'/'newValue'/id
+// @desc    Change an attribute to the user with the given id
+// @access  Public
+
+router.put('/updateOneAttribute/:id', (req, res) =>{
+    
+    var id = req.params.id;
+    var whatToChange = req.body.whatToChange;
+    var newValue = req.body.newValue;
+
+    console.log("[" + whatToChange + "][" + newValue + "]");
+
+    var change = {};
+    change[whatToChange] = newValue
+
+    User.updateOne(
+        {"_id" : id},
+        { $set: change
+                 
+        }
+    ).then( userUpdated =>{
+        res.status(200).json({user_Single_Information_Update: true});
+    });
+})
+
 
 module.exports = router;
 
