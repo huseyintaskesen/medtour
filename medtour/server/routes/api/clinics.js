@@ -7,12 +7,11 @@
 // 	"rating":"5",
 // 	"email":"newClinic@gmail.com",
 // 	"bio":"very very gooooooood clinic"
-// }s
+// }
 
 const express = require('express');
 const router = express.Router();
 const config = require("config");
-
 
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -20,10 +19,12 @@ const jwt = require('jsonwebtoken');
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
-//Clinic Model
 const Clinic = require('../../models/Clinics');
-const Treatment = require('../../models/Treatments');
-const Ratings = require('../../models/Ratings');
+
+
+//==========================================================================================
+//======================    GET CALLS   ====================================================
+//==========================================================================================
 
 
 // @route   Get api/clinics
@@ -31,11 +32,12 @@ const Ratings = require('../../models/Ratings');
 // @access  Public
 router.get('/', (req, res) =>{
     Clinic.find()
-    .sort({id: -1}) 
+    .sort({id: -1})
+    .populate('treatments')
+    .populate("reviews")
+    .populate("phoneNumbers")
     .then( clinics => res.json(clinics) ) 
 });
-
-
 
 
 // @route   Get: api/search/clinicType
@@ -47,14 +49,14 @@ router.get("/search/:searchParam" , (req, res) => {
     var searchParam = req.params.searchParam.replace("_"," ");
 
     Clinic.find({type: searchParam})
+    .populate("treatments")
+    .populate("reviews")
+    .populate("phoneNumbers")
     .then( result => {
         res.status(200).json(result);
     })
 
 });
-
-
-
 
 
 // @route   Get: api/search/treatment/clinicType
@@ -123,82 +125,20 @@ router.get("/search/treatment/:searchParam" , (req, res) => {
 // @access  Public
 
 router.get('/:id', (req, res) =>{
-    Clinic.findById( req.params.id ).then( clinics => {  res.send({ clinics }) })
+    Clinic.findById( req.params.id )
+    .populate('treatments')
+    .populate("reviews")
+    .populate("phoneNumbers")
+    .populate("doctors")
+    .then( clinics => {  res.send({ clinics }) })
 });
 
 
-
-// @route   POST api/clinics/id
-// @desc    Delete a Clinics
-// @access  Private
-
-router.delete('/:id' , (req, res)=> {
-    Clinic.findById(req.params.id)
-    .then( clinic => clinic.remove().then( ()=> res.json({clinic_Deletion :true})))
-    .catch(err => res.status(404).json({clinic_Deletion: false}));
-})
-
-
-// @route   POST api/clinics/addTreatment/id
-// @desc    Add a new tretment to the clinic with matching id
-// @access  Private
-
-router.put('/newTreatment/:id' , (req, res)=> {
-    
-    var id = req.params.id;
-
-    Clinic.update(
-        { "_id": id },
-        {$push: { "treatments": {
-                        name:  req.body.name,
-                        info: req.body.info,
-                        priceLow: req.body.priceLow,
-                        priceHigh: req.body.priceHigh,
-                        currency: req.body.currency
-                    }
-            } 
-        }
-    ).then( clinicUpdate =>{
-        res.status(200).json({  new_Treatment_Insertion: true  })
-    })
-    .catch( err =>{
-        res.status(400).json("Treatment addition failed!");
-    });
-
-})
-
-
-// @route   POST api/clinics/updateInformation/id
-// @desc    Update the basic information for the clinic with matching id
-// @access  Private
-
-router.put('/updateInformation/:id' , (req, res)=> {
-    
-    var id = req.params.id;
-
-    var name = req.body.name;
-    var city = req.body.city;
-    var type = req.body.type;
-    var address = req.body.address;
-    var email = req.body.email;
-    var bio = req.body.bio;
-
-    console.log( id );
-
-    Clinic.updateOne(
-        {"_id" : id},
-        { $set: { "name" : name,
-                 "city" : city,
-                 "type" : type,
-                 "address" : address,
-                 "email" : email,
-                 "bio" : bio
-                } 
-        }
-    ).then( clinicUpdate =>{
-        res.status(200).json({clinic_Information_Update: true});
-    });
-})
+//==========================================================================================
+//======================    END OF GET CALLS   =============================================
+//==========================================================================================
+//======================   POST CALLS  ======================( Done all)====================
+//==========================================================================================
 
 // @route   POST api/clinics/newClinic
 // @desc    Create a new clinic account
@@ -268,6 +208,94 @@ router.post('/newClinic', (req, res) =>{
 
 });
 
+
+//==========================================================================================
+//======================    END OF Post CALLS   ============================================
+//==========================================================================================
+//======================    PUT CALLS  =================( Done all)=========================
+//==========================================================================================
+
+
+// @route   POST api/clinics/addTreatment/id
+// @desc    Add a new tretment to the clinic with matching id
+// @access  Private
+
+router.put('/newTreatment/:id' , (req, res)=> {
+    
+    var id = req.params.id;
+
+    Clinic.updateOne(
+        { "_id": id },
+        {$push: { "treatments": id
+
+                
+            } 
+        }
+    ).then( clinicUpdate =>{
+        res.status(200).json({  new_Treatment_Insertion: true  })
+    })
+    .catch( err =>{
+        res.status(400).json("Treatment addition failed!");
+    });
+
+})
+
+
+// @route   POST api/clinics/updateInformation/id
+// @desc    Update the basic information for the clinic with matching id
+// @access  Private
+
+router.put('/updateInformation/:id' , (req, res)=> {
+    
+    var id = req.params.id;
+
+    var name = req.body.name;
+    var city = req.body.city;
+    var type = req.body.type;
+    var address = req.body.address;
+    var email = req.body.email;
+    var bio = req.body.bio;
+
+    console.log( id );
+
+    Clinic.updateOne(
+        {"_id" : id},
+        { $set: { "name" : name,
+                 "city" : city,
+                 "type" : type,
+                 "address" : address,
+                 "email" : email,
+                 "bio" : bio
+                } 
+        }
+    ).then( clinicUpdate =>{
+        res.status(200).json({clinic_Information_Update: true});
+    });
+})
+
+
+//==========================================================================================
+//======================    END OF PUT CALLS   =============================================
+//==========================================================================================
+//======================    DELTE CALLS  =========( Done all)===============================
+//==========================================================================================
+
+
+// @route   POST api/clinics/id
+// @desc    Delete a Clinics
+// @access  Private
+
+router.delete('/:id' , (req, res)=> {
+    Clinic.findById(req.params.id)
+    .then( clinic => clinic.remove().then( ()=> res.json({clinic_Deletion :true})))
+    .catch(err => res.status(404).json({clinic_Deletion: false}));
+})
+
+
+
+//==========================================================================================
+//======================    END OF DELETE CALLS   ==========================================
+//==========================================================================================
 
 
 module.exports = router;

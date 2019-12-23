@@ -1,6 +1,5 @@
 
-const mongoos = require('mongoose');
-
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const AccomodationSchema = new Schema({
@@ -28,8 +27,17 @@ const AccomodationSchema = new Schema({
     currency:{
         type: String,
         required: true,
+    },
+    checkIn:{
+        type: Date,
+        default: Date.now,
+        required:true
+    },
+    checkOut:{
+        type: Date,
+        default: Date.now,
+        required:true
     }
-
 
 });
 

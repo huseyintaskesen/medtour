@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const PhoneNumber = require("../models/PhoneNumbers");
+
+
 const UserSchema = new Schema({
     name:{
         type: String,
@@ -38,7 +41,11 @@ const UserSchema = new Schema({
     register_date:{
         type: Date,
         default: Date.now
-    }
+    },
+    phoneNumbers:[{
+          type: Schema.Types.ObjectId,
+          ref: PhoneNumber
+    }]
     
 });
 

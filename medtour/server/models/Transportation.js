@@ -7,8 +7,8 @@ const TransportationSchema = new Schema({
         type: Date,
         required: true
     },
-    return:{
-        type: Date,
+    location:{
+        type:String,
         required: true
     },
     type:{

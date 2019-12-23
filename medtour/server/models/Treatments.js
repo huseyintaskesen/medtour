@@ -19,6 +19,10 @@ const TreatmentsSchema = new Schema({
         type: Number,
         required: true
     },
+    arrangedPrice:{
+        type:Number,
+        required: false
+    },
     currency:{
         type: String,
         required: true

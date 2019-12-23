@@ -1,16 +1,17 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const User = require("../models/User");
+
 const RatingsSchema = new Schema({
     
     u_id:{
         type:Schema.Types.ObjectId,
-        ref: "user_id",
+        ref: User,
         required: true
     },
-    c_id:{
-        type:Schema.Types.ObjectId,
-        ref: "clinics_id",
+    name:{
+        type: String,
         required: true
     },
     comment:{
