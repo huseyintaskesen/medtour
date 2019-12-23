@@ -1,36 +1,48 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const User = require("../models/User");
+const Treatment = require("../models/Treatments");
+const Transportation = require("../models/Transportation");
+const Accomodation = require("../models/Accomodation");
+const Clinic = require("../models/Clinics");
+
 const TourDataSchema = new Schema({
     
     u_id:{
         type: Schema.Types.ObjectId,
-        ref: "user_id",
+        ref: User,
         required: true
     },
     t_id:{
         type: Schema.Types.ObjectId,
-        ref: "treatment_id",
-        required: true
-    },
-    tr_id:{
-        type: Schema.Types.ObjectId,
-        ref: "transportation_id",
-        required: true
-    },
-    a_id:{
-        type: Schema.Types.ObjectId,
-        ref: "accomodation_id",
+        ref: Treatment,
         required: true
     },
     c_id:{
         type: Schema.Types.ObjectId,
-        ref: "clinic_id",
+        ref: Clinic,
+        required: true
+    },
+    transportation_Departure_id:{
+        type: Schema.Types.ObjectId,
+        ref: Transportation,
+        required: true
+    },  
+    transportation_Return_id:{
+        type: Schema.Types.ObjectId,
+        ref: Transportation,
+        required: true
+    },  
+    accomodation_id:{
+        type: Schema.Types.ObjectId,
+        ref: Accomodation,
         required: true
     },
     date:{
         type: Date,
-        required: true
+        default: Date.now,
+        required: false
     }
 });
 

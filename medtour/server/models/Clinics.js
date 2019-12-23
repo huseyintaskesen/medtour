@@ -3,6 +3,11 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+const Treatment = require('../models/Treatments');
+const Rating = require('../models/Ratings');
+const PhoneNumber = require('../models/PhoneNumbers');
+const Doctor = require("../models/Doctors");
+
 //CreateSchema
 
 const ClinicsFromDb = new Schema({
@@ -40,60 +45,26 @@ const ClinicsFromDb = new Schema({
       required: true
     },
     bio: {
-        type: String,
-        required: false,
-        default: ""
+      type: String,
+      required: false,
+      default: ""
     },
-    treatments:[
-        {
-          name:{
-            type: String,
-            required: true
-        },
-        info:{
-            type: String,
-            required: true
-        },
-        priceLow:{
-            type: Number,
-            required: true
-        },
-        priceHigh:{
-            type: Number,
-            required: true
-        },
-        currency:{
-            type: String,
-            required: true
-        }
-      }
-    ],
-    reviews:[
-      {
-        u_id:{
-          type:Schema.Types.ObjectId,
-          ref: "user_id",
-          required: true
-        },
-        name:{
-          type: String,
-          required: true
-        },
-        comment:{
-            type: String,
-            required: true
-        },
-        rating:{
-            type:Number,
-            required: true
-        },
-        date:{
-            type: Date,
-            required: true,
-            default: Date.now
-        }
-      }
-    ]
+    treatments:[{
+      type: Schema.Types.ObjectId,
+      ref:  Treatment
+    }],
+    reviews:[{
+      type: Schema.Types.ObjectId,
+      ref: Rating
+    }],
+    phoneNumbers:[{
+      type: Schema.Types.ObjectId,
+      ref: PhoneNumber
+    }],
+    doctors:[{
+      type: Schema.Types.ObjectId,
+      ref: Doctor
+    }]
 });
 
 module.exports = Clinic = mongoose.model('Clinics', ClinicsFromDb);

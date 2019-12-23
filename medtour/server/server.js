@@ -27,6 +27,10 @@ mongoose
 app.use('/api/clinics', require('./routes/api/clinics'));
 app.use('/api/treatments', require('./routes/api/treatments'));
 app.use('/api/ratings', require('./routes/api/ratings'));
+app.use('/api/phoneNumbers', require('./routes/api/phoneNumbers'));
+app.use('/api/doctors', require('./routes/api/doctors'));
+app.use('/api/transportation', require('./routes/api/transportation'));
+app.use('/api/tourData', require('./routes/api/tourData'));
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
 

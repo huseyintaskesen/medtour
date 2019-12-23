@@ -1,5 +1,5 @@
 
-//  Posting to create new treatment, body content
+// Posting to create new treatment, body content
 // {
 // 	"c_id": "5deea470fb5c5624244fbda2",
 	// "name": "Teeth Removal",
@@ -12,8 +12,13 @@
 const express = require('express');
 const router = express.Router();
 
-//Treatment Model
 const Treatment = require('../../models/Treatments');
+const Clinic = require('../../models/Clinics');
+
+
+//==========================================================================================
+//======================    GET CALLS   ====================================================
+//==========================================================================================
 
 // @route   Get api/treatment
 // @desc    Get all treatments
@@ -25,21 +30,21 @@ router.get('/', (req, res) =>{
     .then( treatment => res.json(treatment) ) 
 });
 
-// @route   Get api/treatments/c_id
-// @desc    Get all treatments of a clinic with matching c_id
-// @access  Public
 
-router.get('/:c_id', (req, res) =>{
-    var c_id = req.params.c_id;
-    Treatment.find({"c_id": c_id })
-    .then( treatments => res.json(treatments) )
-});
+//==========================================================================================
+//======================    END OF GET CALLS   =============================================
+//==========================================================================================
+//======================   POST CALLS  ======================( Done all)====================
+//==========================================================================================
+
 
 // @route   POST api/treatment
 // @desc    Create a treatment
 // @access  Public
 
-router.post('/', (req, res) =>{
+router.post('/newTreatment/:clinic_id', (req, res) =>{
+
+    var id = req.params.clinic_id;
 
     const newTreatment = new Treatment({
         name: req.body.name,
@@ -49,35 +54,41 @@ router.post('/', (req, res) =>{
         currency: req.body.currency
     });
 
-    newTreatment.save().then( newT => res.json({
-                                            insertion_for_treatment: true,
-                                            insertion_id: newT._id
-                                            })
+    newTreatment.save().then( newT => {
+        console.log( newT._id);
+        Clinic.updateOne(
+            { "_id": id },
+            { $push: { "treatments": newT._id }   }
+        ).then( clinicUpdate =>{
+            res.status(200).json({  new_Treatment_Insertion: true, updated_Clinics_Treatment_References: true  })
+        })
+        .catch( err =>{
+            Treatment.findById(  newT._id )
+            .then( treatment => treatment.remove().then( ()=> res.status(404).json({new_Treatment_Insertion: false,
+                                                                                    removed_New_Treatment_To_Perserve_Database  :true})))
+            .catch(err => res.status(404).json({removed_New_Treatment_To_Perserve_Database: false}));
+        });
+    }
     );
 
 });
 
-// @route   POST api/treatments/all/id
-// @desc    Delete all treatments for clinic with matching id
-// @access  Private
 
-router.delete('/all/:c_id' , (req, res)=> {
-    var c_id = req.params.c_id;
-    
-    Treatment.remove({ "c_id" : c_id })
-    .then( ()=> res.json({all_treatments_deletion:true}))
-    .catch(err => res.status(404).json({all_treatments_deletion: false, error: err}));
 
-});
+//==========================================================================================
+//======================    END OF Post CALLS   ============================================
+//==========================================================================================
+//======================    DELTE CALLS  =========( Done all)===============================
+//==========================================================================================
+
 
 // @route   POST api/treatments/deleteAll
 // @desc    Delete all treatments
 // @access  Private
 
 router.delete('/deleteAll' , (req, res)=> {
-    var c_id = req.params.c_id;
     
-    Treatment.remove({  })
+    Treatment.remove({ })
     .then( ()=> res.json({all_treatments_deleted:true}))
     .catch(err => res.status(404).json({all_treatments_deleted: false, error: err}));
 
@@ -95,7 +106,12 @@ router.delete('/one/:id' , (req, res)=> {
     .catch( err => res.status(404).json({treatment_deletion: false, error: err})  );
 
 })
-     
+
+
+//==========================================================================================
+//======================    END OF DELETE CALLS   ==========================================
+//==========================================================================================
+
 
 module.exports = router;
 
