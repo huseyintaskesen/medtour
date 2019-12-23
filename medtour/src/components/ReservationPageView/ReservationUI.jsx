@@ -92,7 +92,7 @@ export default function ReservationUI() {
     const [expanded, setExpanded] = React.useState(false);
     const [startDate, setStartDate] = useState(new Date());
     const [hotelID, setHotelID] = useState(0);
-    
+
     const treatments = [
         {
             value: "$199 ",
@@ -107,29 +107,25 @@ export default function ReservationUI() {
             label: "TREATMENT 3"
         },
         {
-          value: '$299',
-          label: 'TREATMENT 4',
-        },
-      ];
+            value: "$299",
+            label: "TREATMENT 4"
+        }
+    ];
 
     const flights = [
         {
-          value: 'Thomas Cook',
-          label: 'TREATMENT 1',
+            value: "Thomas Cook",
+            label: "TREATMENT 1"
         },
         {
-          value: 'Thomas Cook',
-          label: 'TREATMENT 2',
+            value: "Thomas Cook",
+            label: "TREATMENT 2"
         },
         {
-          value: 'Approximately $',
-          label: 'Thomas Cook',
-        },
-        
-      ];
-      
-      
-  
+            value: "Approximately $",
+            label: "Thomas Cook"
+        }
+    ];
 
     const useStyles = makeStyles(theme => ({
         root: {
@@ -459,7 +455,7 @@ export default function ReservationUI() {
                         </div>
                         <div className="pl-4 mt-3">
                             <div className="row">
-                                <div className="col-3 flight-cards">
+                                <div className="col-3">
                                     <div
                                         class="card"
                                         style={{ width: "16rem" }}
