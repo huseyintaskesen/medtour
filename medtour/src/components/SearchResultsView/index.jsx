@@ -130,7 +130,7 @@ export default class SearchResultsView extends Component {
         const options = {
             headers: {'content-type': 'application/json'}
         };
-
+        // search/"+treatment_type
         fetch("http://localhost:3001/api/clinics", {
         method: "GET",
         headers: {
@@ -180,11 +180,12 @@ export default class SearchResultsView extends Component {
                 <div>
                     <ClinicCard
                         name={clinic.name}
-                        treatments = {[]}
-                        // {clinic.treatments}
+                        treatments = {clinic.treatments}
                         avatar={clinic.avatar}
                         rating={clinic.rating}
                         location={clinic.address}
+                        bio = {clinic.bio}
+                        clinic_id = {clinic._id}
                     ></ClinicCard>
                     {/* <ClinicCardComponent name={clinic.name} type={clinic.type} location={clinic.location} address={clinic.address} treatments = {clinic.treatments} review={clinic.review} avatar={clinic.avatar} rating={clinic.rating}></ClinicCardComponent> */}
                 </div>

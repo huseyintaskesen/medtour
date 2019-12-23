@@ -10,12 +10,14 @@ import Box from "@material-ui/core/Box";
 import { createMuiTheme } from "@material-ui/core/styles";
 import purple from "@material-ui/core/colors/purple";
 import "./tabs.css";
+import { useState, useEffect } from 'react';
 
 const theme = createMuiTheme({
     palette: {
         primary: purple
     }
 });
+
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -54,16 +56,63 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function SimpleTabs() {
+export default function SimpleTabs(props) {
+
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
+    const [clinic_treatments, setTreatments] = React.useState([]);
+
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
+
+    // const treatment_details = props.treatments.map(treatment => {
+    //     return (
+    //         <div>
+    //             <li>{treatment["name"]}: {treatment["priceLow"]} - {treatment["priceHigh"]} {treatment["currency"]} </li>
+    //         </div>
+    //     );
+    // });
+    
+
+    // useEffect(() => {
+
+    //         fetch("http://localhost:3001/api/clinics/5dfe3f6e79469144a4653524" +clinic_id, {
+    //             method: "GET",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //             },
+    //             })
+    //             .then(res => res.json())
+    //             .then(data => {
+    //                 setName(data.clinics.name)
+    //                 console.log('sodfsıodfsodıfsıdo')
+    //             })
+           
+    //       }, [])
+
+    // const treatment_details = clinic.treatments.map(treatment => {
+        //     return (
+        //         <div>
+        //             <li>{treatment["name"]}: {treatment["priceLow"]} - {treatment["priceHigh"]} {treatment["currency"]} </li>
+        //         </div>
+        //     );
+        // });
+
     return (
         <div className={classes.root}>
+                <div className="container-fluid name bg-dark">
+                    <div className="row">
+                        <div className="col-6">
+                            
+                        </div>
+                        <div className="col-6">
+                            {/* <h5>{clinic_address}</h5> */}
+                        </div>
+                    </div>
+                </div>
             <AppBar position="static" style={{ background: "darkred" }}>
                 <Tabs
                     value={value}
@@ -73,7 +122,7 @@ export default function SimpleTabs() {
                         margin: "0 0 0 10%",
                         color: "white"
                     }}
-                    indicatorColor="white"
+                    
                 >
                     <Tab label="Profile" {...a11yProps(0)} />
                     <Tab label="Review" {...a11yProps(1)} />
@@ -82,11 +131,10 @@ export default function SimpleTabs() {
             <TabPanel value={value} index={0}>
                 <div className="col-8 offset-2 treatments">
                     <div className="row pb-3 pt-3">
-                        <h3>Treatments</h3>
+                        <h3>Treatments</h3>                
                     </div>
                     <div className="row">
                         <div className="col-3 pt-4">
-                            <p>Hair Removal</p>
                             <p>Teeth Implant</p>
                             <p>Open Heart Surgery</p>
                             <p>Skin Cancer</p>
@@ -124,7 +172,7 @@ export default function SimpleTabs() {
                         <h3>Comments From Users</h3>
                     </div>
                     <div className="row pl-2 pt-4 pb-3">
-                        <div clasName="row">
+                        <div className="row">
                             <h5>Asaf Kağan Bezgin</h5>
                         </div>
                     </div>
@@ -134,7 +182,7 @@ export default function SimpleTabs() {
                         </p>
                     </div>
                     <div className="row pl-2 pt-4 pb-3">
-                        <div clasName="row">
+                        <div className="row">
                             <h5>Hüseyin Taşkesen</h5>
                         </div>
                     </div>
@@ -142,7 +190,7 @@ export default function SimpleTabs() {
                         <p>Çok mutsuzum. Dişim elimde dönüyorum.</p>
                     </div>
                     <div className="row pl-2 pt-4 pb-3">
-                        <div clasName="row">
+                        <div className="row">
                             <h5>Skerd Xhafa</h5>
                         </div>
                     </div>

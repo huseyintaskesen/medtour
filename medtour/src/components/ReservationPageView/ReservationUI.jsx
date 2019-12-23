@@ -115,6 +115,22 @@ const hotelData = [{
           label: 'TREATMENT 4',
         },
       ];
+
+    const flights = [
+        {
+          value: 'Thomas Cook',
+          label: 'TREATMENT 1',
+        },
+        {
+          value: 'Thomas Cook',
+          label: 'TREATMENT 2',
+        },
+        {
+          value: 'Approximately $',
+          label: 'Thomas Cook',
+        },
+        
+      ];
       
       const useStyles = makeStyles(theme => ({
         root: {
@@ -160,6 +176,7 @@ const hotelData = [{
       };
       const handleFavoriteClick  = id => {
         setHotelID(id)
+
         
         console.log('selected hotels index is:' + hotelID)
       }
@@ -225,8 +242,8 @@ const hotelData = [{
                   <MoreVertIcon />
                 </IconButton>
               }
-              title="Shrimp and Chorizo Paella"
-              subheader="September 14, 2016"
+              title="Bilkent Hotel"
+              subheader={"Accomodation Date:\n" + startDate}
             />
             <CardMedia
               className={classes2.media}
@@ -235,8 +252,8 @@ const hotelData = [{
             />
             <CardContent>
               <Typography variant="body2" color="textSecondary" component="p">
-                This impressive paella is a perfect party dish and a fun meal to cook together with your
-                guests. Add 1 cup of frozen peas along with the mussels, if you like.
+                This impressive hotel is a perfect place and a fun destination to cook together with your
+                guests. For one person per night is $90
               </Typography>
             </CardContent>
             <CardActions disableSpacing>
@@ -299,18 +316,18 @@ const hotelData = [{
             <MoreVertIcon />
           </IconButton>
         }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        title="Güven Otel"
+        subheader={"Accomodation Date:\n" + startDate}
       />
       <CardMedia
         className={classes2.media}
-        image = {img1}
+        image = {room1}
         title="Paella dish"
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           This impressive paella is a perfect party dish and a fun meal to cook together with your
-          guests. Add 1 cup of frozen peas along with the mussels, if you like.
+          guests. For one person per night is $65
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -365,9 +382,9 @@ const hotelData = [{
        
           
       <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-       <div>
-         Flights
-
+        <div>
+          <b>Pick your flight</b>
+          
           
 
   

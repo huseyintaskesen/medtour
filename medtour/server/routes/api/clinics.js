@@ -40,7 +40,7 @@ router.get('/', (req, res) =>{
 });
 
 
-// @route   Get: api/search/clinicType
+// @route   Get: api/clinics/search/clinicType
 // @desc    Get all clinics with a certain clinic type
 // @access  Public
 
@@ -255,6 +255,7 @@ router.put('/updateInformation/:id' , (req, res)=> {
     var address = req.body.address;
     var email = req.body.email;
     var bio = req.body.bio;
+    
 
     console.log( id );
 
@@ -281,7 +282,7 @@ router.put('/updateInformation/:id' , (req, res)=> {
 //==========================================================================================
 
 
-// @route   POST api/clinics/id
+// @route   DELETE api/clinics/id
 // @desc    Delete a Clinics
 // @access  Private
 

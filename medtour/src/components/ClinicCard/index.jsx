@@ -1,18 +1,25 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import "./clinic-card.css";
+import { Link } from "react-router-dom";
+
 
 export default function ClinicCardAsaf(props) {
     const treatment_details = props.treatments.map(treatment => {
         return (
             <div>
-                <li>{treatment["treatment_name"]}</li>
+                <li>{treatment["name"]}: {treatment["priceLow"]} - {treatment["priceHigh"]} {treatment["currency"]} </li>
             </div>
         );
     });
 
+    
+    const clinic_id  = props.clinic_id
+    const treatments = props.treatments
     return (
         <div className="page">
+            <b>{clinic_id}</b>
+
             <link
                 rel="stylesheet"
                 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -31,7 +38,11 @@ export default function ClinicCardAsaf(props) {
                     </div>
                     <div className="col-md-8">
                         <div className="card-body">
+                            <b>Clinic name:</b>
                             <h5 className="card-title">{props.name}</h5>
+                            <b>Description:</b>
+                            <p className="card-text">{props.bio}</p>
+                            <b>Address:</b>
                             <p className="card-text">{props.location}</p>
                         </div>
                         <ul className="list-group list-group-flush">
@@ -52,9 +63,13 @@ export default function ClinicCardAsaf(props) {
                             <a href="#" className="card-link">
                                 Enquire
                             </a>
-                            <a href="#" className="card-link">
+                            <Link to={{
+                                        pathname: "/clinicdetails",
+                                         data: props.treatments
+                                    }}
+                                    className="card-link">
                                 Detailed Info
-                            </a>
+                            </Link>
                             <button className="btn btn-success">
                                 Make a Reservation
                             </button>

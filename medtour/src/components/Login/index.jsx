@@ -3,7 +3,10 @@ import ReactDOM from "react-dom";
 import LandingNav from "../LandingNav";
 import "./login.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
+
+var islogin = true;
 
 class Login extends Component {
     constructor() {
@@ -11,6 +14,7 @@ class Login extends Component {
         this.email_input = React.createRef();
         this.password_input = React.createRef();
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.onLoginClicked = this.onLoginClicked.bind(this)
     }
 
     handleSubmit(event) {
@@ -22,7 +26,11 @@ class Login extends Component {
        this.userLogin(email, password);
     }
 
+   
+
     userLogin(email, password) {
+        
+        
         const body = JSON.stringify({
             email,
             password
@@ -38,12 +46,22 @@ class Login extends Component {
         axios.post("/api/auth", body, config).then(res => ({
             payload: res.data,
         })).catch(err => {
-            console.log(err)
-        });
-        console.log('user logged in')
+            
+            alert("Email or password wrong")
+            islogin = false
+        })
+        window.open('/search')
+        
+        
         
     }
 
+    onLoginClicked () {
+        console.log('onlogin:'+islogin)
+     
+            return <Link to="/search"></Link>
+        
+    }
 
 
 

@@ -8,9 +8,9 @@ import "./landing.css";
 
 const languages = [
     {
-        name: "Dentists",
+        name: "dentist",
         value: "0:0:91",
-        label: "Dentists",
+        label: "dentist",
         parname: "",
         url: "dentists|",
         subof: "0"

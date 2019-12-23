@@ -44,7 +44,7 @@ class App extends Component {
                     <Route path="/search" component={SearchResultsView} />
                     <Route path="/landing" component={LandingPage} />
                     <Route
-                        path="/clinic-profile-patient"
+                        path="/clinicdetails"
                         component={ClinicProfilePatient}
                     />
                     <Route
