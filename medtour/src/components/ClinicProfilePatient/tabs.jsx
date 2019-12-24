@@ -12,6 +12,9 @@ import purple from "@material-ui/core/colors/purple";
 import "./tabs.css";
 import { useState, useEffect } from 'react';
 
+
+
+
 const theme = createMuiTheme({
     palette: {
         primary: purple
@@ -60,46 +63,53 @@ export default function SimpleTabs(props) {
 
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
-    const [clinic_treatments, setTreatments] = React.useState([]);
+
+    const treatment_details_names = props.information.treatments.map(treatment => {
+        return (
+           
+            <div>
+                {/* {treatment["priceLow"]} - {treatment["priceHigh"]} {treatment["currency"]} */}
+                
+                <p>{treatment["name"]}:  </p>
+            
+            </div>
+        );
+    }); 
+    const treatment_details_price = props.information.treatments.map(treatment => {
+        return (
+           
+            <div>
+               <p>
+                {treatment["priceLow"]} - {treatment["priceHigh"]} {treatment["currency"]}
+                </p> 
+            </div>
+        );
+    }); 
+
+    const review_details = props.information.reviews.map(review => {
+        return (
+           
+            <div>
+               <div className="row pl-2 pt-4 pb-3">
+                        <div className="row">
+                        <h5>{review.name}</h5> <p style={{marginLeft: '300px'}}>Rating given for the clinic: {review.rating}</p>
+                        </div>
+                    </div>
+                    <div className="row pl-4">
+                        <p>{review.comment}</p> 
+                    </div>
+
+                
+                
+            
+            </div>
+        );
+    });
 
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
-
-    // const treatment_details = props.treatments.map(treatment => {
-    //     return (
-    //         <div>
-    //             <li>{treatment["name"]}: {treatment["priceLow"]} - {treatment["priceHigh"]} {treatment["currency"]} </li>
-    //         </div>
-    //     );
-    // });
-    
-
-    // useEffect(() => {
-
-    //         fetch("http://localhost:3001/api/clinics/5dfe3f6e79469144a4653524" +clinic_id, {
-    //             method: "GET",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //             },
-    //             })
-    //             .then(res => res.json())
-    //             .then(data => {
-    //                 setName(data.clinics.name)
-    //                 console.log('sodfsıodfsodıfsıdo')
-    //             })
-           
-    //       }, [])
-
-    // const treatment_details = clinic.treatments.map(treatment => {
-        //     return (
-        //         <div>
-        //             <li>{treatment["name"]}: {treatment["priceLow"]} - {treatment["priceHigh"]} {treatment["currency"]} </li>
-        //         </div>
-        //     );
-        // });
 
     return (
         <div className={classes.root}>
@@ -131,24 +141,20 @@ export default function SimpleTabs(props) {
             <TabPanel value={value} index={0}>
                 <div className="col-8 offset-2 treatments">
                     <div className="row pb-3 pt-3">
-                        <h3>Treatments</h3>                
+                        <h3>Treatments</h3>    
+                                  
                     </div>
                     <div className="row">
                         <div className="col-3 pt-4">
-                            <p>Teeth Implant</p>
-                            <p>Open Heart Surgery</p>
-                            <p>Skin Cancer</p>
-                            <p>Breast Implant</p>
-                            <p>Eye Surgery</p>
+
+                            {treatment_details_names}
                         </div>
+                        <br></br>
                         <div className="col-3 pt-4">
-                            <p>100$</p>
-                            <p>200$</p>
-                            <p>500$</p>
-                            <p>100$</p>
-                            <p>300$</p>
-                            <p>1000$</p>
+                            <br></br>
+                            {treatment_details_price}
                         </div>
+                        
                         <div className="col-6 clinic-image">
                             <div className="col-12">
                                 <img
@@ -171,32 +177,7 @@ export default function SimpleTabs(props) {
                     <div className="row pb-3 pt-3">
                         <h3>Comments From Users</h3>
                     </div>
-                    <div className="row pl-2 pt-4 pb-3">
-                        <div className="row">
-                            <h5>Asaf Kağan Bezgin</h5>
-                        </div>
-                    </div>
-                    <div className="row pl-4">
-                        <p>
-                            Kliniklerin en güzeli. Ahmet abi çok yardımcı oldu.
-                        </p>
-                    </div>
-                    <div className="row pl-2 pt-4 pb-3">
-                        <div className="row">
-                            <h5>Hüseyin Taşkesen</h5>
-                        </div>
-                    </div>
-                    <div className="row pl-4">
-                        <p>Çok mutsuzum. Dişim elimde dönüyorum.</p>
-                    </div>
-                    <div className="row pl-2 pt-4 pb-3">
-                        <div className="row">
-                            <h5>Skerd Xhafa</h5>
-                        </div>
-                    </div>
-                    <div className="row pl-4">
-                        <p>Turkish tea sucks.</p>
-                    </div>
+                    {review_details}
                 </div>
             </TabPanel>
         </div>

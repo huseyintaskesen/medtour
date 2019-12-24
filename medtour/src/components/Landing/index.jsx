@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Autosuggest from "react-autosuggest";
 import Footer from "../Footer";
 import LandingNav from "../LandingNav";
+import "../../../src/theme/custom.scss";
 import "./landing.css";
 
 
@@ -201,8 +202,8 @@ class Landing extends Component {
                             Find the best treatment in Turkey.
                         </h4>
                     </div>
-                    <div className="input shadow">
-                        <div className="input-group mb-3 form-control form-control-lg">
+                    <div className="input mb-3 borderUp">
+                        <div className="row">
                             <Autosuggest
                                 suggestions={suggestions}
                                 onSuggestionsFetchRequested={
@@ -223,7 +224,6 @@ class Landing extends Component {
                                     }}
                                     className="btn btn-primary"
                                     id="button-addon2"
-                                    style={{ marginLeft: "100px" }}
                                 >
                                     Search
                                 </Link>

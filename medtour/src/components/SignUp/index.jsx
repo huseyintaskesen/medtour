@@ -4,6 +4,9 @@ import LandingNav from "../LandingNav";
 import "./signUp.css";
 import axios from "axios";
 
+var user = {};
+
+
 class SignUp extends Component {
     constructor() {
         super();
@@ -16,7 +19,7 @@ class SignUp extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         console.log("A name was submitted: " + this.name_input.current.value);
         event.preventDefault();
 
@@ -26,10 +29,12 @@ class SignUp extends Component {
         var userName = this.username_input.current.value;
         var email = this.email_input.current.value;
 
-        this.registerUser(name, surname, password, userName, email);
+        user = await this.registerUser(name, surname, password, userName, email);
+        console.log("User object:"+ user)
+        window.open('http://localhost:3000/landing', "_self")
     }
 
-    registerUser(name, surname, password, userName, email) {
+    async registerUser(name, surname, password, userName, email) {
         const body = JSON.stringify({
             name,
             surname,
@@ -45,9 +50,15 @@ class SignUp extends Component {
             }
         };
         //Request body
-        axios.post("/api/users", body, config).then(res => ({
-            payload: res.data,
-        }));
+       var resp = await axios.post("/api/users", body, config).then((res) => {
+            console.log("response:"+res.data)
+            console.log('user id:'+ res.data.user.id)
+            return res.data
+        }).catch(err => {
+        
+        console.log('error returned:'+err)
+        })
+        return resp
         
     }
 
