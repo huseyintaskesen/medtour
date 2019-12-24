@@ -44,13 +44,13 @@ router.post('/', (req, res) =>{
     User.findOne({email})
     .then( userr => {
         if( !userr ){
-            return res.status(400).json({ msg: 'User does not exist!'});
+            return res.status(400).json({ msg: 'User does not exist!', isLoginSuccessful: false});
         } 
         else{
             //Validate pass
             bcrypt.compare(password, userr.password)
             .then( isMatch =>{
-                if( !isMatch) return res.status(400).json({msg: 'Invalid credentials'});
+                if( !isMatch) return res.status(400).json({msg: 'Invalid credentials',isLoginSuccessful: false});
 
                 jwt.sign(
                     { id: userr.id},
@@ -68,7 +68,8 @@ router.post('/', (req, res) =>{
                                 userName: userr.userName,
                                 password: userr.password,
                                 email: userr.email
-                            }
+                            },
+                            isLoginSuccessful: true
                         });
                     }
                 )
