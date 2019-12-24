@@ -80,6 +80,8 @@ router.get('/:id', (req, res) =>{
 // @desc    Get the transportation that matches the given id
 // @access  Public
 
+// @params in the body{}
+
 router.post('/newTour', (req, res) =>{
     
     var transportation_one_id;

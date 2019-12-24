@@ -38,7 +38,7 @@ router.get('/', (req, res) =>{
 //==========================================================================================
 
 
-// @route   POST api/treatment
+// @route   POST api/treatments/newTreatment/:clinic_id
 // @desc    Create a treatment
 // @access  Public
 
