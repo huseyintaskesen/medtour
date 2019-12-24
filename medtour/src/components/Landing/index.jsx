@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import Autosuggest from "react-autosuggest";
 import Footer from "../Footer";
 import LandingNav from "../LandingNav";
+import "../../theme/animation.css";
 import "../../../src/theme/custom.scss";
 import "./landing.css";
-
 
 const languages = [
     {
