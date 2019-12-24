@@ -142,7 +142,7 @@ export default function SimpleTabs(props) {
                 <div className="col-8 offset-2 treatments">
                     <div className="row pb-3 pt-3">
                         <h3>Treatments</h3>    
-                        <p>{props.information.name}</p>            
+                                  
                     </div>
                     <div className="row">
                         <div className="col-3 pt-4">
