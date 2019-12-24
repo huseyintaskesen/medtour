@@ -83,6 +83,8 @@ router.post('/user', (req, res) =>{
 
 
 
+
+
 router.post('/clinic', (req, res) =>{
     
     const { password, email } = req.body;
