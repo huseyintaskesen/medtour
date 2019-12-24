@@ -3,6 +3,7 @@ const router = express.Router();
 
 //User Model
 const User = require('../../models/User');
+const Clinic = require('../../models/Clinics');
 
 const bcrypt = require('bcryptjs');
 const config = require('config');
@@ -10,8 +11,7 @@ const jwt = require('jsonwebtoken');
 
 const auth = require('../../middleware/auth');
 
-// @route   Post api/auth
-// @desc    Sign user in
+
 // @access  Public
 // params 
 // Content-Type: application/json
@@ -30,7 +30,7 @@ const auth = require('../../middleware/auth');
 
 
 
-router.post('/', (req, res) =>{
+router.post('/user', (req, res) =>{
     
     const { email, password } = req.body;
 
@@ -82,8 +82,59 @@ router.post('/', (req, res) =>{
 });
 
 
-// @route   GET api/auth/user
-// @desc    Get user data with their ID 
+
+
+
+router.post('/clinic', (req, res) =>{
+    
+    const { password, email } = req.body;
+
+    //Simple validation
+
+    if( !password || !email ){
+        return res.status(400).json({ msg: 'Please enter all fields!'});
+    }
+
+    //Check for existing user
+    Clinic.findOne({email})
+    .then( clinic => {
+        if( !clinic ){
+            return res.status(400).json({ msg: 'Clinic does not exist!', isLoginSuccessful: false});
+        } 
+        else{
+            //Validate pass
+            bcrypt.compare(password, clinic.password)
+            .then( isMatch =>{
+                if( !isMatch) return res.status(400).json({msg: 'Invalid credentials',isLoginSuccessful: false});
+
+                jwt.sign(
+                    { id: clinic.id},
+                    config.get('jwtSecret'),
+                    { expiresIn: 3600 },
+                    ( err, token )=> {
+                        if(err)
+                            throw err;
+                        res.json({
+                            token,
+                            clinic: {
+                                id: clinic.id,
+                                name: clinic.name,
+                                email: clinic.email
+                            },
+                            isLoginSuccessful: true,
+                            loggedInAs: "Clinic"
+                        });
+                    }
+                )
+
+            })
+        }
+    })
+
+
+});
+
+
 // @access  Private
 // @params 
 // id: user id
