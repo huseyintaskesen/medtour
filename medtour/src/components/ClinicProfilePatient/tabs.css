@@ -1,0 +1,15 @@
+.MuiTabs-indicator {
+    background-color: white;
+}
+
+.treatments {
+    height: 29em;
+}
+
+.clinic-image img {
+    width: 100%;
+}
+
+.borderUp {
+    border: 2px solid purple;
+}

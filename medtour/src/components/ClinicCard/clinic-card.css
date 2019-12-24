@@ -1,0 +1,17 @@
+.page {
+    display: contents;
+}
+
+.clinic-card {
+    margin-top: 4%;
+    margin-left: 7%;
+    margin-bottom: 5%;
+}
+
+.checked {
+    color: orange;
+}
+
+.card-body button {
+    float: right;
+}

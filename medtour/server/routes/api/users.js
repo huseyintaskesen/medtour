@@ -8,9 +8,31 @@ const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
 
-// @route   Get api/users
-// @desc    Get all users
+// @route   Post api/users
+// @desc    User Sign Up
 // @access  Public
+
+// params 
+// Headers: Content-Type: application/json
+    // {
+    // 	"name": "test name",
+    // 	"surname": "test surname",
+    // 	"userName": "testt",
+    // 	"password":"19191919230",
+    // 	"email":"testemail@gmail.com"
+    // }
+// returns 
+// {
+//     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkZjdiZTRiMmVhYzVjNDkzNDMyMWI2OCIsImlhdCI6MTU3NjUxNzE5NSwiZXhwIjoxNTc2NTIwNzk1fQ._j0kzdX4CUKSK_REiaZmu3H_I2JpP-rvB_l0ca555ug",
+//     "userr": {
+//         "id": "5df7be4b2eac5c4934321b68",
+//         "name": "test name",
+//         "surname": "test surname",
+//         "userName": "testt",
+//         "password": "$2a$10$ADiVT.NXvZKzBoOkE8Ss0u/hm8WTpGPQSXTn2tArvAdkXEnzNo1kG",
+//         "email": "testemail2@gmail.com"
+//     }
+// }
 
 router.post('/', (req, res) =>{
     

@@ -1,0 +1,17 @@
+.name h4 {
+    color: white;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    margin-left: 20%;
+}
+
+.name h5 {
+    color: white;
+    margin-top: 3.5%;
+    float: right;
+    margin-right: 20%;
+}
+
+.borderUp {
+    border: 2px solid purple;
+}

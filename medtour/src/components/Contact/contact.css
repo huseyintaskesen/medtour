@@ -1,0 +1,32 @@
+.contact {
+    position: absolute;
+    width: 60%;
+    background-color: white;
+    margin-top: 6%;
+    margin-left: 20%;
+    margin-right: 20%;
+    border-radius: 10px;
+}
+
+.contact h3 {
+    padding-top: 5%;
+    padding-left: 5%;
+    color: darkred;
+}
+
+.left {
+    position: absolute;
+    /* float: left; */
+    left: 0;
+    margin-left: 7%;
+    margin-top: 2%;
+}
+
+.right {
+    position: absolute;
+    width: 50%;
+    left: 50%;
+    float: right;
+    margin-left: 11%;
+    margin-top: 0%;
+}

@@ -2,9 +2,18 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
 
 export default function ProfilePagePatient () {
-    
+//     const useStyles = makeStyles(theme => ({
+//   root: {
+//     '& > *': {
+//       margin: theme.spacing(1),
+//       width: 200,
+//     },
+//   },
+// }));
         return (
             <div class="profile-page-container" >
                 <div class ="form-row" style={{marginBottom: '30px'}}>
@@ -72,6 +81,7 @@ export default function ProfilePagePatient () {
                     </div>
                     
                 </div>
+                {/* <TextField id="outlined-basic" label="Outlined" variant="outlined" /> */}
                 <button class="btn btn-primary" type="submit">Update information</button>
                 </form>
                  </div>

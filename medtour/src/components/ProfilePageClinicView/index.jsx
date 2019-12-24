@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import ProfilePageClinic from "./ProfilPageClinic"
+import ProfilePageClinic from "./ProfilePageClinic";
 
-export default class ProfilePagePatientView extends Component {
+export default class ProfileClinicPatientView extends Component {
     render() {
-        return (
-           <ProfilePageClinic></ProfilePageClinic>
-                     
-        );
+        return <ProfilePageClinic></ProfilePageClinic>;
     }
-  }
+}

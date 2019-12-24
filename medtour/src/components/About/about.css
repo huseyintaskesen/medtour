@@ -1,0 +1,17 @@
+.about {
+    background-color: white;
+    margin-top: 7%;
+    margin-left: 20%;
+    margin-right: 20%;
+    border-radius: 10px;
+}
+
+.about h3 {
+    padding-top: 5%;
+    padding-left: 5%;
+    color: darkred;
+}
+
+.about p {
+    padding: 2% 5% 5% 5%;
+}

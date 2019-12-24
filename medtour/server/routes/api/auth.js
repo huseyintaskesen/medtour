@@ -11,13 +11,28 @@ const jwt = require('jsonwebtoken');
 
 const auth = require('../../middleware/auth');
 
-// @route   Post api/auth/user
-// @desc    Auth user
+
 // @access  Public
+// params 
+// Content-Type: application/json
+// returns 
+// {
+//     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkZjdiZTRiMmVhYzVjNDkzNDMyMWI2OCIsImlhdCI6MTU3NjUxNzMxMywiZXhwIjoxNTc2NTIwOTEzfQ.3aHvk1GVuzME_QkROnm84O6ERnZgnyURTLILiZvWboE",
+//     "userr": {
+//         "id": "5df7be4b2eac5c4934321b68",
+//         "name": "test name",
+//         "surname": "test surname",
+//         "userName": "testt",
+//         "password": "$2a$10$ADiVT.NXvZKzBoOkE8Ss0u/hm8WTpGPQSXTn2tArvAdkXEnzNo1kG",
+//         "email": "testemail2@gmail.com"
+//     }
+// }
+
+
 
 router.post('/', (req, res) =>{
     
-    const { password, email } = req.body;
+    const { email, password } = req.body;
 
     //Simple validation
 
@@ -67,9 +82,6 @@ router.post('/', (req, res) =>{
 });
 
 
-// @route   Post api/auth/clinic
-// @desc    Auth clinic
-// @access  Public
 
 router.post('/clinic', (req, res) =>{
     
@@ -121,9 +133,11 @@ router.post('/clinic', (req, res) =>{
 });
 
 
-// @route   GET api/auth/clinic
-// @desc    Get user data
 // @access  Private
+// @params 
+// id: user id
+// x-auth-token: user token
+
 
 router.get('/user', auth, (req, res) =>{
 
