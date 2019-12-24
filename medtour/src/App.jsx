@@ -15,6 +15,7 @@ import ProfilePagePatientView from "./components/ProfilePagePatientView";
 import ProfilePageClinic from "./components/ProfilePageClinicView/ProfilePageClinic";
 import LandingPage from "./components/Landing";
 
+
 //TODO Web Template Studio: Add routes for your new pages here.
 class App extends Component {
     render() {
