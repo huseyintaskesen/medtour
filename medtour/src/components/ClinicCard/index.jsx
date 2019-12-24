@@ -38,9 +38,8 @@ export default function ClinicCardAsaf(props) {
                     </div>
                     <div className="col-md-8">
                         <div className="card-body">
-                            <b>Clinic name:</b>
                             <h5 className="card-title">{props.name}</h5>
-                            <b>Description:</b>
+                            <b>About Clinic:</b>
                             <p className="card-text">{props.bio}</p>
                             <b>Address:</b>
                             <p className="card-text">{props.location}</p>
