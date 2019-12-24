@@ -137,8 +137,9 @@ body {
 }
 
 .react-autosuggest__input {
-    width: 540%;
+    width: 435%;
     height: 38px;
+    padding-left: 20px;
     margin-left: 10%;
     font-family: Helvetica, sans-serif;
     font-weight: 300;
@@ -148,7 +149,7 @@ body {
 }
 
 #button-addon2 {
-    margin-left: 55rem;
+    margin-left: 47rem;
 }
 
 .react-autosuggest__input--focused {
