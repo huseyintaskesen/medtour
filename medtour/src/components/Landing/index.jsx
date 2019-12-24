@@ -201,7 +201,7 @@ class Landing extends Component {
                             Find the best treatment in Turkey.
                         </h4>
                     </div>
-                    <div className="input mb-3 borderUp">
+                    <div className="input mb-3">
                         <div className="row">
                             <Autosuggest
                                 suggestions={suggestions}
