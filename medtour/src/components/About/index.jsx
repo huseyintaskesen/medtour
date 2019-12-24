@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import LandingNav from "../LandingNav";
 import "./about.css";
-import "../../theme/animation.css";
 
 class About extends Component {
     render() {
