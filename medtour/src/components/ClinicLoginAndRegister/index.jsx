@@ -39,11 +39,6 @@ class ClinicLoginAndRegister extends Component {
         event.preventDefault();
         var email = this.login_email.current.value;
         var password  = this.login_password.current.value;
-        
-        
-
-
-
     }
 
     async registerClinic(name, password, email) {

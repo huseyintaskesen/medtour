@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import LandingNav from "../LandingNav";
 import "./login.css";
 import axios from "axios";
+import cogoToast from 'cogo-toast';
+
 
 
 var islogin={};
@@ -30,7 +32,9 @@ class Login extends Component {
             sessionStorage.setItem('userID', user_id);
             const u_id = sessionStorage.getItem('userID');
             console.log('user id from session storage:'+ u_id)
-            window.open('http://localhost:3000/landing', "_self")
+            cogoToast.success("Success!");
+            setTimeout(function(){  window.open('http://localhost:3000/landing', "_self")}, 1000);
+           
          }
      }
      
@@ -54,7 +58,7 @@ class Login extends Component {
             console.log("response:"+res.data.isLoginSuccessful)
            return res.data
         }).catch(err => {
-            alert("Email or password wrong")
+            cogoToast.error("Error in credentials!");
             console.log('error returned:'+err)
         })
         return resp
