@@ -3,10 +3,9 @@ import ReactDOM from "react-dom";
 import LandingNav from "../LandingNav";
 import "./login.css";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
 
-var islogin = true;
+var islogin={};
 
 class Login extends Component {
     constructor() {
@@ -14,22 +13,30 @@ class Login extends Component {
         this.email_input = React.createRef();
         this.password_input = React.createRef();
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.onLoginClicked = this.onLoginClicked.bind(this)
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         console.log("A email was submitted: " + this.email_input.current.value);
         event.preventDefault();
         var email = this.email_input.current.value;
         var password = this.password_input.current.value;
 
-       this.userLogin(email, password);
+    
+     console.log('is user logged in:' + islogin)
+     islogin = await this.userLogin(email, password);
+     if(islogin != undefined){
+        if(islogin.isLoginSuccessful ){
+            var user_id = islogin.userr.id
+            sessionStorage.setItem('userID', user_id);
+            const u_id = sessionStorage.getItem('userID');
+            console.log('user id from session storage:'+ u_id)
+            window.open('http://localhost:3000/landing', "_self")
+         }
+     }
+     
     }
 
-   
-
-    userLogin(email, password) {
-        
+   async userLogin(email, password) {
         
         const body = JSON.stringify({
             email,
@@ -43,25 +50,18 @@ class Login extends Component {
             }
         };
         //Request body
-        axios.post("/api/auth", body, config).then(res => ({
-            payload: res.data,
-        })).catch(err => {
-            
+       var resp = await axios.post("/api/auth", body, config).then((res) => {
+            console.log("response:"+res.data.isLoginSuccessful)
+           return res.data
+        }).catch(err => {
             alert("Email or password wrong")
-            islogin = false
+            console.log('error returned:'+err)
         })
-        window.open('/search')
-        
-        
+        return resp
+
         
     }
 
-    onLoginClicked () {
-        console.log('onlogin:'+islogin)
-     
-            return <Link to="/search"></Link>
-        
-    }
 
 
 
