@@ -19,10 +19,12 @@
         "fs-extra": "8.1.0",
         "google-maps-react": "^2.0.2",
         "jquery": "^3.4.1",
+        "moment": "^2.24.0",
         "mongodb": "^3.3.5",
         "morgan": "^1.9.1",
         "node-sass": "^4.12.0",
         "react": "^16.11.0",
+        "react-agenda": "0.0.8",
         "react-autosuggest": "^9.4.3",
         "react-datepicker": "^2.10.1",
         "react-dom": "^16.11.0",
@@ -31,9 +33,10 @@
         "react-router-dom": "^4.3.1",
         "react-scripts": "^3.2.0",
         "react-select": "^3.0.8",
+        "react-window": "^1.8.5",
         "reactstrap": "^8.1.1",
-        "webpack": "^4.41.0",
-        "webpack-dev-server": "^3.2.1"
+        "webpack": "^4.41.2",
+        "webpack-dev-server": "^3.9.0"
     },
     "eslintConfig": {
         "extends": "react-app",

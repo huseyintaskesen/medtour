@@ -6,6 +6,7 @@ import Footer from "../Footer";
 import LandingNav from "../LandingNav";
 import "./landing.css";
 
+
 const languages = [
     {
         name: "dentist",
