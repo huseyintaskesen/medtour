@@ -1,38 +1,46 @@
 {
-    "flight1": [
+    "flights": [
         {
             "id": "1",
             "from": "Barcelona",
             "to": "Ankara",
             "class": "Economy",
             "price": "250$"
-        }
-    ],
-    "flight2": [
+        },
         {
             "id": "2",
             "from": "Taiwan",
             "to": "Izmir",
             "class": "Economy",
             "price": "700$"
-        }
-    ],
-    "flight3": [
+        },
         {
             "id": "3",
             "from": "Los Angles",
             "to": "Istanbul",
             "class": "Business",
             "price": "1400$"
-        }
-    ],
-    "flight4": [
+        },
         {
             "id": "4",
             "from": "Buenos Aires",
             "to": "Ankara",
             "class": "Economy",
             "price": "1200$"
+        },
+        {
+            "id": "5",
+            "from": "Abu Dhabi",
+            "to": "Istanbul",
+            "class": "Business",
+            "price": "580$"
+        },
+        {
+            "id": "6",
+            "from": "Cape Town",
+            "to": "Izmir",
+            "class": "Economy",
+            "price": "1000$"
         }
     ]
 }
