@@ -7,6 +7,7 @@ import LandingNav from "../LandingNav";
 import "../../../src/theme/custom.scss";
 import "./landing.css";
 
+
 const languages = [
     {
         name: "dentist",
