@@ -23,12 +23,61 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ButtonAppBar() {
+export default function ButtonAppBar(props) {
   const classes = useStyles();
   //For later use
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
+  var clinic_id = sessionStorage.getItem('clinicID');
+  var clinic_name = ""
+  
+  var clinic = fetch("http://localhost:3001/api/clinics/"+clinic_id, {
+    method: "GET",
+    headers: {
+        "Content-Type": "application/json",
+    },}).then(response =>{
+      response.json().then(resp => {
+        clinic_name = resp.clinics.name;
+        console.log(clinic_name)
+        return resp.clinics
+      }
+
+      )
+    })
+
+    
+
+
+    
+    
+
+
+
+  // console.log("clinic name is:"+clinic_name)
+  // const options = {
+  //   headers: {'content-type': 'application/json'}
+  //   };
+  //   // search/"+treatment_type
+  //   fetch("http://localhost:3001/api/clinics", {
+  //   method: "GET",
+  //   headers: {
+  //       "Content-Type": "application/json",
+  //   },
+  //   }).then(response => {
+  //       return response.json();
+  //   }).then(muutuja => {
+  //       //let results_from_API = JSON.stringify(muutuja)
+  //       // this.setState({
+  //       //     clinics: results_from_API,
+  //       // });
+  //       console.log(muutuja[0])
+  //       this.setState({
+  //           clinics: muutuja
+  //       })
+        
+  //   });
 
   const handleChange = event => {
     setAuth(event.target.checked);
@@ -79,7 +128,7 @@ export default function ButtonAppBar() {
               </Menu>
         </div>
           <Typography variant="h6" className={classes.title}>
-            CLINIC_NAME
+           Clinic id is: {clinic_id}
           </Typography>
           <Button color="inherit">Logout</Button>
         </Toolbar>
