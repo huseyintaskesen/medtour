@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import LandingNav from "../LandingNav";
 import "./clinic-login-and-register.css";
 import axios from "axios";
+import cogoToast from 'cogo-toast';
+
 
 
 
@@ -33,6 +35,9 @@ class ClinicLoginAndRegister extends Component {
         console.log("Clinic object:"+ clinic)
         console.log("Clinic name:"+ clinic.clinic.name)
         console.log("Clinic email:"+ clinic.clinic.email)
+        cogoToast.success("Success!");
+        setTimeout(function(){  window.open('http://localhost:3000/landing', "_self")}, 1000);
+
         // window.open('http://localhost:3000/landing', "_self")
     }
     async handleLogin(event) {
