@@ -64,7 +64,7 @@ export default function ClinicCardAsaf(props) {
                             </a>
                             <Link to={{
                                         pathname: "/clinicdetails",
-                                         data: props.treatments
+                                         data: props
                                     }}
                                     className="card-link">
                                 Detailed Info
