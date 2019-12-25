@@ -42,7 +42,7 @@ class ClinicProfilePatient extends Component {
                 </div>
                 <div className="container-fluid bg-white">
                     <div className="row">
-                        <Tabs information = {this.props.location.data}/>
+                        <Tabs information = {this.props.location.data} bio = {this.props.location.data.bio}/>
                     </div>
                 </div>
                 <Footer />

@@ -142,8 +142,15 @@ export default function SimpleTabs(props) {
             </AppBar>
             <TabPanel value={value} index={0}>
                 <div className="col-8 offset-2 treatments">
+                <div className="row pb-3 pt-3">
+                        <h4>About us</h4>  
+                </div>
+                <div>
+                {props.bio}
+                </div>
+                    
                     <div className="row pb-3 pt-3">
-                        <h3>Treatments</h3>    
+                        <h4>Treatments</h4>    
                                   
                     </div>
                     <div className="row">
@@ -174,9 +181,18 @@ export default function SimpleTabs(props) {
                                     }}
                                     >
                                        Make a Reservation
-                                    </Link>
-                        
+                    </Link>
                     </div>
+                        <div className="row pt-4 pl-2">
+
+                    <Link className="btn btn-success" >
+                                       Enquire
+                    </Link>
+                    </div>
+
+
+                        
+                    
                 </div>
             </TabPanel>
             <TabPanel value={value} index={1}>
