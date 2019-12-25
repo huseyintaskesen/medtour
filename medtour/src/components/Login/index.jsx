@@ -24,8 +24,9 @@ class Login extends Component {
         var password = this.password_input.current.value;
 
     
-     console.log('is user logged in:' + islogin)
+     
      islogin = await this.userLogin(email, password);
+     console.log(islogin)
      if(islogin != undefined){
         if(islogin.isLoginSuccessful ){
             var user_id = islogin.userr.id
@@ -54,7 +55,7 @@ class Login extends Component {
             }
         };
         //Request body
-       var resp = await axios.post("/api/auth", body, config).then((res) => {
+       var resp = await axios.post("/api/auth/user", body, config).then((res) => {
             console.log("response:"+res.data.isLoginSuccessful)
            return res.data
         }).catch(err => {
