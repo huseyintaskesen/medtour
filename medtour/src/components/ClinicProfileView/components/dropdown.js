@@ -10,6 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 
 
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -46,37 +47,6 @@ export default function ButtonAppBar(props) {
 
     }, []);
 
-    
-
-
-    
-    
-
-
-
-  // console.log("clinic name is:"+clinic_name)
-  // const options = {
-  //   headers: {'content-type': 'application/json'}
-  //   };
-  //   // search/"+treatment_type
-  //   fetch("http://localhost:3001/api/clinics", {
-  //   method: "GET",
-  //   headers: {
-  //       "Content-Type": "application/json",
-  //   },
-  //   }).then(response => {
-  //       return response.json();
-  //   }).then(muutuja => {
-  //       //let results_from_API = JSON.stringify(muutuja)
-  //       // this.setState({
-  //       //     clinics: results_from_API,
-  //       // });
-  //       console.log(muutuja[0])
-  //       this.setState({
-  //           clinics: muutuja
-  //       })
-        
-  //   });
 
   const handleChange = event => {
     setAuth(event.target.checked);
@@ -88,6 +58,9 @@ export default function ButtonAppBar(props) {
 
   const handleClose = () => {
     setAnchorEl(null);
+    console.log('handle close clicked')
+    window.open('http://localhost:3000/clinic-settings', "_self");
+
   };
 
   return (

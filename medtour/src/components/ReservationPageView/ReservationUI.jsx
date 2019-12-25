@@ -180,7 +180,7 @@ export default function ReservationUI(props) {
             <div className="container-fluid bg-white col-12 pt-4">
                 <div className="offset-1 col-10">
                     <div className="row borderDown">
-                        <h3>Choose your reservation date:</h3>
+                        <h3>Choose your treatment date:</h3>
                     </div>
                     <div className="row pt-2 pb-2">
                         <Box component="span" m={1}>
