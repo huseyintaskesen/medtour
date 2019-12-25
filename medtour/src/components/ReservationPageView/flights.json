@@ -4,6 +4,8 @@
             "id": "1",
             "from": "Barcelona",
             "to": "Ankara",
+            "date": "2019-01-23",
+            "time": "13:05",
             "class": "Economy",
             "price": "250$"
         },
@@ -11,6 +13,8 @@
             "id": "2",
             "from": "Taiwan",
             "to": "Izmir",
+            "date": "2019-02-23",
+            "time": "13:05",
             "class": "Economy",
             "price": "700$"
         },
@@ -18,6 +22,8 @@
             "id": "3",
             "from": "Los Angles",
             "to": "Istanbul",
+            "date": "2019-03-23",
+            "time": "13:05",
             "class": "Business",
             "price": "1400$"
         },
@@ -25,6 +31,8 @@
             "id": "4",
             "from": "Buenos Aires",
             "to": "Ankara",
+            "date": "2019-04-23",
+            "time": "13:05",
             "class": "Economy",
             "price": "1200$"
         },
@@ -32,6 +40,8 @@
             "id": "5",
             "from": "Abu Dhabi",
             "to": "Istanbul",
+            "date": "2019-05-23",
+            "time": "13:05",
             "class": "Business",
             "price": "580$"
         },
@@ -39,6 +49,8 @@
             "id": "6",
             "from": "Cape Town",
             "to": "Izmir",
+            "date": "2019-06-23",
+            "time": "13:05",
             "class": "Economy",
             "price": "1000$"
         },
@@ -46,6 +58,8 @@
             "id": "7",
             "from": "London ",
             "to": "Ankara",
+            "date": "2019-07-23",
+            "time": "13:05",
             "class": "Economy",
             "price": "3000$"
         }

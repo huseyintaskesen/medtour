@@ -95,7 +95,6 @@ export default function ReservationUI(props) {
     const [startDate, setStartDate] = useState(new Date());
     const [hotelID, setHotelID] = useState(0);
 
-    
     // console.log("props:" + props)
 
     // useEffect(() =>{
@@ -170,12 +169,10 @@ export default function ReservationUI(props) {
         console.log("selected hotels index is:" + hotelID);
     };
 
-    
-
     return (
         <div>
             <div className="col-12 bg-dark title pt-4 pb-4 pl-5">
-    <h4>Set up your reservation for {props.name}</h4>
+                <h4>Set up your reservation for {props.name}</h4>
             </div>
             <div className="container-fluid bg-white col-12 pt-4">
                 <div className="offset-1 col-10">
@@ -231,220 +228,206 @@ export default function ReservationUI(props) {
                             </div>
                         </form>
                     </div>
+                    <div className="row">
+                        <div className="col-6">
+                            <div className="row borderDown">
+                                <h3>Check-In Date</h3>
+                            </div>
+                            <div className="row pt-2 pb-2">
+                                <Box component="span" m={1}>
+                                    <DatePicker
+                                        selected={startDate}
+                                        onChange={date => setStartDate(date)}
+                                    />
+                                </Box>
+                            </div>
+                        </div>
+                        <div className="col-6">
+                            <div className="row borderDown">
+                                <h3>Check-Out Date</h3>
+                            </div>
+                            <div className="row pt-2 pb-2">
+                                <Box component="span" m={1}>
+                                    <DatePicker
+                                        selected={startDate}
+                                        onChange={date => setStartDate(date)}
+                                    />
+                                </Box>
+                            </div>
+                        </div>
+                    </div>
                     <div className="row borderDown">
                         <h3>Pick your hotel to stay during your trip:</h3>
                     </div>
-                    <div className="row pl-2 pt-2 pb-2">
-                        <Card
-                            className={classes2.card}
-                            style={{ float: "left", marginRight: "10px" }}
-                        >
-                            <CardHeader
-                                avatar={
-                                    <Avatar
-                                        aria-label="recipe"
-                                        className={classes2.avatar}
-                                    >
-                                        R
-                                    </Avatar>
-                                }
-                                action={
-                                    <IconButton aria-label="settings">
-                                        <MoreVertIcon />
-                                    </IconButton>
-                                }
-                                title="Shrimp and Chorizo Paella"
-                                subheader="September 14, 2016"
+                    <div className="row pl-2 pt-4 pb-2">
+                        <div className="card" style={{ width: "18rem" }}>
+                            <img
+                                src={require("../../images/room-1.jpeg")}
+                                className="card-img-top"
+                                alt="..."
                             />
-                            <CardMedia
-                                className={classes2.media}
-                                image={img1}
-                                title="Paella dish"
+                            <div className="card-body">
+                                <h5 className="card-title">Card title</h5>
+                                <p className="card-text">
+                                    Some quick example text to build on the card
+                                    title and make up the bulk of the card's
+                                    content.
+                                </p>
+                                <div data-toggle="buttons">
+                                    <div className="checkbox">
+                                        <label className="btn btn-primary">
+                                            <input
+                                                type="checkbox"
+                                                value="1"
+                                                name="post[post_facebook]"
+                                                id="post_post_facebook"
+                                            />
+                                            &nbsp;&nbsp; Select
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="card" style={{ width: "18rem" }}>
+                            <img
+                                src={require("../../images/room-1.jpeg")}
+                                className="card-img-top"
+                                alt="..."
                             />
-                            <CardContent>
-                                <Typography
-                                    variant="body2"
-                                    color="textSecondary"
-                                    component="p"
-                                >
-                                    This impressive paella is a perfect party
-                                    dish and a fun meal to cook together with
-                                    your guests. Add 1 cup of frozen peas along
-                                    with the mussels, if you like.
-                                </Typography>
-                            </CardContent>
-                            <CardActions disableSpacing>
-                                <IconButton aria-label="add to favorites">
-                                    <FavoriteIcon
-                                        onClick={() => handleFavoriteClick(0)}
-                                    />
-                                </IconButton>
-                                <IconButton aria-label="share">
-                                    <ShareIcon />
-                                </IconButton>
-                                <IconButton
-                                    className={clsx(classes2.expand, {
-                                        [classes2.expandOpen]: expanded
-                                    })}
-                                    onClick={handleExpandClick}
-                                    aria-expanded={expanded}
-                                    aria-label="show more"
-                                >
-                                    <ExpandMoreIcon />
-                                </IconButton>
-                            </CardActions>
-                            <Collapse
-                                in={expanded}
-                                timeout="auto"
-                                unmountOnExit
-                            >
-                                <CardContent>
-                                    <Typography paragraph>Method:</Typography>
-                                    <Typography paragraph>
-                                        Heat 1/2 cup of the broth in a pot until
-                                        simmering, add saffron and set aside for
-                                        10 minutes.
-                                    </Typography>
-                                    <Typography paragraph>
-                                        Heat oil in a (14- to 16-inch) paella
-                                        pan or a large, deep skillet over
-                                        medium-high heat. Add chicken, shrimp
-                                        and chorizo, and cook, stirring
-                                        occasionally until lightly browned, 6 to
-                                        8 minutes. Transfer shrimp to a large
-                                        plate and set aside, leaving chicken and
-                                        chorizo in the pan. Add pimentón, bay
-                                        leaves, garlic, tomatoes, onion, salt
-                                        and pepper, and cook, stirring often
-                                        until thickened and fragrant, about 10
-                                        minutes. Add saffron broth and remaining
-                                        4 1/2 cups chicken broth; bring to a
-                                        boil.
-                                    </Typography>
-                                    <Typography paragraph>
-                                        Add rice and stir very gently to
-                                        distribute. Top with artichokes and
-                                        peppers, and cook without stirring,
-                                        until most of the liquid is absorbed, 15
-                                        to 18 minutes. Reduce heat to
-                                        medium-low, add reserved shrimp and
-                                        mussels, tucking them down into the
-                                        rice, and cook again without stirring,
-                                        until mussels have opened and rice is
-                                        just tender, 5 to 7 minutes more.
-                                        (Discard any mussels that don’t open.)
-                                    </Typography>
-                                    <Typography>
-                                        Set aside off of the heat to let rest
-                                        for 10 minutes, and then serve.
-                                    </Typography>
-                                </CardContent>
-                            </Collapse>
-                        </Card>
-
-                        <Card className={classes2.card}>
-                            <CardHeader
-                                avatar={
-                                    <Avatar
-                                        aria-label="recipe"
-                                        className={classes2.avatar}
-                                    >
-                                        R
-                                    </Avatar>
-                                }
-                                action={
-                                    <IconButton aria-label="settings">
-                                        <MoreVertIcon />
-                                    </IconButton>
-                                }
-                                title="Shrimp and Chorizo Paella"
-                                subheader="September 14, 2016"
+                            <div className="card-body">
+                                <h5 className="card-title">Card title</h5>
+                                <p className="card-text">
+                                    Some quick example text to build on the card
+                                    title and make up the bulk of the card's
+                                    content.
+                                </p>
+                                <div data-toggle="buttons">
+                                    <div className="checkbox">
+                                        <label className="btn btn-primary">
+                                            <input
+                                                type="checkbox"
+                                                value="1"
+                                                name="post[post_facebook]"
+                                                id="post_post_facebook"
+                                            />
+                                            &nbsp;&nbsp; Select
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="card" style={{ width: "18rem" }}>
+                            <img
+                                src={require("../../images/room-1.jpeg")}
+                                className="card-img-top"
+                                alt="..."
                             />
-                            <CardMedia
-                                className={classes2.media}
-                                image={img1}
-                                title="Paella dish"
+                            <div className="card-body">
+                                <h5 className="card-title">Card title</h5>
+                                <p className="card-text">
+                                    Some quick example text to build on the card
+                                    title and make up the bulk of the card's
+                                    content.
+                                </p>
+                                <div data-toggle="buttons">
+                                    <div className="checkbox">
+                                        <label className="btn btn-primary">
+                                            <input
+                                                type="checkbox"
+                                                value="1"
+                                                name="post[post_facebook]"
+                                                id="post_post_facebook"
+                                            />
+                                            &nbsp;&nbsp; Select
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="card" style={{ width: "18rem" }}>
+                            <img
+                                src={require("../../images/room-1.jpeg")}
+                                className="card-img-top"
+                                alt="..."
                             />
-                            <CardContent>
-                                <Typography
-                                    variant="body2"
-                                    color="textSecondary"
-                                    component="p"
-                                >
-                                    This impressive paella is a perfect party
-                                    dish and a fun meal to cook together with
-                                    your guests. Add 1 cup of frozen peas along
-                                    with the mussels, if you like.
-                                </Typography>
-                            </CardContent>
-                            <CardActions disableSpacing>
-                                <IconButton aria-label="add to favorites">
-                                    <FavoriteIcon
-                                        onClick={() => handleFavoriteClick(1)}
-                                    />
-                                </IconButton>
-                                <IconButton aria-label="share">
-                                    <ShareIcon />
-                                </IconButton>
-                                <IconButton
-                                    className={clsx(classes2.expand, {
-                                        [classes2.expandOpen]: expanded
-                                    })}
-                                    onClick={handleExpandClick}
-                                    aria-expanded={expanded}
-                                    aria-label="show more"
-                                >
-                                    <ExpandMoreIcon />
-                                </IconButton>
-                            </CardActions>
-                            <Collapse
-                                in={expanded}
-                                timeout="auto"
-                                unmountOnExit
-                            >
-                                <CardContent>
-                                    <Typography paragraph>Method:</Typography>
-                                    <Typography paragraph>
-                                        Heat 1/2 cup of the broth in a pot until
-                                        simmering, add saffron and set aside for
-                                        10 minutes.
-                                    </Typography>
-                                    <Typography paragraph>
-                                        Heat oil in a (14- to 16-inch) paella
-                                        pan or a large, deep skillet over
-                                        medium-high heat. Add chicken, shrimp
-                                        and chorizo, and cook, stirring
-                                        occasionally until lightly browned, 6 to
-                                        8 minutes. Transfer shrimp to a large
-                                        plate and set aside, leaving chicken and
-                                        chorizo in the pan. Add pimentón, bay
-                                        leaves, garlic, tomatoes, onion, salt
-                                        and pepper, and cook, stirring often
-                                        until thickened and fragrant, about 10
-                                        minutes. Add saffron broth and remaining
-                                        4 1/2 cups chicken broth; bring to a
-                                        boil.
-                                    </Typography>
-                                    <Typography paragraph>
-                                        Add rice and stir very gently to
-                                        distribute. Top with artichokes and
-                                        peppers, and cook without stirring,
-                                        until most of the liquid is absorbed, 15
-                                        to 18 minutes. Reduce heat to
-                                        medium-low, add reserved shrimp and
-                                        mussels, tucking them down into the
-                                        rice, and cook again without stirring,
-                                        until mussels have opened and rice is
-                                        just tender, 5 to 7 minutes more.
-                                        (Discard any mussels that don’t open.)
-                                    </Typography>
-                                    <Typography>
-                                        Set aside off of the heat to let rest
-                                        for 10 minutes, and then serve.
-                                    </Typography>
-                                </CardContent>
-                            </Collapse>
-                        </Card>
+                            <div className="card-body">
+                                <h5 className="card-title">Card title</h5>
+                                <p className="card-text">
+                                    Some quick example text to build on the card
+                                    title and make up the bulk of the card's
+                                    content.
+                                </p>
+                                <div data-toggle="buttons">
+                                    <div className="checkbox">
+                                        <label className="btn btn-primary">
+                                            <input
+                                                type="checkbox"
+                                                value="1"
+                                                name="post[post_facebook]"
+                                                id="post_post_facebook"
+                                            />
+                                            &nbsp;&nbsp; Select
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="card" style={{ width: "18rem" }}>
+                            <img
+                                src={require("../../images/room-1.jpeg")}
+                                className="card-img-top"
+                                alt="..."
+                            />
+                            <div className="card-body">
+                                <h5 className="card-title">Card title</h5>
+                                <p className="card-text">
+                                    Some quick example text to build on the card
+                                    title and make up the bulk of the card's
+                                    content.
+                                </p>
+                                <div data-toggle="buttons">
+                                    <div className="checkbox">
+                                        <label className="btn btn-primary">
+                                            <input
+                                                type="checkbox"
+                                                value="1"
+                                                name="post[post_facebook]"
+                                                id="post_post_facebook"
+                                            />
+                                            &nbsp;&nbsp; Select
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="card" style={{ width: "18rem" }}>
+                            <img
+                                src={require("../../images/room-1.jpeg")}
+                                className="card-img-top"
+                                alt="..."
+                            />
+                            <div className="card-body">
+                                <h5 className="card-title">Card title</h5>
+                                <p className="card-text">
+                                    Some quick example text to build on the card
+                                    title and make up the bulk of the card's
+                                    content.
+                                </p>
+                                <div data-toggle="buttons">
+                                    <div className="checkbox">
+                                        <label className="btn btn-primary">
+                                            <input
+                                                type="checkbox"
+                                                value="1"
+                                                name="post[post_facebook]"
+                                                id="post_post_facebook"
+                                            />
+                                            &nbsp;&nbsp; Select
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -475,6 +458,18 @@ export default function ReservationUI(props) {
                                                         </h5>
                                                     </div>
                                                     <ul class="list-group list-group-flush">
+                                                        <li className="list-group-item">
+                                                            <p>
+                                                                Date:{" "}
+                                                                {flight.date}{" "}
+                                                            </p>
+                                                        </li>
+                                                        <li className="list-group-item">
+                                                            <p>
+                                                                Time:{" "}
+                                                                {flight.time}
+                                                            </p>
+                                                        </li>
                                                         <li class="list-group-item">
                                                             <p>
                                                                 {flight.class}

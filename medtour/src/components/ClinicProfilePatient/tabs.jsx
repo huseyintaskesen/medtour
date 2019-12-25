@@ -10,19 +10,8 @@ import Box from "@material-ui/core/Box";
 import { createMuiTheme } from "@material-ui/core/styles";
 import purple from "@material-ui/core/colors/purple";
 import "./tabs.css";
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
-
-
-
-
-const theme = createMuiTheme({
-    palette: {
-        primary: purple
-    }
-});
-
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -62,52 +51,50 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function SimpleTabs(props) {
-
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
 
-    const treatment_details_names = props.information.treatments.map(treatment => {
-        return (
-           
-            <div>
-                {/* {treatment["priceLow"]} - {treatment["priceHigh"]} {treatment["currency"]} */}
-                
-                <p>{treatment["name"]}:  </p>
-            
-            </div>
-        );
-    }); 
-    const treatment_details_price = props.information.treatments.map(treatment => {
-        return (
-           
-            <div>
-               <p>
-                {treatment["priceLow"]} - {treatment["priceHigh"]} {treatment["currency"]}
-                </p> 
-            </div>
-        );
-    }); 
+    const treatment_details_names = props.information.treatments.map(
+        treatment => {
+            return (
+                <div>
+                    {/* {treatment["priceLow"]} - {treatment["priceHigh"]} {treatment["currency"]} */}
+
+                    <p>{treatment["name"]}: </p>
+                </div>
+            );
+        }
+    );
+    const treatment_details_price = props.information.treatments.map(
+        treatment => {
+            return (
+                <div>
+                    <p>
+                        {treatment["priceLow"]} - {treatment["priceHigh"]}{" "}
+                        {treatment["currency"]}
+                    </p>
+                </div>
+            );
+        }
+    );
 
     const review_details = props.information.reviews.map(review => {
         return (
-           
             <div>
-               <div className="row pl-2 pt-4 pb-3">
-                        <div className="row">
-                        <h5>{review.name}</h5> <p style={{marginLeft: '300px'}}>Rating given for the clinic: {review.rating}</p>
-                        </div>
+                <div className="row pl-2 pt-4 pb-3">
+                    <div className="row">
+                        <h5>{review.name}</h5>{" "}
+                        <p style={{ marginLeft: "300px" }}>
+                            Rating given for the clinic: {review.rating}
+                        </p>
                     </div>
-                    <div className="row pl-4">
-                        <p>{review.comment}</p> 
-                    </div>
-
-                
-                
-            
+                </div>
+                <div className="row pl-4">
+                    <p>{review.comment}</p>
+                </div>
             </div>
         );
     });
-
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -115,16 +102,14 @@ export default function SimpleTabs(props) {
 
     return (
         <div className={classes.root}>
-                <div className="container-fluid name bg-dark">
-                    <div className="row">
-                        <div className="col-6">
-                            
-                        </div>
-                        <div className="col-6">
-                            {/* <h5>{clinic_address}</h5> */}
-                        </div>
+            <div className="container-fluid name bg-dark">
+                <div className="row">
+                    <div className="col-6"></div>
+                    <div className="col-6">
+                        {/* <h5>{clinic_address}</h5> */}
                     </div>
                 </div>
+            </div>
             <AppBar position="static" style={{ background: "darkred" }}>
                 <Tabs
                     value={value}
@@ -134,7 +119,6 @@ export default function SimpleTabs(props) {
                         margin: "0 0 0 10%",
                         color: "white"
                     }}
-                    
                 >
                     <Tab label="Profile" {...a11yProps(0)} />
                     <Tab label="Review" {...a11yProps(1)} />
@@ -142,20 +126,16 @@ export default function SimpleTabs(props) {
             </AppBar>
             <TabPanel value={value} index={0}>
                 <div className="col-8 offset-2 treatments">
-                <div className="row pb-3 pt-3">
-                        <h4>About us</h4>  
-                </div>
-                <div>
-                {props.bio}
-                </div>
-                    
                     <div className="row pb-3 pt-3">
-                        <h4>Treatments</h4>    
-                                  
+                        <h4>About us</h4>
+                    </div>
+                    <div>{props.bio}</div>
+
+                    <div className="row pb-3 pt-3">
+                        <h4>Treatments</h4>
                     </div>
                     <div className="row">
                         <div className="col-3 pt-4">
-
                             {treatment_details_names}
                         </div>
                         <br></br>
@@ -163,7 +143,7 @@ export default function SimpleTabs(props) {
                             <br></br>
                             {treatment_details_price}
                         </div>
-                        
+
                         <div className="col-6 clinic-image">
                             <div className="col-12">
                                 <img
@@ -175,22 +155,17 @@ export default function SimpleTabs(props) {
                         </div>
                     </div>
                     <div className="row pt-4 pl-2">
-                    <Link className="btn btn-warning" >
-                                       Enquire
-                    </Link>
-                    <Link className="btn btn-success" to={{
-                                        pathname: "/reservation",
-                                         data: props
-                                    }}
-                                    >
-                                       Make a Reservation
-                    </Link>                    
+                        <Link className="btn btn-warning">Enquire</Link>
+                        <Link
+                            className="btn btn-success"
+                            to={{
+                                pathname: "/reservation",
+                                data: props
+                            }}
+                        >
+                            Make a Reservation
+                        </Link>
                     </div>
-                    
-
-
-                        
-                    
                 </div>
             </TabPanel>
             <TabPanel value={value} index={1}>
