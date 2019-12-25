@@ -66,14 +66,18 @@ export default function SimpleTabs(props) {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
 
-    const treatment_details = props.information.treatments.map(treatment => {
+    var treatments = props.information.treatments;
+    var reviews = props.information.reviews;
+    var ratingAverage = props.information.ratingAverage;
+
+    const treatment_details = treatments.map(treatment => {
         return (
             <div class="col-12">
                 <tr class="row text-left">
                         <td class="col-md-6 col-sm-12"> {treatment["name"]} </td>
                         <td class="col-md-4 col-sm-8"> {treatment["priceLow"]} - {treatment["priceHigh"]} {treatment["currency"]}</td>
                         <td class="col-md-2 col-sm-3">
-                            <button class="btn btn-success"> Contact</button>    
+                            <button class="btn btn-success mb-1"> Contact</button>    
                         </td>
                 </tr >
             </div>
@@ -81,7 +85,7 @@ export default function SimpleTabs(props) {
     }); 
 
 
-    const review_details = props.information.reviews.map(review => {
+    const review_details = reviews.map(review => {
         var date = ((review.date) + "" ).substr( 0, ((review.date) + "" ).indexOf("T")  );
         
         return (
@@ -99,7 +103,7 @@ export default function SimpleTabs(props) {
                                         </div>
                                         <div class="mx-0 my-0">
                                             <StarRatings
-                                                rating={ review.rating / 2 }
+                                                rating={ review.rating }
                                                 starRatedColor="red"
                                                 numberOfStars={5}
                                                 starDimension="20px"
@@ -185,8 +189,15 @@ export default function SimpleTabs(props) {
                             </div>
 
                             <div class="col-4">
-                                <div class="col-12">
-                                    <h4>Rating: {props.ratingAverage}</h4>
+                                <div class="col-12 mb-3">
+                                    <StarRatings
+                                        rating={ ratingAverage}
+                                        starRatedColor="red"
+                                        numberOfStars={5}
+                                        starDimension="20px"
+                                        starSpacing="2px"
+                                        name='rating'
+                                    />
                                 </div>
                                 <div class="col-12">
                                     <img class="mw-100"
