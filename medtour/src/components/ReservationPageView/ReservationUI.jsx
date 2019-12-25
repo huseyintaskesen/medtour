@@ -25,67 +25,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Box from "@material-ui/core/Box";
 import flightData from "./flights.json";
-import "./flights.css";
-
-const hotelData = [
-    {
-        sys: {
-            id: "1"
-        },
-        fields: {
-            name: "Büyük Hotel",
-            slug: "single-economy",
-            type: "single",
-            price: 100,
-            size: 200,
-            capacity: 1,
-            pets: false,
-            breakfast: false,
-            featured: false,
-            description:
-                "Street art edison bulb gluten-free, tofu try-hard lumbersexual brooklyn tattooed pickled chambray. Actually humblebrag next level, deep v art party wolf tofu direct trade readymade sustainable hell of banjo. Organic authentic subway tile cliche palo santo, street art XOXO dreamcatcher retro sriracha portland air plant kitsch stumptown. Austin small batch squid gastropub. Pabst pug tumblr gochujang offal retro cloud bread bushwick semiotics before they sold out sartorial literally mlkshk. Vaporware hashtag vice, sartorial before they sold out pok pok health goth trust fund cray.",
-            extras: [
-                "Plush pillows and breathable bed linens",
-                "Soft, oversized bath towels",
-                "Full-sized, pH-balanced toiletries",
-                "Complimentary refreshments",
-                "Adequate safety/security",
-                "Internet",
-                "Comfortable beds"
-            ],
-            images: [
-                {
-                    fields: {
-                        file: {
-                            url: img1
-                        }
-                    }
-                },
-                {
-                    fields: {
-                        file: {
-                            url: room2
-                        }
-                    }
-                },
-                {
-                    fields: {
-                        file: {
-                            url: room3
-                        }
-                    }
-                },
-                {
-                    fields: {
-                        file: {
-                            url: room4
-                        }
-                    }
-                }
-            ]
-        }
-    }
-];
+import hotelData from "./hotels.json";
+import "./reservation.css";
 
 // var treatments = [];
 
@@ -259,175 +200,62 @@ export default function ReservationUI(props) {
                     <div className="row borderDown">
                         <h3>Pick your hotel to stay during your trip:</h3>
                     </div>
-                    <div className="row pl-2 pt-4 pb-2">
-                        <div className="card" style={{ width: "18rem" }}>
-                            <img
-                                src={require("../../images/room-1.jpeg")}
-                                className="card-img-top"
-                                alt="..."
-                            />
-                            <div className="card-body">
-                                <h5 className="card-title">Card title</h5>
-                                <p className="card-text">
-                                    Some quick example text to build on the card
-                                    title and make up the bulk of the card's
-                                    content.
-                                </p>
-                                <div data-toggle="buttons">
-                                    <div className="checkbox">
-                                        <label className="btn btn-primary">
-                                            <input
-                                                type="checkbox"
-                                                value="1"
-                                                name="post[post_facebook]"
-                                                id="post_post_facebook"
-                                            />
-                                            &nbsp;&nbsp; Select
-                                        </label>
+                    <div className="row pl-4 pt-4 pb-2">
+                        {hotelData.hotels.map(hotel => {
+                            return (
+                                <div key={hotel.id}>
+                                    <div
+                                        className="card mr-4 mb-4"
+                                        style={{ width: "18rem" }}
+                                    >
+                                        <img
+                                            src={require("../../images/room-1.jpeg")}
+                                            className="card-img-top"
+                                            alt="..."
+                                        />
+                                        <div className="card-header">
+                                            <h5>{hotel.name}</h5>
+                                        </div>
+                                        <ul className="list-group list-group-flush">
+                                            <li className="list-group-item">
+                                                <p>
+                                                    {" Available From: "}
+                                                    {hotel.availableFrom}
+                                                    <br />
+                                                    {" Until: "}
+                                                    {hotel.availableTo}
+                                                </p>
+                                            </li>
+                                            <li className="list-group-item">
+                                                <p>
+                                                    {"Room left: "}
+                                                    {hotel.room}
+                                                </p>
+                                            </li>
+                                            <li className="list-group-item">
+                                                <p>
+                                                    {"Price for one night: "}
+                                                    {hotel.price}
+                                                </p>
+                                            </li>
+                                            <li className="list-group-item">
+                                                <div data-toggle="buttons">
+                                                    <div className="checkbox">
+                                                        <label className="btn btn-primary">
+                                                            <input
+                                                                type="checkbox"
+                                                                value="1"
+                                                            />
+                                                            &nbsp;&nbsp; Select
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div className="card" style={{ width: "18rem" }}>
-                            <img
-                                src={require("../../images/room-1.jpeg")}
-                                className="card-img-top"
-                                alt="..."
-                            />
-                            <div className="card-body">
-                                <h5 className="card-title">Card title</h5>
-                                <p className="card-text">
-                                    Some quick example text to build on the card
-                                    title and make up the bulk of the card's
-                                    content.
-                                </p>
-                                <div data-toggle="buttons">
-                                    <div className="checkbox">
-                                        <label className="btn btn-primary">
-                                            <input
-                                                type="checkbox"
-                                                value="1"
-                                                name="post[post_facebook]"
-                                                id="post_post_facebook"
-                                            />
-                                            &nbsp;&nbsp; Select
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="card" style={{ width: "18rem" }}>
-                            <img
-                                src={require("../../images/room-1.jpeg")}
-                                className="card-img-top"
-                                alt="..."
-                            />
-                            <div className="card-body">
-                                <h5 className="card-title">Card title</h5>
-                                <p className="card-text">
-                                    Some quick example text to build on the card
-                                    title and make up the bulk of the card's
-                                    content.
-                                </p>
-                                <div data-toggle="buttons">
-                                    <div className="checkbox">
-                                        <label className="btn btn-primary">
-                                            <input
-                                                type="checkbox"
-                                                value="1"
-                                                name="post[post_facebook]"
-                                                id="post_post_facebook"
-                                            />
-                                            &nbsp;&nbsp; Select
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="card" style={{ width: "18rem" }}>
-                            <img
-                                src={require("../../images/room-1.jpeg")}
-                                className="card-img-top"
-                                alt="..."
-                            />
-                            <div className="card-body">
-                                <h5 className="card-title">Card title</h5>
-                                <p className="card-text">
-                                    Some quick example text to build on the card
-                                    title and make up the bulk of the card's
-                                    content.
-                                </p>
-                                <div data-toggle="buttons">
-                                    <div className="checkbox">
-                                        <label className="btn btn-primary">
-                                            <input
-                                                type="checkbox"
-                                                value="1"
-                                                name="post[post_facebook]"
-                                                id="post_post_facebook"
-                                            />
-                                            &nbsp;&nbsp; Select
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="card" style={{ width: "18rem" }}>
-                            <img
-                                src={require("../../images/room-1.jpeg")}
-                                className="card-img-top"
-                                alt="..."
-                            />
-                            <div className="card-body">
-                                <h5 className="card-title">Card title</h5>
-                                <p className="card-text">
-                                    Some quick example text to build on the card
-                                    title and make up the bulk of the card's
-                                    content.
-                                </p>
-                                <div data-toggle="buttons">
-                                    <div className="checkbox">
-                                        <label className="btn btn-primary">
-                                            <input
-                                                type="checkbox"
-                                                value="1"
-                                                name="post[post_facebook]"
-                                                id="post_post_facebook"
-                                            />
-                                            &nbsp;&nbsp; Select
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="card" style={{ width: "18rem" }}>
-                            <img
-                                src={require("../../images/room-1.jpeg")}
-                                className="card-img-top"
-                                alt="..."
-                            />
-                            <div className="card-body">
-                                <h5 className="card-title">Card title</h5>
-                                <p className="card-text">
-                                    Some quick example text to build on the card
-                                    title and make up the bulk of the card's
-                                    content.
-                                </p>
-                                <div data-toggle="buttons">
-                                    <div className="checkbox">
-                                        <label className="btn btn-primary">
-                                            <input
-                                                type="checkbox"
-                                                value="1"
-                                                name="post[post_facebook]"
-                                                id="post_post_facebook"
-                                            />
-                                            &nbsp;&nbsp; Select
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            );
+                        })}
                     </div>
                 </div>
             </div>
@@ -447,48 +275,58 @@ export default function ReservationUI(props) {
                                         <div key={flight.id}>
                                             <div className="col-3 pb-4">
                                                 <div
-                                                    class="card"
+                                                    className="card"
                                                     style={{ width: "16rem" }}
                                                 >
-                                                    <div class="card-header">
+                                                    <div className="card-header">
                                                         <h5>
                                                             {flight.from}
                                                             {" - "}
                                                             {flight.to}
                                                         </h5>
                                                     </div>
-                                                    <ul class="list-group list-group-flush">
+                                                    <ul className="list-group list-group-flush">
                                                         <li className="list-group-item">
                                                             <p>
-                                                                Date:{" "}
-                                                                {flight.date}{" "}
-                                                            </p>
-                                                        </li>
-                                                        <li className="list-group-item">
-                                                            <p>
+                                                                Outbound:{" "}
+                                                                {
+                                                                    flight.outboundDate
+                                                                }
+                                                                <br />
                                                                 Time:{" "}
-                                                                {flight.time}
+                                                                {flight.outTime}
                                                             </p>
                                                         </li>
-                                                        <li class="list-group-item">
+                                                        <li className="list-group-item">
+                                                            <p>
+                                                                Return:{" "}
+                                                                {
+                                                                    flight.returnDate
+                                                                }
+                                                                <br />
+                                                                Time:{" "}
+                                                                {
+                                                                    flight.returnTime
+                                                                }
+                                                            </p>
+                                                        </li>
+                                                        <li className="list-group-item">
                                                             <p>
                                                                 {flight.class}
                                                             </p>
                                                         </li>
-                                                        <li class="list-group-item">
+                                                        <li className="list-group-item">
                                                             <p>
                                                                 {flight.price}
                                                             </p>
                                                         </li>
-                                                        <li class="list-group-item">
+                                                        <li className="list-group-item">
                                                             <div data-toggle="buttons">
                                                                 <div className="checkbox">
                                                                     <label className="btn btn-primary">
                                                                         <input
                                                                             type="checkbox"
                                                                             value="1"
-                                                                            name="post[post_facebook]"
-                                                                            id="post_post_facebook"
                                                                         />
                                                                         &nbsp;&nbsp;
                                                                         Select
