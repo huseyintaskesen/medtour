@@ -13,6 +13,11 @@ export default function ClinicCardAsaf(props) {
         );
     });
 
+    var bio = props.bio + "";
+    var bioLength = 150;
+    if( bio.length > bioLength){
+        bio = bio.substring(0,bioLength) + "...";
+    }
     
     const clinic_id  = props.clinic_id
     const treatments = props.treatments
@@ -40,7 +45,7 @@ export default function ClinicCardAsaf(props) {
                         <div className="card-body">
                             <h5 className="card-title">{props.name}</h5>
                             <b>About Clinic:</b>
-                            <p className="card-text">{props.bio}</p>
+                            <p className="card-text">{bio}</p>
                             <b>Address:</b>
                             <p className="card-text">{props.location}</p>
                         </div>
@@ -64,7 +69,8 @@ export default function ClinicCardAsaf(props) {
                             </a>
                             <Link to={{
                                         pathname: "/clinicdetails",
-                                         data: props
+                                        data: props
+
                                     }}
                                     className="card-link">
                                 Detailed Info
