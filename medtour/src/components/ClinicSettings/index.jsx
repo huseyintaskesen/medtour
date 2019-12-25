@@ -5,7 +5,44 @@ import Footer from "../Footer";
 import "./clinic-settings.css";
 import MaterialTable from "./treatment-table";
 
+var c_id;
+var clinic_name;
+
 class ClinicSettings extends Component {
+
+    
+
+
+
+    constructor(props){
+        super(props)
+        
+        c_id = sessionStorage.getItem('clinicID');
+        clinic_name = this.getClinicName(c_id)
+        console.log(clinic_name)
+    }
+
+
+
+    async getClinicName(c_id){
+        var clinic_name = await fetch("http://localhost:3001/api/clinics/"+c_id, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },}).then(response =>{
+            response.json().then(resp => {
+            return resp.clinics.name
+            }
+            )
+            })
+
+            return clinic_name
+
+    }
+
+
+
+
     render() {
         return (
             <div>
@@ -13,7 +50,7 @@ class ClinicSettings extends Component {
                 <div className="container-fluid col-12 bg-white">
                     <div className="offset-1 col-10">
                         <div className="row pt-5 pl-3 pt-3 pb-3 borderDown">
-                            <h4>Clinic Settings</h4>
+                            <h4>Clinic Settings, id:{c_id}</h4>
                         </div>
                         <div className="row clinic-settings">
                             <div className="col-6">
@@ -21,7 +58,7 @@ class ClinicSettings extends Component {
                                     <form>
                                         <div class="form-group">
                                             <label for="input-field">
-                                                Name
+                                                Name:
                                             </label>
                                             <input
                                                 type="text"

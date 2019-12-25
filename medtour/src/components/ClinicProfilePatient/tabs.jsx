@@ -175,20 +175,18 @@ export default function SimpleTabs(props) {
                         </div>
                     </div>
                     <div className="row pt-4 pl-2">
+                    <Link className="btn btn-warning" >
+                                       Enquire
+                    </Link>
                     <Link className="btn btn-success" to={{
                                         pathname: "/reservation",
                                          data: props
                                     }}
                                     >
                                        Make a Reservation
-                    </Link>
+                    </Link>                    
                     </div>
-                        <div className="row pt-4 pl-2">
-
-                    <Link className="btn btn-success" >
-                                       Enquire
-                    </Link>
-                    </div>
+                    
 
 
                         
