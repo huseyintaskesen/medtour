@@ -25,67 +25,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Box from "@material-ui/core/Box";
 import flightData from "./flights.json";
-import "./flights.css";
-
-const hotelData = [
-    {
-        sys: {
-            id: "1"
-        },
-        fields: {
-            name: "Büyük Hotel",
-            slug: "single-economy",
-            type: "single",
-            price: 100,
-            size: 200,
-            capacity: 1,
-            pets: false,
-            breakfast: false,
-            featured: false,
-            description:
-                "Street art edison bulb gluten-free, tofu try-hard lumbersexual brooklyn tattooed pickled chambray. Actually humblebrag next level, deep v art party wolf tofu direct trade readymade sustainable hell of banjo. Organic authentic subway tile cliche palo santo, street art XOXO dreamcatcher retro sriracha portland air plant kitsch stumptown. Austin small batch squid gastropub. Pabst pug tumblr gochujang offal retro cloud bread bushwick semiotics before they sold out sartorial literally mlkshk. Vaporware hashtag vice, sartorial before they sold out pok pok health goth trust fund cray.",
-            extras: [
-                "Plush pillows and breathable bed linens",
-                "Soft, oversized bath towels",
-                "Full-sized, pH-balanced toiletries",
-                "Complimentary refreshments",
-                "Adequate safety/security",
-                "Internet",
-                "Comfortable beds"
-            ],
-            images: [
-                {
-                    fields: {
-                        file: {
-                            url: img1
-                        }
-                    }
-                },
-                {
-                    fields: {
-                        file: {
-                            url: room2
-                        }
-                    }
-                },
-                {
-                    fields: {
-                        file: {
-                            url: room3
-                        }
-                    }
-                },
-                {
-                    fields: {
-                        file: {
-                            url: room4
-                        }
-                    }
-                }
-            ]
-        }
-    }
-];
+import hotelData from "./hotels.json";
+import "./reservation.css";
 
 // var treatments = [];
 
@@ -95,7 +36,6 @@ export default function ReservationUI(props) {
     const [startDate, setStartDate] = useState(new Date());
     const [hotelID, setHotelID] = useState(0);
 
-    
     // console.log("props:" + props)
 
     // useEffect(() =>{
@@ -170,17 +110,15 @@ export default function ReservationUI(props) {
         console.log("selected hotels index is:" + hotelID);
     };
 
-    
-
     return (
         <div>
             <div className="col-12 bg-dark title pt-4 pb-4 pl-5">
-    <h4>Set up your reservation for {props.name}</h4>
+                <h4>Set up your reservation for {props.name}</h4>
             </div>
             <div className="container-fluid bg-white col-12 pt-4">
                 <div className="offset-1 col-10">
                     <div className="row borderDown">
-                        <h3>Choose your reservation date:</h3>
+                        <h3>Choose your treatment date:</h3>
                     </div>
                     <div className="row pt-2 pb-2">
                         <Box component="span" m={1}>
@@ -231,220 +169,93 @@ export default function ReservationUI(props) {
                             </div>
                         </form>
                     </div>
+                    <div className="row">
+                        <div className="col-6">
+                            <div className="row borderDown">
+                                <h3>Check-In Date</h3>
+                            </div>
+                            <div className="row pt-2 pb-2">
+                                <Box component="span" m={1}>
+                                    <DatePicker
+                                        selected={startDate}
+                                        onChange={date => setStartDate(date)}
+                                    />
+                                </Box>
+                            </div>
+                        </div>
+                        <div className="col-6">
+                            <div className="row borderDown">
+                                <h3>Check-Out Date</h3>
+                            </div>
+                            <div className="row pt-2 pb-2">
+                                <Box component="span" m={1}>
+                                    <DatePicker
+                                        selected={startDate}
+                                        onChange={date => setStartDate(date)}
+                                    />
+                                </Box>
+                            </div>
+                        </div>
+                    </div>
                     <div className="row borderDown">
                         <h3>Pick your hotel to stay during your trip:</h3>
                     </div>
-                    <div className="row pl-2 pt-2 pb-2">
-                        <Card
-                            className={classes2.card}
-                            style={{ float: "left", marginRight: "10px" }}
-                        >
-                            <CardHeader
-                                avatar={
-                                    <Avatar
-                                        aria-label="recipe"
-                                        className={classes2.avatar}
+                    <div className="row pl-4 pt-4 pb-2">
+                        {hotelData.hotels.map(hotel => {
+                            return (
+                                <div key={hotel.id}>
+                                    <div
+                                        className="card mr-4 mb-4"
+                                        style={{ width: "18rem" }}
                                     >
-                                        R
-                                    </Avatar>
-                                }
-                                action={
-                                    <IconButton aria-label="settings">
-                                        <MoreVertIcon />
-                                    </IconButton>
-                                }
-                                title="Shrimp and Chorizo Paella"
-                                subheader="September 14, 2016"
-                            />
-                            <CardMedia
-                                className={classes2.media}
-                                image={img1}
-                                title="Paella dish"
-                            />
-                            <CardContent>
-                                <Typography
-                                    variant="body2"
-                                    color="textSecondary"
-                                    component="p"
-                                >
-                                    This impressive paella is a perfect party
-                                    dish and a fun meal to cook together with
-                                    your guests. Add 1 cup of frozen peas along
-                                    with the mussels, if you like.
-                                </Typography>
-                            </CardContent>
-                            <CardActions disableSpacing>
-                                <IconButton aria-label="add to favorites">
-                                    <FavoriteIcon
-                                        onClick={() => handleFavoriteClick(0)}
-                                    />
-                                </IconButton>
-                                <IconButton aria-label="share">
-                                    <ShareIcon />
-                                </IconButton>
-                                <IconButton
-                                    className={clsx(classes2.expand, {
-                                        [classes2.expandOpen]: expanded
-                                    })}
-                                    onClick={handleExpandClick}
-                                    aria-expanded={expanded}
-                                    aria-label="show more"
-                                >
-                                    <ExpandMoreIcon />
-                                </IconButton>
-                            </CardActions>
-                            <Collapse
-                                in={expanded}
-                                timeout="auto"
-                                unmountOnExit
-                            >
-                                <CardContent>
-                                    <Typography paragraph>Method:</Typography>
-                                    <Typography paragraph>
-                                        Heat 1/2 cup of the broth in a pot until
-                                        simmering, add saffron and set aside for
-                                        10 minutes.
-                                    </Typography>
-                                    <Typography paragraph>
-                                        Heat oil in a (14- to 16-inch) paella
-                                        pan or a large, deep skillet over
-                                        medium-high heat. Add chicken, shrimp
-                                        and chorizo, and cook, stirring
-                                        occasionally until lightly browned, 6 to
-                                        8 minutes. Transfer shrimp to a large
-                                        plate and set aside, leaving chicken and
-                                        chorizo in the pan. Add pimentón, bay
-                                        leaves, garlic, tomatoes, onion, salt
-                                        and pepper, and cook, stirring often
-                                        until thickened and fragrant, about 10
-                                        minutes. Add saffron broth and remaining
-                                        4 1/2 cups chicken broth; bring to a
-                                        boil.
-                                    </Typography>
-                                    <Typography paragraph>
-                                        Add rice and stir very gently to
-                                        distribute. Top with artichokes and
-                                        peppers, and cook without stirring,
-                                        until most of the liquid is absorbed, 15
-                                        to 18 minutes. Reduce heat to
-                                        medium-low, add reserved shrimp and
-                                        mussels, tucking them down into the
-                                        rice, and cook again without stirring,
-                                        until mussels have opened and rice is
-                                        just tender, 5 to 7 minutes more.
-                                        (Discard any mussels that don’t open.)
-                                    </Typography>
-                                    <Typography>
-                                        Set aside off of the heat to let rest
-                                        for 10 minutes, and then serve.
-                                    </Typography>
-                                </CardContent>
-                            </Collapse>
-                        </Card>
-
-                        <Card className={classes2.card}>
-                            <CardHeader
-                                avatar={
-                                    <Avatar
-                                        aria-label="recipe"
-                                        className={classes2.avatar}
-                                    >
-                                        R
-                                    </Avatar>
-                                }
-                                action={
-                                    <IconButton aria-label="settings">
-                                        <MoreVertIcon />
-                                    </IconButton>
-                                }
-                                title="Shrimp and Chorizo Paella"
-                                subheader="September 14, 2016"
-                            />
-                            <CardMedia
-                                className={classes2.media}
-                                image={img1}
-                                title="Paella dish"
-                            />
-                            <CardContent>
-                                <Typography
-                                    variant="body2"
-                                    color="textSecondary"
-                                    component="p"
-                                >
-                                    This impressive paella is a perfect party
-                                    dish and a fun meal to cook together with
-                                    your guests. Add 1 cup of frozen peas along
-                                    with the mussels, if you like.
-                                </Typography>
-                            </CardContent>
-                            <CardActions disableSpacing>
-                                <IconButton aria-label="add to favorites">
-                                    <FavoriteIcon
-                                        onClick={() => handleFavoriteClick(1)}
-                                    />
-                                </IconButton>
-                                <IconButton aria-label="share">
-                                    <ShareIcon />
-                                </IconButton>
-                                <IconButton
-                                    className={clsx(classes2.expand, {
-                                        [classes2.expandOpen]: expanded
-                                    })}
-                                    onClick={handleExpandClick}
-                                    aria-expanded={expanded}
-                                    aria-label="show more"
-                                >
-                                    <ExpandMoreIcon />
-                                </IconButton>
-                            </CardActions>
-                            <Collapse
-                                in={expanded}
-                                timeout="auto"
-                                unmountOnExit
-                            >
-                                <CardContent>
-                                    <Typography paragraph>Method:</Typography>
-                                    <Typography paragraph>
-                                        Heat 1/2 cup of the broth in a pot until
-                                        simmering, add saffron and set aside for
-                                        10 minutes.
-                                    </Typography>
-                                    <Typography paragraph>
-                                        Heat oil in a (14- to 16-inch) paella
-                                        pan or a large, deep skillet over
-                                        medium-high heat. Add chicken, shrimp
-                                        and chorizo, and cook, stirring
-                                        occasionally until lightly browned, 6 to
-                                        8 minutes. Transfer shrimp to a large
-                                        plate and set aside, leaving chicken and
-                                        chorizo in the pan. Add pimentón, bay
-                                        leaves, garlic, tomatoes, onion, salt
-                                        and pepper, and cook, stirring often
-                                        until thickened and fragrant, about 10
-                                        minutes. Add saffron broth and remaining
-                                        4 1/2 cups chicken broth; bring to a
-                                        boil.
-                                    </Typography>
-                                    <Typography paragraph>
-                                        Add rice and stir very gently to
-                                        distribute. Top with artichokes and
-                                        peppers, and cook without stirring,
-                                        until most of the liquid is absorbed, 15
-                                        to 18 minutes. Reduce heat to
-                                        medium-low, add reserved shrimp and
-                                        mussels, tucking them down into the
-                                        rice, and cook again without stirring,
-                                        until mussels have opened and rice is
-                                        just tender, 5 to 7 minutes more.
-                                        (Discard any mussels that don’t open.)
-                                    </Typography>
-                                    <Typography>
-                                        Set aside off of the heat to let rest
-                                        for 10 minutes, and then serve.
-                                    </Typography>
-                                </CardContent>
-                            </Collapse>
-                        </Card>
+                                        <img
+                                            src={require("../../images/room-1.jpeg")}
+                                            className="card-img-top"
+                                            alt="..."
+                                        />
+                                        <div className="card-header">
+                                            <h5>{hotel.name}</h5>
+                                        </div>
+                                        <ul className="list-group list-group-flush">
+                                            <li className="list-group-item">
+                                                <p>
+                                                    {" Available From: "}
+                                                    {hotel.availableFrom}
+                                                    <br />
+                                                    {" Until: "}
+                                                    {hotel.availableTo}
+                                                </p>
+                                            </li>
+                                            <li className="list-group-item">
+                                                <p>
+                                                    {"Room left: "}
+                                                    {hotel.room}
+                                                </p>
+                                            </li>
+                                            <li className="list-group-item">
+                                                <p>
+                                                    {"Price for one night: "}
+                                                    {hotel.price}
+                                                </p>
+                                            </li>
+                                            <li className="list-group-item">
+                                                <div data-toggle="buttons">
+                                                    <div className="checkbox">
+                                                        <label className="btn btn-primary">
+                                                            <input
+                                                                type="checkbox"
+                                                                value="1"
+                                                            />
+                                                            &nbsp;&nbsp; Select
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
             </div>
@@ -464,36 +275,58 @@ export default function ReservationUI(props) {
                                         <div key={flight.id}>
                                             <div className="col-3 pb-4">
                                                 <div
-                                                    class="card"
+                                                    className="card"
                                                     style={{ width: "16rem" }}
                                                 >
-                                                    <div class="card-header">
+                                                    <div className="card-header">
                                                         <h5>
                                                             {flight.from}
                                                             {" - "}
                                                             {flight.to}
                                                         </h5>
                                                     </div>
-                                                    <ul class="list-group list-group-flush">
-                                                        <li class="list-group-item">
+                                                    <ul className="list-group list-group-flush">
+                                                        <li className="list-group-item">
+                                                            <p>
+                                                                Outbound:{" "}
+                                                                {
+                                                                    flight.outboundDate
+                                                                }
+                                                                <br />
+                                                                Time:{" "}
+                                                                {flight.outTime}
+                                                            </p>
+                                                        </li>
+                                                        <li className="list-group-item">
+                                                            <p>
+                                                                Return:{" "}
+                                                                {
+                                                                    flight.returnDate
+                                                                }
+                                                                <br />
+                                                                Time:{" "}
+                                                                {
+                                                                    flight.returnTime
+                                                                }
+                                                            </p>
+                                                        </li>
+                                                        <li className="list-group-item">
                                                             <p>
                                                                 {flight.class}
                                                             </p>
                                                         </li>
-                                                        <li class="list-group-item">
+                                                        <li className="list-group-item">
                                                             <p>
                                                                 {flight.price}
                                                             </p>
                                                         </li>
-                                                        <li class="list-group-item">
+                                                        <li className="list-group-item">
                                                             <div data-toggle="buttons">
                                                                 <div className="checkbox">
                                                                     <label className="btn btn-primary">
                                                                         <input
                                                                             type="checkbox"
                                                                             value="1"
-                                                                            name="post[post_facebook]"
-                                                                            id="post_post_facebook"
                                                                         />
                                                                         &nbsp;&nbsp;
                                                                         Select

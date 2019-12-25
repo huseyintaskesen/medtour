@@ -239,7 +239,7 @@ router.put('/newTreatment/:id' , (req, res)=> {
 })
 
 
-// @route   POST api/clinics/updateInformation/id
+// @route   PUT api/clinics/updateInformation/id
 // @desc    Update the basic information for the clinic with matching id
 // @access  Private
 
