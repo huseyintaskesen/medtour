@@ -41,6 +41,13 @@
             "to": "Izmir",
             "class": "Economy",
             "price": "1000$"
+        },
+        {
+            "id": "7",
+            "from": "London ",
+            "to": "Ankara",
+            "class": "Economy",
+            "price": "3000$"
         }
     ]
 }

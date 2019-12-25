@@ -5,7 +5,6 @@ import room4 from "../hotel_assets/images/details-4.jpeg";
 import img1 from "../hotel_assets/images/room-1.jpeg";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-import MenuItem from "@material-ui/core/MenuItem";
 import React, { useState, useEffect, Component } from "react";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
@@ -88,46 +87,43 @@ const hotelData = [
     }
 ];
 
-export default function ReservationUI() {
+// var treatments = [];
+
+export default function ReservationUI(props) {
     const [treatment, setTreatmentValue] = React.useState("");
     const [expanded, setExpanded] = React.useState(false);
     const [startDate, setStartDate] = useState(new Date());
     const [hotelID, setHotelID] = useState(0);
 
-    const treatments = [
-        {
-            value: "$199 ",
-            label: "TREATMENT 1"
-        },
-        {
-            value: "$205",
-            label: "TREATMENT 2"
-        },
-        {
-            value: "$399",
-            label: "TREATMENT 3"
-        },
-        {
-            value: "$299",
-            label: "TREATMENT 4"
-        }
-    ];
+    
+    // console.log("props:" + props)
 
-    const flights = [
-        {
-            value: "Thomas Cook",
-            label: "TREATMENT 1"
-        },
-        {
-            value: "Thomas Cook",
-            label: "TREATMENT 2"
-        },
-        {
-            value: "Approximately $",
-            label: "Thomas Cook"
-        }
-    ];
+    // useEffect(() =>{
+    //      treatments = this.props.location.data.information.treatments;
+    // },[])
 
+    // const treatments = [
+    //     {
+    //         priceLow: "$199 ",
+    //         priceHigh: "$299",
+    //         name: "TREATMENT 1"
+    //     },
+    //     {
+    //         priceLow: "$205",
+    //         priceHigh: "$350",
+    //         name: "TREATMENT 2"
+    //     },
+    //     {
+    //         priceLow: "$399",
+    //         priceHigh: "$599",
+    //         name: "TREATMENT 3"
+    //     },
+    //     {
+    //         priceLow: "$299",
+    //         priceHigh: "$350",
+    //         name: "TREATMENT 4"
+    //     }
+    // ];
     const useStyles = makeStyles(theme => ({
         root: {
             "& .MuiTextField-root": {
@@ -174,10 +170,12 @@ export default function ReservationUI() {
         console.log("selected hotels index is:" + hotelID);
     };
 
+    
+
     return (
         <div>
             <div className="col-12 bg-dark title pt-4 pb-4 pl-5">
-                <h4>Reservation Page</h4>
+    <h4>Set up your reservation for {props.name}</h4>
             </div>
             <div className="container-fluid bg-white col-12 pt-4">
                 <div className="offset-1 col-10">
@@ -191,6 +189,9 @@ export default function ReservationUI() {
                                 onChange={date => setStartDate(date)}
                             />
                         </Box>
+                    </div>
+                    <div className="row borderDown">
+                        <h3>Choose your treatment:</h3>
                     </div>
                     <div className="row pl-2 pt-2 pb-2">
                         <form
@@ -210,12 +211,12 @@ export default function ReservationUI() {
                                     }}
                                     variant="outlined"
                                 >
-                                    {treatments.map(option => (
+                                    {props.treatments.map(option => (
                                         <option
-                                            key={option.value}
-                                            value={option.value}
+                                            key={option.name}
+                                            value={option.priceLow}
                                         >
-                                            {option.label}
+                                            {option.name}
                                         </option>
                                     ))}
                                 </TextField>
@@ -230,8 +231,8 @@ export default function ReservationUI() {
                             </div>
                         </form>
                     </div>
-                    <div className="row pl-2 pt-2 pb-2">
-                        <h4>Pick your hotel to stay during your trip:</h4>
+                    <div className="row borderDown">
+                        <h3>Pick your hotel to stay during your trip:</h3>
                     </div>
                     <div className="row pl-2 pt-2 pb-2">
                         <Card

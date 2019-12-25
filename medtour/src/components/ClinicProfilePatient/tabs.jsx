@@ -11,6 +11,8 @@ import { createMuiTheme } from "@material-ui/core/styles";
 import purple from "@material-ui/core/colors/purple";
 import "./tabs.css";
 import { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
+
 
 
 
@@ -166,9 +168,14 @@ export default function SimpleTabs(props) {
                         </div>
                     </div>
                     <div className="row pt-4 pl-2">
-                        <button className="btn btn-success">
-                            Make a Reservation
-                        </button>
+                    <Link className="btn btn-success" to={{
+                                        pathname: "/reservation",
+                                         data: props
+                                    }}
+                                    >
+                                       Make a Reservation
+                                    </Link>
+                        
                     </div>
                 </div>
             </TabPanel>

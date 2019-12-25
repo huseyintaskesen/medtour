@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import LandingNav from "../LandingNav";
 import "./signUp.css";
 import axios from "axios";

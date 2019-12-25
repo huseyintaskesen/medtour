@@ -20,7 +20,11 @@ class ClinicProfilePatient extends Component {
         }
     }
 
+
     
+
+
+
     render() {
         return (
             <div>
@@ -38,7 +42,6 @@ class ClinicProfilePatient extends Component {
                 </div>
                 <div className="container-fluid bg-white">
                     <div className="row">
-
                         <Tabs information = {this.props.location.data}/>
                     </div>
                 </div>
