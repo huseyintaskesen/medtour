@@ -15,3 +15,8 @@
 .card-body button {
     float: right;
 }
+
+
+.borderUp{
+    border: 2px solid red;
+}
