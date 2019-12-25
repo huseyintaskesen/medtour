@@ -15,6 +15,15 @@ const TreatmentsSchema = new Schema({
         type: Number,
         required: true
     },
+    treatmentDuration_Hours:{
+        type: Number
+    },
+    treatmentDuration_Days_Start:{
+        type:Number
+    },
+    treatmentDuration_Days_End:{
+        type:Number
+    },
     priceHigh:{
         type: Number,
         required: true

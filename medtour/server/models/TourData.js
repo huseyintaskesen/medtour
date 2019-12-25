@@ -24,11 +24,15 @@ const TourDataSchema = new Schema({
         ref: Clinic,
         required: true
     },
+    treatment_Date:{
+        type: Date,
+        required: true
+    },
     transportation_Departure_id:{
         type: Schema.Types.ObjectId,
         ref: Transportation,
         required: true
-    },  
+    }, 
     transportation_Return_id:{
         type: Schema.Types.ObjectId,
         ref: Transportation,
