@@ -24,6 +24,14 @@ var items = [
     classes       : 'color-1 color-4'
   },
   {
+    _id            :'my-event-idid',
+     name          : 'Test event',
+     startDateTime : new Date(now.getFullYear(), now.getMonth(), now.getDate()+1, 10, 0),
+     endDateTime   : new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12, 0),
+     classes       : 'color-1 color-4'
+   },
+  
+  {
    _id            :guid(),
     name          : 'Working lunch , Holly',
     startDateTime : new Date(now.getFullYear(), now.getMonth(), now.getDate()+1, 11, 0),
@@ -60,12 +68,11 @@ var items = [
     classes       : 'color-3'
   }
 ];
-
 export default class Agenda extends Component {
   constructor(props){
   super(props);
 
-
+  
 
 this.state = {
   items:[],
@@ -94,7 +101,6 @@ this.handleCellSelection = this.handleCellSelection.bind(this)
   componentDidMount(){
 
     this.setState({items:items})
-
 
   }
 

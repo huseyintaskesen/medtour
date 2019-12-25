@@ -4,7 +4,7 @@ import LandingNav from "../LandingNav";
 import "./clinic-login-and-register.css";
 import axios from "axios";
 import cogoToast from 'cogo-toast';
-
+import { useHistory } from "react-router-dom";
 
 
 
@@ -36,14 +36,57 @@ class ClinicLoginAndRegister extends Component {
         console.log("Clinic name:"+ clinic.clinic.name)
         console.log("Clinic email:"+ clinic.clinic.email)
         cogoToast.success("Success!");
-        setTimeout(function(){  window.open('http://localhost:3000/landing', "_self")}, 1000);
+        let history = useHistory();
+        history.push('/landing') 
+        
+        // setTimeout(function(){  window.open('http://localhost:3000/landing', "_self")}, 1000);
 
-        // window.open('http://localhost:3000/landing', "_self")
     }
     async handleLogin(event) {
         event.preventDefault();
         var email = this.login_email.current.value;
         var password  = this.login_password.current.value;
+
+        clinic = await this.loginClinic(email,password)
+        if(clinic != undefined){
+            if(clinic.isLoginSuccessful ){
+                var clinic_id = clinic.clinic.id
+                sessionStorage.setItem('clinicID', clinic_id);
+                const c_id = sessionStorage.getItem('clinicID');
+                console.log('user id from session storage:'+ c_id)
+                cogoToast.success("Success!");
+                
+                setTimeout(function(){  window.open('http://localhost:3000/clinic-profile-page', "_self")}, 1000);
+               
+             }
+         }
+        
+
+    }
+
+    async loginClinic(email,password){
+
+        const body = JSON.stringify({
+            email,
+            password
+        });
+        //Headers
+        const config = {
+            headers: {
+                "Content-type": "application/json"
+            }
+        };
+
+        var resp = await axios.post("/api/auth/clinic", body, config).then((res) => {
+            console.log("response:"+res.data)
+            console.log('clinic id:'+ res.data.clinic.id)
+            return res.data
+        }).catch(err => {
+            cogoToast.error("Error in credentials!");
+            console.log('error returned:'+err)
+        })
+        return resp
+
     }
 
     async registerClinic(name, password, email) {

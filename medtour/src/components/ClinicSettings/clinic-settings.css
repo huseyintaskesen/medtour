@@ -1,0 +1,18 @@
+.clinic-settings form {
+    padding-top: 4%;
+    padding-left: 5%;
+    padding-bottom: 4%;
+    width: 95%;
+}
+
+.clinic-settings button {
+    margin-top: 2%;
+    margin-left: 42%;
+    margin-bottom: 4%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+#input-field {
+    margin-bottom: 5%;
+}

@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import Autosuggest from "react-autosuggest";
 import Footer from "../Footer";
 import LandingNav from "../LandingNav";
+import "../../theme/animation.css";
 import "../../../src/theme/custom.scss";
 import "./landing.css";
-
 
 const languages = [
     {
@@ -202,7 +202,7 @@ class Landing extends Component {
                             Find the best treatment in Turkey.
                         </h4>
                     </div>
-                    <div className="input mb-3 borderUp">
+                    <div className="input mb-3">
                         <div className="row">
                             <Autosuggest
                                 suggestions={suggestions}
