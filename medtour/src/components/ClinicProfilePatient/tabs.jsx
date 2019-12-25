@@ -10,18 +10,9 @@ import Box from "@material-ui/core/Box";
 import { createMuiTheme } from "@material-ui/core/styles";
 import purple from "@material-ui/core/colors/purple";
 import "./tabs.css";
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import StarRatings from 'react-star-ratings';
-
-
-
-const theme = createMuiTheme({
-    palette: {
-        primary: purple
-    }
-});
-
+import StarRatings from "react-star-ratings";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -60,9 +51,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-
 export default function SimpleTabs(props) {
-
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
 
@@ -83,20 +72,17 @@ export default function SimpleTabs(props) {
                 </tr >
             </div>
         );
-    }); 
-
+    });
 
     const review_details = reviews.map(review => {
         var date = ((review.date) + "" ).substr( 0, ((review.date) + "" ).indexOf("T")  );
-        
+
         return (
-            
             <div class="card w-100  mx-0 my-2 ">
                 <div class="">
                     <div class="col-12">
                         <div class=" card-header row  text-left text-weight-bold">
-                            <div class="col-6 mx-0 px-0"> 
-
+                            <div class="col-6 mx-0 px-0">
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="spaceRight">
@@ -104,15 +90,16 @@ export default function SimpleTabs(props) {
                                         </div>
                                         <div class="mx-0 my-0">
                                             <StarRatings
+                                              
                                                 rating={ review.rating }
+
                                                 starRatedColor="red"
                                                 numberOfStars={5}
                                                 starDimension="20px"
                                                 starSpacing="2px"
-                                                name='rating'
+                                                name="rating"
                                             />
                                         </div>
-                                    
                                     </div>
                                 </div>
                             </div>
@@ -121,22 +108,19 @@ export default function SimpleTabs(props) {
                         </div>
                         <div class="col-12 mx-0 px-0">Review: </div>
                     </div>
-                    
+
                     <div class="col-12 text-left ">
                         {review.comment}
                         {/* <div class="underlineIt text-muted">
                             Read Mode
                         </div> */}
                     </div>
-
                 </div>
-            
-                
+
                 <br></br>
             </div>
         );
     });
-
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -144,16 +128,14 @@ export default function SimpleTabs(props) {
 
     return (
         <div className={classes.root}>
-                <div className="container-fluid name bg-dark">
-                    <div className="row">
-                        <div className="col-6">
-                            
-                        </div>
-                        <div className="col-6">
-                            {/* <h5>{clinic_address}</h5> */}
-                        </div>
+            <div className="container-fluid name bg-dark">
+                <div className="row">
+                    <div className="col-6"></div>
+                    <div className="col-6">
+                        {/* <h5>{clinic_address}</h5> */}
                     </div>
                 </div>
+            </div>
             <AppBar position="static" style={{ background: "darkred" }}>
                 <Tabs
                     value={value}
@@ -163,14 +145,12 @@ export default function SimpleTabs(props) {
                         margin: "0 0 0 10%",
                         color: "white"
                     }}
-                    
                 >
                     <Tab label="Profile" {...a11yProps(0)} />
                     <Tab label="Review" {...a11yProps(1)} />
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
-
                 <div class="container-fluid">
                     <br></br>
                     <div class="col-md-8 col-sm-12 offset-0 offset-md-2 p-0">
@@ -185,7 +165,7 @@ export default function SimpleTabs(props) {
                                 <br></br>
                                 <div class="row">
                                     <h3>Treatments</h3>
-                                        {treatment_details} 
+                                    {treatment_details}
                                 </div>
                             </div>
 
@@ -201,41 +181,36 @@ export default function SimpleTabs(props) {
                                     />
                                 </div>
                                 <div class="col-12">
-                                    <img class="mw-100"
+                                    <img
+                                        class="mw-100"
                                         id="clinic-wide"
                                         src={require("../../images/clinic-wide.jpg")}
                                         alt="clinic"
                                     ></img>
                                 </div>
-
-                                
                             </div>
-
-                            
                         </div>
 
                         <br></br>
 
                         <div class="row">
                             <div class="col-2 offset-2">
-                                <Link className="btn btn-warning" >
-                                    Enquire
-                                </Link>
+                                <Link className="btn btn-warning">Enquire</Link>
                             </div>
                             <div class="col-4">
-                                <Link className="btn btn-success" to={{
-                                            pathname: "/reservation",
-                                            data: props
-                                        }}
-                                        >
+                                <Link
+                                    className="btn btn-success"
+                                    to={{
+                                        pathname: "/reservation",
+                                        data: props
+                                    }}
+                                >
                                     Make a Reservation
-                                </Link>   
+                                </Link>
                             </div>
-
                         </div>
                     </div>
                 </div>
-
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <div className="col-8 offset-2 pb-5">

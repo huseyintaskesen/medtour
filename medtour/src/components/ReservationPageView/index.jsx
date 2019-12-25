@@ -4,12 +4,10 @@ import LandingNav from "../LandingNav";
 import Footer from "../Footer";
 
 export default class ReservationPageView extends Component {
-
-    constructor(props){
-        super(props)
-        console.log(this.props.location.data)
+    constructor(props) {
+        super(props);
+        console.log(this.props.location.data);
     }
-
 
     render() {
         return (
