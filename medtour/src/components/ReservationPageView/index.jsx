@@ -11,13 +11,12 @@ export default class ReservationPageView extends Component {
     }
 
 
-
-
     render() {
         return (
             <div>
                 <LandingNav />
-                <ReservationUI name={this.props.location.data.information.name} treatments={this.props.location.data.information.treatments} clinic_id={this.props.location.data.information.clinic_id} clinic_location = {this.props.location.data.information.clinic_id}></ReservationUI>
+                {/* <ReservationUI name={this.props.location.data.information.name} treatments={this.props.location.data.information.treatments}></ReservationUI> */}
+                <ReservationUI name="KARIII!!@#!@#!@#!@#!@3" ></ReservationUI>
                 <Footer />
             </div>
         );

@@ -90,6 +90,7 @@ const hotelData = [
 // var treatments = [];
 
 export default function ReservationUI(props) {
+
     const [treatment, setTreatmentValue] = React.useState("");
     const [expanded, setExpanded] = React.useState(false);
     const [startDate, setStartDate] = useState(new Date());
@@ -102,28 +103,29 @@ export default function ReservationUI(props) {
     //      treatments = this.props.location.data.information.treatments;
     // },[])
 
-    // const treatments = [
-    //     {
-    //         priceLow: "$199 ",
-    //         priceHigh: "$299",
-    //         name: "TREATMENT 1"
-    //     },
-    //     {
-    //         priceLow: "$205",
-    //         priceHigh: "$350",
-    //         name: "TREATMENT 2"
-    //     },
-    //     {
-    //         priceLow: "$399",
-    //         priceHigh: "$599",
-    //         name: "TREATMENT 3"
-    //     },
-    //     {
-    //         priceLow: "$299",
-    //         priceHigh: "$350",
-    //         name: "TREATMENT 4"
-    //     }
-    // ];
+    const treatments = [
+        {
+            priceLow: "$199 ",
+            priceHigh: "$299",
+            name: "TREATMENT 1"
+        },
+        {
+            priceLow: "$205",
+            priceHigh: "$350",
+            name: "TREATMENT 2"
+        },
+        {
+            priceLow: "$399",
+            priceHigh: "$599",
+            name: "TREATMENT 3"
+        },
+        {
+            priceLow: "$299",
+            priceHigh: "$350",
+            name: "TREATMENT 4"
+        }
+    ];
+    
     const useStyles = makeStyles(theme => ({
         root: {
             "& .MuiTextField-root": {
@@ -170,12 +172,15 @@ export default function ReservationUI(props) {
         console.log("selected hotels index is:" + hotelID);
     };
 
+
+    var name = props.name;
+    //var treatments = props.treatments;
     
 
     return (
         <div>
             <div className="col-12 bg-dark title pt-4 pb-4 pl-5">
-    <h4>Set up your reservation for {props.name}</h4>
+    <h4>Set up your reservation for {name}</h4>
             </div>
             <div className="container-fluid bg-white col-12 pt-4">
                 <div className="offset-1 col-10">
@@ -211,7 +216,7 @@ export default function ReservationUI(props) {
                                     }}
                                     variant="outlined"
                                 >
-                                    {props.treatments.map(option => (
+                                    {treatments.map(option => (
                                         <option
                                             key={option.name}
                                             value={option.priceLow}
