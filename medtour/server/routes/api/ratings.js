@@ -80,8 +80,73 @@ router.post('/:clinic_id', (req, res) =>{
 //==========================================================================================
 //======================    END OF Post CALLS   ============================================
 //==========================================================================================
+//======================    PUT CALLS  =================( Done all)=========================
+//==========================================================================================
+
+
+// @route   Get api/treatments/'whatToChange'/'newValue'/id
+// @desc    Change an attribute to the treatment with the given id
+// @access  Public
+
+router.put('/updateOneAttribute/:id', (req, res) =>{
+    
+    var id = req.params.id;
+    var whatToChange = req.body.whatToChange;
+    var newValue = req.body.newValue;
+
+    console.log("[" + whatToChange + "][" + newValue + "]");
+
+    var change = {};
+    change[whatToChange] = newValue
+
+    Treatment.updateOne(
+        {"_id" : id},
+        { $set: change
+                 
+        }
+    ).then( userUpdated =>{
+        res.status(200).json({user_Single_Information_Update: true});
+    });
+})
+
+
+
+// @route   POST api/treatments/updateInformation/id
+// @desc    Update the basic information for the treatment with matching id
+// @access  Private
+
+router.put('/updateInformation/:id' , (req, res)=> {
+    
+    var id = req.params.id;
+
+    var name = req.body.name;
+    var info = req.body.info;
+    var priceLow = req.body.priceLow;
+    var priceHigh = req.body.priceHigh;
+    var currency = req.body.currency;
+
+    Treatment.updateOne(
+        {"_id" : id},
+        { $set: { "name" : name,
+                 "info" : info,
+                 "priceLow" : priceLow,
+                 "priceHigh" : priceHigh,
+                 "currency" : currency
+                } 
+        }
+    ).then( treatmentUpdate =>{
+        res.status(200).json({treatment_Information_Update: true});
+    });
+})
+
+
+
+//==========================================================================================
+//======================    END OF PUT CALLS   ============================================
+//==========================================================================================
 //======================    DELTE CALLS  =========( Done all)===============================
 //==========================================================================================
+
 
 
 // @route   POST api/ratings/all/c_id
