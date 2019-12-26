@@ -4,6 +4,7 @@ import Agenda from './components/agenda'
 import ButtonAppBar from './components/dropdown.js'
 import VirtualizedList from './components/treatmentList.js'
 import Settings from '../ClinicSettings'
+import MessagesView from './components/messages.js'
 
 var c_id;
 
@@ -52,7 +53,7 @@ class ClinicProfileView extends Component {
           <div>
           <ButtonAppBar changeView = {this.changeView}></ButtonAppBar>
           </div>
-          hello
+         <MessagesView></MessagesView>
         </div>
   
       );

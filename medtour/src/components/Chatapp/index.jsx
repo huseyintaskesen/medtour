@@ -18,7 +18,6 @@ const chatkit = new Chatkit({
 var u_id = String(sessionStorage.getItem('userID'));
 var c_id = String(sessionStorage.getItem('clinicID'));
 
-
 var room_id = String(u_id + c_id)
 
 // setter
@@ -34,15 +33,15 @@ class Chat extends Component {
     constructor(props){
         super(props)
         this.state = {
-            currentUser: String(u_id),
+            currentUser: u_id,
             currentRoom: {users:[]},
             messages: [],
-            users: []
+            users: [],
+            clinicSide: 0,
         }
         // this.create_room = this.create_room.bind(this);
         this.createUniqueUser = this.createUniqueUser.bind(this);
         this.addMessage = this.addMessage.bind(this);
-
     }
 
 createUniqueUser(chatkit){
@@ -55,8 +54,26 @@ createUniqueUser(chatkit){
             console.log("User CREATED!!!")
         )
     // this.create_room();
+    this.setState({
+        currentUser : u_id,
+    },()=>{
+        
+        console.log("CURRENT USER" + this.state.currentUser)
+    })
 };
 
+createUniqueClinic(chatkit){
+    
+    c_id = String(c_id)
+       chatkit.createUser({
+            id: c_id,
+            name: c_id
+        }).then(
+            console.log("Clinic CREATED!!!")
+        )
+    // this.create_room();
+
+}
 // create_room()
 //     {
 //         this.state.currentUser.createRoom({
@@ -80,20 +97,33 @@ addMessage(text) {
     })
     .catch(error => console.error('error', error));
 }
-    
-componentDidMount(){
-  
+
+classInitialization()
+{
+    console.log("CURRENT USER2 ACTUAL" + this.state.currentUser)
     const chatManager = new ChatManager({
         instanceLocator: 'v1:us1:b0f369e5-f3fa-4e2f-ac37-538ce3bd5e62',
-        userId: u_id,
+        userId: this.state.currentUser,
         tokenProvider: new TokenProvider({
             url: 'https://us1.pusherplatform.io/services/chatkit_token_provider/v1/b0f369e5-f3fa-4e2f-ac37-538ce3bd5e62/token'
         })
         
 
     });
+    console.log("MY PROP:" + this.props.clinic)
+    
+ 
 
-    this.createUniqueUser(chatkit);
+    console.log("CLINICSTATE: " + this.state.clinicSide)
+    if(!this.props.clinic){
+        this.createUniqueUser(chatkit);
+    }
+    if(this.props.clinic){
+        this.createUniqueClinic(chatkit);
+    }
+
+
+
 
 
     chatManager.connect().then(currentUser=>{
@@ -101,7 +131,7 @@ componentDidMount(){
         currentUser.createRoom({
             id: room_id,
             name: 'Contact',
-            private: true,
+            private: false,
             // String(c_id)
             addUserIds: [],
             customData: { foo: 42 },
@@ -134,6 +164,31 @@ componentDidMount(){
             console.log(currentRoom.userIds)
         }).catch(error => console.log(error))
     )
+}
+    
+componentDidMount(){
+    if(this.props.clinic){
+        console.log("CURRENT USER1" + this.state.currentUser)
+        this.setState({
+            currentUser : c_id,
+        },()=>{
+            
+            console.log("CURRENT USER2" + this.state.currentUser)
+            this.classInitialization()
+        })
+    }
+    else{
+            console.log("CURRENT USER1" + this.state.currentUser)
+            this.setState({
+                currentUser : u_id,
+            },()=>{
+                
+                console.log("CURRENT USER2" + this.state.currentUser)
+                this.classInitialization()
+            })
+    }
+
+   
 
 }
 

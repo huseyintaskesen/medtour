@@ -4,6 +4,19 @@ import { Link } from "react-router-dom";
 import "./landing-nav.css";
 
 class LandingNav extends Component {
+
+
+    constructor(props) {
+        super(props);
+        this.changeView = this.changeView.bind(this);
+    }
+
+    changeView(view){
+        this.setState({
+          currentView: view
+        })
+    }
+    
     render() {
         return (
             <div className="navs border-bottom border-primary">
