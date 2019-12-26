@@ -6,18 +6,26 @@ import React, { Component } from "react";
 // import Chatapp from "./ChatApp"
 import { ChatManager, TokenProvider } from '@pusher/chatkit-client';
 import {default as Chatkit} from '@pusher/chatkit-server'; 
-// import MessageList from './MessageList';
-// import Input from './Input';
+import MessageList from './MessageList';
+import Input from './Input';
+import './index.css'
 
 const chatkit = new Chatkit({
     instanceLocator: 'v1:us1:b0f369e5-f3fa-4e2f-ac37-538ce3bd5e62',
     key: 'c11a04fd-67ae-4836-886c-3a5bd3c4f806:AXcqLAAtjuqwoVPnK9OmC1RD4oLbclRdgkokeTDIo1w='
 })
 
-var u_id = sessionStorage.getItem('userID');
-var c_id = sessionStorage.getItem('clinicID');
+var u_id = String(sessionStorage.getItem('userID'));
+var c_id = String(sessionStorage.getItem('clinicID'));
+
 
 var room_id = String(u_id + c_id)
+
+// setter
+localStorage.setItem('chatID', room_id);
+
+
+
 
 console.log("Room id is:"+room_id)
 
@@ -77,7 +85,7 @@ componentDidMount(){
   
     const chatManager = new ChatManager({
         instanceLocator: 'v1:us1:b0f369e5-f3fa-4e2f-ac37-538ce3bd5e62',
-        userId: sessionStorage.getItem('userID'),
+        userId: u_id,
         tokenProvider: new TokenProvider({
             url: 'https://us1.pusherplatform.io/services/chatkit_token_provider/v1/b0f369e5-f3fa-4e2f-ac37-538ce3bd5e62/token'
         })
@@ -90,49 +98,54 @@ componentDidMount(){
 
     chatManager.connect().then(currentUser=>{
         this.setState({currentUser: currentUser})
-        return currentUser.createRoom({
+        currentUser.createRoom({
             id: room_id,
             name: 'Contact',
             private: true,
             // String(c_id)
-            addUserIds: [String(u_id)],
+            addUserIds: [],
             customData: { foo: 42 },
-            hooks: {
-                onMessage: message => {
-                    this.setState({
-                        messages: [...this.state.messages, message],
-                    })
-                },
-            }
-          }).then(room => {
-            console.log(`Created room called ${room.name}`)
-            console.log('MESSAGES STATE:'+this.state.messages)
-            this.setState({
-                currentRoom: room,
-                users: room.userIds
-            })
-
-            console.log('CURRENT ROOM:'+ this.state.currentRoom.name)
-            console.log('users:'+ this.state.users)
-            
-          })
-          .catch(err => {
-            console.log(`Error creating room ${err}`)
-          })
+          }).then(console.log(`Created room:  ${room_id}`)
+          
+          ).catch(err => {console.log(`Error creating room ${err}`)})
 
           
 
-    })
+    }).then(
+        chatManager.connect().then(currentUser => {
+            this.setState({ currentUser: currentUser })
+            console.log(`Created room:  ${room_id}`)
+            return currentUser.subscribeToRoom({
+                roomId: room_id,
+                messageLimit: 100,
+                hooks: {
+                    onMessage: message => {
+                        this.setState({
+                            messages: [...this.state.messages, message],
+                        })
+                    },
+                }
+            })
+        }).then(currentRoom => {
+            this.setState({
+                currentRoom,
+                users: currentRoom.userIds
+            })
+            console.log(currentRoom.userIds)
+        }).catch(error => console.log(error))
+    )
 
 }
 
 
     render() {
         return (
-            <div>
-                Hello
-                {/* <Chatapp></Chatapp> */}
-            </div>
+           
+                <div >
+                    <h2 className="header">Live Support</h2>
+                    <MessageList messages={this.state.messages} />
+                    <Input className="input-field" onSubmit={this.addMessage} />
+                </div>
         );
     }
 }
