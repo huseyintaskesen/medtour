@@ -6,6 +6,7 @@ import img1 from "../hotel_assets/images/room-1.jpeg";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import React, { useState, useEffect, Component } from "react";
+import { Link } from "react-router-dom";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -26,50 +27,43 @@ import "react-datepicker/dist/react-datepicker.css";
 import Box from "@material-ui/core/Box";
 import flightData from "./flights.json";
 import hotelData from "./hotels.json";
-import moment from 'moment';
+import moment from "moment";
 import "./reservation.css";
 
 // var treatments = [];
 
-
-    
-
-function filerWithNewDate(hotels, date, type, checkIn, checkOut){
-
-
-    if( date == null){
+function filerWithNewDate(hotels, date, type, checkIn, checkOut) {
+    if (date == null) {
         return hotels;
-    }
-    else{
-
-        var filteredHotels = hotels.filter(function (hotel) {
-
+    } else {
+        var filteredHotels = hotels.filter(function(hotel) {
             var earliestDate = new Date(hotel.availableFrom);
             var latestDate = new Date(hotel.availableTo);
 
-            if( checkIn != undefined && checkOut == undefined){
-                 
-                return ( earliestDate  <= checkIn.getTime() && latestDate.getTime() >= checkIn.getTime());
-            }
-            else if( checkIn == undefined && checkOut != undefined){
-                 
-                return ( latestDate.getTime() >= checkOut.getTime() && earliestDate.getTime() <= checkOut.getTime());
-            }
-            else if( checkIn != undefined && checkOut != undefined ){
-
-                return ( latestDate.getTime() >= checkOut.getTime() && earliestDate.getTime() <= checkIn.getTime() );
+            if (checkIn != undefined && checkOut == undefined) {
+                return (
+                    earliestDate <= checkIn.getTime() &&
+                    latestDate.getTime() >= checkIn.getTime()
+                );
+            } else if (checkIn == undefined && checkOut != undefined) {
+                return (
+                    latestDate.getTime() >= checkOut.getTime() &&
+                    earliestDate.getTime() <= checkOut.getTime()
+                );
+            } else if (checkIn != undefined && checkOut != undefined) {
+                return (
+                    latestDate.getTime() >= checkOut.getTime() &&
+                    earliestDate.getTime() <= checkIn.getTime()
+                );
             }
         });
 
         return filteredHotels;
-            
-       
     }
 }
 
 export default function ReservationUI(props) {
-
-    console.log( new Date() );
+    console.log(new Date());
 
     const [treatment, setTreatmentValue] = React.useState("");
     const [expanded, setExpanded] = React.useState(false);
@@ -77,7 +71,9 @@ export default function ReservationUI(props) {
     const [startCheckInDate, setStartCheckInDate] = useState();
     const [starCheckOutDate, setStartCheckOutDate] = useState();
     const [hotelID, setHotelID] = useState(0);
-    const [hotels, filterHotels] = useState( filerWithNewDate( hotelData, null, null) );
+    const [hotels, filterHotels] = useState(
+        filerWithNewDate(hotelData, null, null)
+    );
 
     // console.log("props:" + props)
 
@@ -108,7 +104,6 @@ export default function ReservationUI(props) {
     //     }
     // ];
 
-    
     const useStyles = makeStyles(theme => ({
         root: {
             "& .MuiTextField-root": {
@@ -144,7 +139,6 @@ export default function ReservationUI(props) {
     const classes = useStyles();
     const classes2 = useStyles2();
 
-
     const handleChange = event => {
         setTreatmentValue(event.target.value);
     };
@@ -156,19 +150,17 @@ export default function ReservationUI(props) {
         console.log("selected hotels index is:" + hotelID);
     };
 
-
     var name = props.name;
     var treatments = props.treatments;
 
-    treatments = treatments.filter( treats => {
+    treatments = treatments.filter(treats => {
         return treats.name == "TREATMENT 1";
-    })
-    
+    });
 
     return (
         <div>
             <div className="col-12 bg-dark title pt-4 pb-4 pl-5">
-    <h4>Set up your reservation for {name}</h4>
+                <h4>Set up your reservation for {name}</h4>
             </div>
             <div className="container-fluid bg-white col-12 pt-4">
                 <div className="offset-1 col-10">
@@ -234,7 +226,18 @@ export default function ReservationUI(props) {
                                     <DatePicker
                                         selected={startCheckInDate}
                                         dateFormat="dd/MM/yyy"
-                                        onChange={date => {  setStartCheckInDate(date); filterHotels ( filerWithNewDate( hotelData, date, "check-in", date, starCheckOutDate  ) );  } }
+                                        onChange={date => {
+                                            setStartCheckInDate(date);
+                                            filterHotels(
+                                                filerWithNewDate(
+                                                    hotelData,
+                                                    date,
+                                                    "check-in",
+                                                    date,
+                                                    starCheckOutDate
+                                                )
+                                            );
+                                        }}
                                     />
                                 </Box>
                             </div>
@@ -248,7 +251,18 @@ export default function ReservationUI(props) {
                                     <DatePicker
                                         selected={starCheckOutDate}
                                         dateFormat="dd/MM/yyyy"
-                                        onChange={date => {  setStartCheckOutDate(date); filterHotels ( filerWithNewDate( hotelData, date, "check-out" , startCheckInDate, date ) );  }}
+                                        onChange={date => {
+                                            setStartCheckOutDate(date);
+                                            filterHotels(
+                                                filerWithNewDate(
+                                                    hotelData,
+                                                    date,
+                                                    "check-out",
+                                                    startCheckInDate,
+                                                    date
+                                                )
+                                            );
+                                        }}
                                     />
                                 </Box>
                             </div>
@@ -259,13 +273,21 @@ export default function ReservationUI(props) {
                     </div>
                     <div className="row pl-4 pt-4 pb-2">
                         {hotels.map(hotel => {
-
                             var fromDate = new Date(hotel.availableFrom);
-                            var from = fromDate.getDate() + "/" + (fromDate.getUTCMonth() + 1) + "/" + fromDate.getFullYear();
+                            var from =
+                                fromDate.getDate() +
+                                "/" +
+                                (fromDate.getUTCMonth() + 1) +
+                                "/" +
+                                fromDate.getFullYear();
 
                             var toDate = new Date(hotel.availableTo);
-                            var to = toDate.getDate() + "/" + (toDate.getUTCMonth()+1 ) + "/" + toDate.getFullYear();
-
+                            var to =
+                                toDate.getDate() +
+                                "/" +
+                                (toDate.getUTCMonth() + 1) +
+                                "/" +
+                                toDate.getFullYear();
 
                             return (
                                 <div key={hotel.id}>
@@ -407,9 +429,11 @@ export default function ReservationUI(props) {
                                 })}
                             </div>
                             <div className="row mt-4 pb-5">
-                                <a style={{ fontWeight: "bold" }} href="#">
-                                    Proceed to payment page
-                                </a>
+                                <Link to="/payment">
+                                    <a style={{ fontWeight: "bold" }} href="#">
+                                        Proceed to payment page
+                                    </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
