@@ -58,6 +58,7 @@ export default function SimpleTabs(props) {
     var treatments = props.information.treatments;
     var reviews = props.information.reviews;
     var ratingAverage = props.information.ratingAverage;
+    var bio = props.bio;
 
     const treatment_details = treatments.map(treatment => {
         return (
@@ -157,7 +158,9 @@ export default function SimpleTabs(props) {
                             <div class="col-8">
                                 <div class="row">
                                     <h3>About Us:</h3>
-                                    <div class="col-12 pl-3">{props.bio}</div>
+                                    <div class="col-12 pl-3">
+                                        {bio}
+                                    </div>
                                 </div>
                                 <br></br>
                                 <div class="row">

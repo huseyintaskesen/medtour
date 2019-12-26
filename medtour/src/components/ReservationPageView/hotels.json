@@ -1,52 +1,50 @@
-{
-    "hotels": [
-        {
-            "id": "1",
-            "name": "Kaya Hotel",
-            "availableFrom": "2019-01-12",
-            "availableTo": "2019-02-12",
-            "room": "5",
-            "price": "200$"
-        },
-        {
-            "id": "2",
-            "name": "Marmara Hotel",
-            "availableFrom": "2019-03-12",
-            "availableTo": "2019-04-12",
-            "room": "1",
-            "price": "100$"
-        },
-        {
-            "id": "3",
-            "name": "Bilkent Hotel",
-            "availableFrom": "2019-05-12",
-            "availableTo": "2019-06-12",
-            "room": "12",
-            "price": "350$"
-        },
-        {
-            "id": "4",
-            "name": "Asaf Hotel",
-            "availableFrom": "2019-07-12",
-            "availableTo": "2019-08-12",
-            "room": "20",
-            "price": "400$"
-        },
-        {
-            "id": "5",
-            "name": "Skerd Hotel",
-            "availableFrom": "2019-09-12",
-            "availableTo": "2019-10-12",
-            "room": "4",
-            "price": "160$"
-        },
-        {
-            "id": "6",
-            "name": "Hüseyin Hotel",
-            "availableFrom": "2019-11-12",
-            "availableTo": "2019-12-12",
-            "room": "8",
-            "price": "220$"
-        }
-    ]
-}
+[
+    {
+        "id": "1",
+        "name": "Kaya Hotel",
+        "availableFrom": "Tue Dec 24 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "availableTo": "Sat Dec 28 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "room": "5",
+        "price": "200$"
+    },
+    {
+        "id": "2",
+        "name": "Marmara Hotel",
+        "availableFrom": "Wed Jan 01 2020 00:00:00 GMT+0300 (GMT+03:00)",
+        "availableTo": "Tue Jan 14 2020 00:00:00 GMT+0300 (GMT+03:00)",
+        "room": "1",
+        "price": "100$"
+    },
+    {
+        "id": "3",
+        "name": "Bilkent Hotel",
+        "availableFrom": "Wed Dec 25 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "availableTo": "Fri Dec 27 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "room": "12",
+        "price": "350$"
+    },
+    {
+        "id": "4",
+        "name": "Asaf Hotel",
+        "availableFrom": "Mon Dec 09 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "availableTo": "Fri Dec 13 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "room": "20",
+        "price": "400$"
+    },
+    {
+        "id": "5",
+        "name": "Skerd Hotel",
+        "availableFrom": "Sun Dec 01 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "availableTo": "Sat Dec 28 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "room": "4",
+        "price": "160$"
+    },
+    {
+        "id": "6",
+        "name": "Hüseyin Hotel",
+        "availableFrom": "Thu Dec 26 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "availableTo": "Thu Dec 26 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "room": "8",
+        "price": "220$"
+    }
+]

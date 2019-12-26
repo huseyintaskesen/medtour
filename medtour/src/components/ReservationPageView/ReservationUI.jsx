@@ -26,15 +26,58 @@ import "react-datepicker/dist/react-datepicker.css";
 import Box from "@material-ui/core/Box";
 import flightData from "./flights.json";
 import hotelData from "./hotels.json";
+import moment from 'moment';
 import "./reservation.css";
 
 // var treatments = [];
 
+
+    
+
+function filerWithNewDate(hotels, date, type, checkIn, checkOut){
+
+
+    if( date == null){
+        return hotels;
+    }
+    else{
+
+        var filteredHotels = hotels.filter(function (hotel) {
+
+            var earliestDate = new Date(hotel.availableFrom);
+            var latestDate = new Date(hotel.availableTo);
+
+            if( checkIn != undefined && checkOut == undefined){
+                 
+                return ( earliestDate  <= checkIn.getTime() && latestDate.getTime() >= checkIn.getTime());
+            }
+            else if( checkIn == undefined && checkOut != undefined){
+                 
+                return ( latestDate.getTime() >= checkOut.getTime() && earliestDate.getTime() <= checkOut.getTime());
+            }
+            else if( checkIn != undefined && checkOut != undefined ){
+
+                return ( latestDate.getTime() >= checkOut.getTime() && earliestDate.getTime() <= checkIn.getTime() );
+            }
+        });
+
+        return filteredHotels;
+            
+       
+    }
+}
+
 export default function ReservationUI(props) {
+
+    console.log( new Date() );
+
     const [treatment, setTreatmentValue] = React.useState("");
     const [expanded, setExpanded] = React.useState(false);
-    const [startDate, setStartDate] = useState(new Date());
+    const [startTreatmentDate, setStartTreatmentDate] = useState(Date.now);
+    const [startCheckInDate, setStartCheckInDate] = useState();
+    const [starCheckOutDate, setStartCheckOutDate] = useState();
     const [hotelID, setHotelID] = useState(0);
+    const [hotels, filterHotels] = useState( filerWithNewDate( hotelData, null, null) );
 
     // console.log("props:" + props)
 
@@ -42,7 +85,7 @@ export default function ReservationUI(props) {
     //      treatments = this.props.location.data.information.treatments;
     // },[])
 
-    // const treatments = [
+    // var treatments = [
     //     {
     //         priceLow: "$199 ",
     //         priceHigh: "$299",
@@ -64,6 +107,8 @@ export default function ReservationUI(props) {
     //         name: "TREATMENT 4"
     //     }
     // ];
+
+    
     const useStyles = makeStyles(theme => ({
         root: {
             "& .MuiTextField-root": {
@@ -99,6 +144,7 @@ export default function ReservationUI(props) {
     const classes = useStyles();
     const classes2 = useStyles2();
 
+
     const handleChange = event => {
         setTreatmentValue(event.target.value);
     };
@@ -110,10 +156,19 @@ export default function ReservationUI(props) {
         console.log("selected hotels index is:" + hotelID);
     };
 
+
+    var name = props.name;
+    var treatments = props.treatments;
+
+    treatments = treatments.filter( treats => {
+        return treats.name == "TREATMENT 1";
+    })
+    
+
     return (
         <div>
             <div className="col-12 bg-dark title pt-4 pb-4 pl-5">
-                <h4>Set up your reservation for {props.name}</h4>
+    <h4>Set up your reservation for {name}</h4>
             </div>
             <div className="container-fluid bg-white col-12 pt-4">
                 <div className="offset-1 col-10">
@@ -123,8 +178,8 @@ export default function ReservationUI(props) {
                     <div className="row pt-2 pb-2">
                         <Box component="span" m={1}>
                             <DatePicker
-                                selected={startDate}
-                                onChange={date => setStartDate(date)}
+                                selected={startTreatmentDate}
+                                onChange={date => setStartTreatmentDate(date)}
                             />
                         </Box>
                     </div>
@@ -149,7 +204,7 @@ export default function ReservationUI(props) {
                                     }}
                                     variant="outlined"
                                 >
-                                    {props.treatments.map(option => (
+                                    {treatments.map(option => (
                                         <option
                                             key={option.name}
                                             value={option.priceLow}
@@ -177,8 +232,9 @@ export default function ReservationUI(props) {
                             <div className="row pt-2 pb-2">
                                 <Box component="span" m={1}>
                                     <DatePicker
-                                        selected={startDate}
-                                        onChange={date => setStartDate(date)}
+                                        selected={startCheckInDate}
+                                        dateFormat="dd/MM/yyy"
+                                        onChange={date => {  setStartCheckInDate(date); filterHotels ( filerWithNewDate( hotelData, date, "check-in", date, starCheckOutDate  ) );  } }
                                     />
                                 </Box>
                             </div>
@@ -190,8 +246,9 @@ export default function ReservationUI(props) {
                             <div className="row pt-2 pb-2">
                                 <Box component="span" m={1}>
                                     <DatePicker
-                                        selected={startDate}
-                                        onChange={date => setStartDate(date)}
+                                        selected={starCheckOutDate}
+                                        dateFormat="dd/MM/yyyy"
+                                        onChange={date => {  setStartCheckOutDate(date); filterHotels ( filerWithNewDate( hotelData, date, "check-out" , startCheckInDate, date ) );  }}
                                     />
                                 </Box>
                             </div>
@@ -201,7 +258,15 @@ export default function ReservationUI(props) {
                         <h3>Pick your hotel to stay during your trip:</h3>
                     </div>
                     <div className="row pl-4 pt-4 pb-2">
-                        {hotelData.hotels.map(hotel => {
+                        {hotels.map(hotel => {
+
+                            var fromDate = new Date(hotel.availableFrom);
+                            var from = fromDate.getDate() + "/" + (fromDate.getUTCMonth() + 1) + "/" + fromDate.getFullYear();
+
+                            var toDate = new Date(hotel.availableTo);
+                            var to = toDate.getDate() + "/" + (toDate.getUTCMonth()+1 ) + "/" + toDate.getFullYear();
+
+
                             return (
                                 <div key={hotel.id}>
                                     <div
@@ -220,10 +285,10 @@ export default function ReservationUI(props) {
                                             <li className="list-group-item">
                                                 <p>
                                                     {" Available From: "}
-                                                    {hotel.availableFrom}
+                                                    {from}
                                                     <br />
                                                     {" Until: "}
-                                                    {hotel.availableTo}
+                                                    {to}
                                                 </p>
                                             </li>
                                             <li className="list-group-item">
