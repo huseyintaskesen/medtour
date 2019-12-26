@@ -140,133 +140,133 @@ function goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReserv
 
 }
 
-function filerWithNewDate(hotels, date, type, checkIn, checkOut){
+// function filerWithNewDate(hotels, date, type, checkIn, checkOut){
 
-    var u_id = apiUserId;
-    var t_id = apiTreatmentId;
-    var c_id = apiClinicId;
+//     var u_id = apiUserId;
+//     var t_id = apiTreatmentId;
+//     var c_id = apiClinicId;
 
-    var td = new Date(treatmentReservedDate);
+//     var td = new Date(treatmentReservedDate);
 
-    var tYear = td.getFullYear();
-    var tMonth = td.getMonth();
-    if( tMonth < 10){
-        tMonth = "0" + (tMonth+1);
-    }
-    else{
-        tMonth = tMonth +1;
-    }
+//     var tYear = td.getFullYear();
+//     var tMonth = td.getMonth();
+//     if( tMonth < 10){
+//         tMonth = "0" + (tMonth+1);
+//     }
+//     else{
+//         tMonth = tMonth +1;
+//     }
 
-    var tDay = td.getDate();
-    if( tDay < 10){
-        tDay = "0" + (tDay);
-    }
+//     var tDay = td.getDate();
+//     if( tDay < 10){
+//         tDay = "0" + (tDay);
+//     }
 
-    var treatment_Date = tYear+ '-' + tMonth + '-' + tDay + "T00:00:00.000+00:00";
+//     var treatment_Date = tYear+ '-' + tMonth + '-' + tDay + "T00:00:00.000+00:00";
 
 
-    if( t_id != ""){
-        var departure_one = "";
-        var location_one = "";
-        var type_one = "";
-        var price_one = "";
-        var currency_one = "";
+//     if( t_id != ""){
+//         var departure_one = "";
+//         var location_one = "";
+//         var type_one = "";
+//         var price_one = "";
+//         var currency_one = "";
 
-        var departure_two = "";
-        var location_two = "";
-        var type_two = "";
-        var price_two = "";
-        var currency_two = "";
+//         var departure_two = "";
+//         var location_two = "";
+//         var type_two = "";
+//         var price_two = "";
+//         var currency_two = "";
 
-        var name = "";
-        var location = "";
-        var type = "";
-        var rating = "";
-        var price = "";
-        var currency = "";
-        var checkIn = "";
-        var checkOut = "";
+//         var name = "";
+//         var location = "";
+//         var type = "";
+//         var rating = "";
+//         var price = "";
+//         var currency = "";
+//         var checkIn = "";
+//         var checkOut = "";
 
-        if( selectedFlight.length == 0){
-            alert("emptyFlight");
-        }
-        else{
-            var i = 0;
-            departure_one = selectedFlight[i++];
-            location_one = selectedFlight[i++];
-            type_one = selectedFlight[i++];
-            price_one = selectedFlight[i++];
-            currency_one = selectedFlight[i++];
+//         if( selectedFlight.length == 0){
+//             alert("emptyFlight");
+//         }
+//         else{
+//             var i = 0;
+//             departure_one = selectedFlight[i++];
+//             location_one = selectedFlight[i++];
+//             type_one = selectedFlight[i++];
+//             price_one = selectedFlight[i++];
+//             currency_one = selectedFlight[i++];
 
-            departure_two = selectedFlight[i++];
-            location_two = selectedFlight[i++];
-            type_two = selectedFlight[i++];
-            price_two = selectedFlight[i++];
-            currency_two = selectedFlight[i++];
-        }
+//             departure_two = selectedFlight[i++];
+//             location_two = selectedFlight[i++];
+//             type_two = selectedFlight[i++];
+//             price_two = selectedFlight[i++];
+//             currency_two = selectedFlight[i++];
+//         }
 
-        if( selectedHotel.length == 0){
-            alert("empty hotel");
-        }
-        else{
-            var i = 0;
-            name = selectedHotel[i++];
-            location = selectedHotel[i++];
-            type = selectedHotel[i++];
-            rating = selectedHotel[i++];
-            price = selectedHotel[i++];
-            currency = selectedHotel[i++];
-            checkIn = selectedHotel[i++];
-            checkOut = selectedHotel[i++];
-        }
-    }
-    else{
-        alert("No treatment selected");
-    }
+//         if( selectedHotel.length == 0){
+//             alert("empty hotel");
+//         }
+//         else{
+//             var i = 0;
+//             name = selectedHotel[i++];
+//             location = selectedHotel[i++];
+//             type = selectedHotel[i++];
+//             rating = selectedHotel[i++];
+//             price = selectedHotel[i++];
+//             currency = selectedHotel[i++];
+//             checkIn = selectedHotel[i++];
+//             checkOut = selectedHotel[i++];
+//         }
+//     }
+//     else{
+//         alert("No treatment selected");
+//     }
 
-    //Headers
-    const config = {
-        headers:{
-            "Content-type":"application/json"
-        }
-    }
+//     //Headers
+//     const config = {
+//         headers:{
+//             "Content-type":"application/json"
+//         }
+//     }
 
-    //Request body
-    const body = JSON.stringify({
-        u_id,
-        t_id,
-        c_id,
+//     //Request body
+//     const body = JSON.stringify({
+//         u_id,
+//         t_id,
+//         c_id,
 
-        treatment_Date,
+//         treatment_Date,
         
-        departure_one,
-        location_one,
-        type_one,
-        price_one,
-        currency_one,
+//         departure_one,
+//         location_one,
+//         type_one,
+//         price_one,
+//         currency_one,
         
-        departure_two,
-        location_two,
-        type_two,
-        price_two,
-        currency_two,
+//         departure_two,
+//         location_two,
+//         type_two,
+//         price_two,
+//         currency_two,
         
-        name,
-        location,
-        type,
-        rating,
-        price,
-        currency,
-        checkIn,
-        checkOut
-    });
+//         name,
+//         location,
+//         type,
+//         rating,
+//         price,
+//         currency,
+//         checkIn,
+//         checkOut
+//     });
 
-    var infoPack =[ body, config ];
+//     var infoPack =[ body, config ];
 
-    console.log( JSON.stringify(infoPack)  );
-    return infoPack;
+//     console.log( JSON.stringify(infoPack)  );
+//     return infoPack;
 
-}
+// }
 
 function filerWithNewDate(hotels, date, type, checkIn, checkOut){
 
