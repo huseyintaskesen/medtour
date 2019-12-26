@@ -138,7 +138,25 @@ export default class PaymentForm extends React.Component {
                             className="row mt-4 pt-4 pb-5 mx-auto"
                             style={{ width: "100px" }}
                         >
-                            <button className="btn btn-primary" id="button-pay">
+                            <button
+                                className="btn btn-primary"
+                                id="button-pay"
+                                onClick={click => {
+                                    axios
+                                        .post(
+                                            "http://localhost:3001/api/tourData/newTour",
+                                            props.body,
+                                            props.config
+                                        )
+                                        .then(res => {
+                                            alert("SUCESS!!!");
+                                        })
+                                        .catch(err => {
+                                            alert("FAILL");
+                                            console.log(err);
+                                        });
+                                }}
+                            >
                                 Pay
                             </button>
                         </div>
