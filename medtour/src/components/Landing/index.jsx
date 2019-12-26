@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
 import Autosuggest from "react-autosuggest";
 import Footer from "../Footer";

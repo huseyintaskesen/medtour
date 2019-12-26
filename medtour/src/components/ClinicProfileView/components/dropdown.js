@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -28,56 +28,25 @@ export default function ButtonAppBar(props) {
   //For later use
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [clinic_name, setClinicName] = React.useState('')
   const open = Boolean(anchorEl);
 
   var clinic_id = sessionStorage.getItem('clinicID');
-  var clinic_name = ""
-  
-  var clinic = fetch("http://localhost:3001/api/clinics/"+clinic_id, {
+
+    useEffect(() =>{
+    fetch("http://localhost:3001/api/clinics/"+clinic_id, {
     method: "GET",
     headers: {
         "Content-Type": "application/json",
     },}).then(response =>{
       response.json().then(resp => {
-        clinic_name = resp.clinics.name;
-        console.log(clinic_name)
-        return resp.clinics
+       setClinicName(resp.clinics.name)
       }
-
       )
     })
 
-    
+    }, []);
 
-
-    
-    
-
-
-
-  // console.log("clinic name is:"+clinic_name)
-  // const options = {
-  //   headers: {'content-type': 'application/json'}
-  //   };
-  //   // search/"+treatment_type
-  //   fetch("http://localhost:3001/api/clinics", {
-  //   method: "GET",
-  //   headers: {
-  //       "Content-Type": "application/json",
-  //   },
-  //   }).then(response => {
-  //       return response.json();
-  //   }).then(muutuja => {
-  //       //let results_from_API = JSON.stringify(muutuja)
-  //       // this.setState({
-  //       //     clinics: results_from_API,
-  //       // });
-  //       console.log(muutuja[0])
-  //       this.setState({
-  //           clinics: muutuja
-  //       })
-        
-  //   });
 
   const handleChange = event => {
     setAuth(event.target.checked);
@@ -89,6 +58,9 @@ export default function ButtonAppBar(props) {
 
   const handleClose = () => {
     setAnchorEl(null);
+    console.log('handle close clicked')
+    window.open('http://localhost:3000/clinic-settings', "_self");
+
   };
 
   return (
@@ -128,7 +100,7 @@ export default function ButtonAppBar(props) {
               </Menu>
         </div>
           <Typography variant="h6" className={classes.title}>
-           Clinic id is: {clinic_id}
+           Clinic name is: {clinic_name}
           </Typography>
           <Button color="inherit">Logout</Button>
         </Toolbar>

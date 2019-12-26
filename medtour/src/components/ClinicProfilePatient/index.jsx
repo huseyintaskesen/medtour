@@ -5,22 +5,18 @@ import Tabs from "./tabs";
 import Footer from "../Footer";
 import "./clinic-profile-patient.css";
 
-
-
 class ClinicProfilePatient extends Component {
-
     constructor(props) {
         super(props);
-        console.log(this.props.location.data)
+        console.log(this.props.location.data);
         this.state = {
             clinic_id: 0,
-            clinic_name : "",
-            clinic_address : "",
-            treatments : [],
-        }
+            clinic_name: "",
+            clinic_address: "",
+            treatments: []
+        };
     }
 
-    
     render() {
         return (
             <div>
@@ -29,7 +25,6 @@ class ClinicProfilePatient extends Component {
                     <div className="row">
                         <div className="col-6">
                             <h4>{this.props.location.data.name}</h4>
-
                         </div>
                         <div className="col-6">
                             <h5>{this.props.location.data.location}</h5>
@@ -38,8 +33,10 @@ class ClinicProfilePatient extends Component {
                 </div>
                 <div className="container-fluid bg-white">
                     <div className="row">
-
-                        <Tabs information = {this.props.location.data}/>
+                        <Tabs
+                            information={this.props.location.data}
+                            bio={this.props.location.data.bio}
+                        />
                     </div>
                 </div>
                 <Footer />

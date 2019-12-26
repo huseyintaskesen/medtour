@@ -15,3 +15,7 @@
 .borderUp {
     border: 2px solid purple;
 }
+
+.spaceRight{
+    margin-right: 15px;
+}

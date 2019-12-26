@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import LandingNav from "../LandingNav";
 import "./signUp.css";
 import axios from "axios";
+import cogoToast from 'cogo-toast';
+
 
 var user = {};
 
@@ -20,7 +21,6 @@ class SignUp extends Component {
     }
 
     async handleSubmit(event) {
-        console.log("A name was submitted: " + this.name_input.current.value);
         event.preventDefault();
 
         var name = this.name_input.current.value;
@@ -30,9 +30,14 @@ class SignUp extends Component {
         var email = this.email_input.current.value;
 
         user = await this.registerUser(name, surname, password, userName, email);
-        console.log("User object:"+ user)
-        window.open('http://localhost:3000/landing', "_self")
-    }
+        if(user != undefined){
+            cogoToast.success("Your account has been created!");
+        }
+        
+        sessionStorage.setItem('userID', user.user.id);
+        const u_id = sessionStorage.getItem('userID');
+        console.log('USER ID FROM SESSION STORAGE:'+ u_id)
+        setTimeout(function(){  window.open('http://localhost:3000/landing', "_self")}, 1000);    }
 
     async registerUser(name, surname, password, userName, email) {
         const body = JSON.stringify({
@@ -42,7 +47,6 @@ class SignUp extends Component {
             password,
             email
         });
-        console.log(body);
         //Headers
         const config = {
             headers: {
@@ -51,12 +55,10 @@ class SignUp extends Component {
         };
         //Request body
        var resp = await axios.post("/api/users", body, config).then((res) => {
-            console.log("response:"+res.data)
-            console.log('user id:'+ res.data.user.id)
+            
             return res.data
         }).catch(err => {
-        
-        console.log('error returned:'+err)
+            cogoToast.error("Error occurred! Check your credentials!")
         })
         return resp
         

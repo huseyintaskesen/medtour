@@ -1,0 +1,74 @@
+[
+    {
+        "id": "1",
+        "name": "Kaya Hotel",
+        "availableFrom": "Tue Dec 24 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "availableTo": "Sat Dec 28 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "location" : "Somewhere",
+        "type": "Hotel",
+        "rating": "5.6",
+        "room": "5",
+        "price": "200",
+        "currency" : "USD"
+    },
+    {
+        "id": "2",
+        "name": "Marmara Hotel",
+        "availableFrom": "Wed Jan 01 2020 00:00:00 GMT+0300 (GMT+03:00)",
+        "availableTo": "Tue Jan 14 2020 00:00:00 GMT+0300 (GMT+03:00)",
+        "location" : "Somewhere",
+        "type": "Hotel",
+        "rating": "5.6",
+        "room": "1",
+        "price": "100",
+        "currency" : "USD"
+    },
+    {
+        "id": "3",
+        "name": "Bilkent Hotel",
+        "availableFrom": "Wed Dec 25 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "availableTo": "Fri Dec 27 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "location" : "Somewhere",
+        "type": "Hotel",
+        "rating": "5.6",
+        "room": "12",
+        "price": "350",
+        "currency" : "USD"
+    },
+    {
+        "id": "4",
+        "name": "Asaf Hotel",
+        "availableFrom": "Mon Dec 09 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "availableTo": "Fri Dec 13 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "location" : "Somewhere",
+        "type": "Hotel",
+        "rating": "5.6",
+        "room": "20",
+        "price": "400",
+        "currency" : "USD"
+    },
+    {
+        "id": "5",
+        "name": "Skerd Hotel",
+        "availableFrom": "Sun Dec 01 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "availableTo": "Sat Dec 28 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "location" : "Somewhere",
+        "type": "Hotel",
+        "rating": "5.6",
+        "room": "4",
+        "price": "160",
+        "currency" : "USD"
+    },
+    {
+        "id": "6",
+        "name": "Hüseyin Hotel",
+        "availableFrom": "Thu Dec 26 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "availableTo": "Thu Dec 26 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "location" : "Somewhere",
+        "type": "Hotel",
+        "rating": "5.6",
+        "room": "8",
+        "price": "220",
+        "currency" : "USD"
+    }
+]

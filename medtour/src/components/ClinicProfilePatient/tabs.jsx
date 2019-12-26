@@ -10,17 +10,9 @@ import Box from "@material-ui/core/Box";
 import { createMuiTheme } from "@material-ui/core/styles";
 import purple from "@material-ui/core/colors/purple";
 import "./tabs.css";
-import { useState, useEffect } from 'react';
-
-
-
-
-const theme = createMuiTheme({
-    palette: {
-        primary: purple
-    }
-});
-
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import StarRatings from "react-star-ratings";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -60,52 +52,75 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function SimpleTabs(props) {
-
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
 
-    const treatment_details_names = props.information.treatments.map(treatment => {
-        return (
-           
-            <div>
-                {/* {treatment["priceLow"]} - {treatment["priceHigh"]} {treatment["currency"]} */}
-                
-                <p>{treatment["name"]}:  </p>
-            
-            </div>
-        );
-    }); 
-    const treatment_details_price = props.information.treatments.map(treatment => {
-        return (
-           
-            <div>
-               <p>
-                {treatment["priceLow"]} - {treatment["priceHigh"]} {treatment["currency"]}
-                </p> 
-            </div>
-        );
-    }); 
+    var treatments = props.information.treatments;
+    var reviews = props.information.reviews;
+    var ratingAverage = props.information.ratingAverage;
+    var bio = props.bio;
 
-    const review_details = props.information.reviews.map(review => {
+    const treatment_details = treatments.map(treatment => {
         return (
-           
-            <div>
-               <div className="row pl-2 pt-4 pb-3">
-                        <div className="row">
-                        <h5>{review.name}</h5> <p style={{marginLeft: '300px'}}>Rating given for the clinic: {review.rating}</p>
-                        </div>
-                    </div>
-                    <div className="row pl-4">
-                        <p>{review.comment}</p> 
-                    </div>
-
-                
-                
-            
+            <div class="col-12">
+                <tr class="row text-left">
+                        <td class="col-md-6 col-sm-12"> {treatment["name"]} </td>
+                        <td class="col-md-4 col-sm-8"> {treatment["priceLow"]} - {treatment["priceHigh"]} {treatment["currency"]}</td>
+                        <td class="col-md-2 col-sm-3">
+                            <button class="btn btn-success mb-1"> Contact</button>    
+                        </td>
+                </tr >
             </div>
         );
     });
 
+    const review_details = reviews.map(review => {
+        var date = ((review.date) + "" ).substr( 0, ((review.date) + "" ).indexOf("T")  );
+
+        return (
+            <div class="card w-100  mx-0 my-2 ">
+                <div class="">
+                    <div class="col-12">
+                        <div class=" card-header row  text-left text-weight-bold">
+                            <div class="col-6 mx-0 px-0">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="spaceRight">
+                                            <h3> {review.name} </h3>
+                                        </div>
+                                        <div class="mx-0 my-0">
+                                            <StarRatings
+                                              
+                                                rating={ review.rating }
+
+                                                starRatedColor="red"
+                                                numberOfStars={5}
+                                                starDimension="20px"
+                                                starSpacing="2px"
+                                                name="rating"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-6 text-right"> Date: {date} </div>
+                        </div>
+                        <div class="col-12 mx-0 px-0">Review: </div>
+                    </div>
+
+                    <div class="col-12 text-left ">
+                        {review.comment}
+                        {/* <div class="underlineIt text-muted">
+                            Read Mode
+                        </div> */}
+                    </div>
+                </div>
+
+                <br></br>
+            </div>
+        );
+    });
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -113,16 +128,14 @@ export default function SimpleTabs(props) {
 
     return (
         <div className={classes.root}>
-                <div className="container-fluid name bg-dark">
-                    <div className="row">
-                        <div className="col-6">
-                            
-                        </div>
-                        <div className="col-6">
-                            {/* <h5>{clinic_address}</h5> */}
-                        </div>
+            <div className="container-fluid name bg-dark">
+                <div className="row">
+                    <div className="col-6"></div>
+                    <div className="col-6">
+                        {/* <h5>{clinic_address}</h5> */}
                     </div>
                 </div>
+            </div>
             <AppBar position="static" style={{ background: "darkred" }}>
                 <Tabs
                     value={value}
@@ -132,43 +145,75 @@ export default function SimpleTabs(props) {
                         margin: "0 0 0 10%",
                         color: "white"
                     }}
-                    
                 >
                     <Tab label="Profile" {...a11yProps(0)} />
                     <Tab label="Review" {...a11yProps(1)} />
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
-                <div className="col-8 offset-2 treatments">
-                    <div className="row pb-3 pt-3">
-                        <h3>Treatments</h3>    
-                                  
-                    </div>
-                    <div className="row">
-                        <div className="col-3 pt-4">
+                <div class="container-fluid">
+                    <br></br>
+                    <div class="col-md-8 col-sm-12 offset-0 offset-md-2 p-0">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="row">
+                                    <h3>About Us:</h3>
+                                    <div class="col-12 pl-3">
+                                        {bio}
+                                    </div>
+                                </div>
+                                <br></br>
+                                <div class="row">
+                                    <h3>Treatments</h3>
+                                    {treatment_details}
+                                </div>
+                            </div>
 
-                            {treatment_details_names}
-                        </div>
-                        <br></br>
-                        <div className="col-3 pt-4">
-                            <br></br>
-                            {treatment_details_price}
-                        </div>
-                        
-                        <div className="col-6 clinic-image">
-                            <div className="col-12">
-                                <img
-                                    id="clinic-wide"
-                                    src={require("../../images/clinic-wide.jpg")}
-                                    alt="clinic"
-                                ></img>
+                            <div class="col-4">
+                                <div class="col-12 mb-3">
+                                    <StarRatings
+                                        rating={ ratingAverage}
+                                        starRatedColor="red"
+                                        numberOfStars={5}
+                                        starDimension="20px"
+                                        starSpacing="2px"
+                                        name='rating'
+                                    />
+                                </div>
+                                <div class="col-12">
+                                    <img
+                                        class="mw-100"
+                                        id="clinic-wide"
+                                        src={require("../../images/clinic-wide.jpg")}
+                                        alt="clinic"
+                                    ></img>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="row pt-4 pl-2">
-                        <button className="btn btn-success">
-                            Make a Reservation
-                        </button>
+
+                        <br></br>
+
+                        <div class="row">
+                            <div class="col-2 offset-2">
+                                
+                                <Link className="btn btn-warning" to={{
+                                    pathname:'/chat'
+                                }}
+                                >Enquire
+                                </Link>
+                            </div>
+                            <div class="col-4">
+                                <Link
+                                    className="btn btn-success"
+                                    to={{
+                                        pathname: "/reservation",
+                                        data: props
+                                    }}
+                                >
+                                    Make a Reservation
+                                </Link>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </TabPanel>

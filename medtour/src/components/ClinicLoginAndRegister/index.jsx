@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 
 
 var clinic = {}
+var clinic_after_register = {}
 
 class ClinicLoginAndRegister extends Component {
     constructor() {
@@ -35,11 +36,23 @@ class ClinicLoginAndRegister extends Component {
         console.log("Clinic object:"+ clinic)
         console.log("Clinic name:"+ clinic.clinic.name)
         console.log("Clinic email:"+ clinic.clinic.email)
-        cogoToast.success("Success!");
-        let history = useHistory();
-        history.push('/landing') 
+        if(clinic != undefined){
+            cogoToast.success("Successfully registered!");
+        }
+        clinic_after_register = await this.loginClinic(email, password)
+        if(clinic_after_register != undefined){
+            if(clinic_after_register.isLoginSuccessful ){
+                var clinic_id = clinic_after_register.clinic.id
+                sessionStorage.setItem('clinicID', clinic_id);
+                const c_id = sessionStorage.getItem('clinicID');
+                console.log('user id from session storage:'+ c_id)
+                cogoToast.success("Now you are being redirect to control page!");
+                
+                setTimeout(function(){  window.open('http://localhost:3000/clinic-profile-page', "_self")}, 1000);
+               
+             }
+         }
         
-        // setTimeout(function(){  window.open('http://localhost:3000/landing', "_self")}, 1000);
 
     }
     async handleLogin(event) {

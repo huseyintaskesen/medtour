@@ -4,6 +4,8 @@
 // 	"u_id": "5dee9f7b53e5670d6075500d",
 // 	"t_id": "5e001e73d4a6f30138ffe5ab",
 // 	"c_id": "5dfe3f6e79469144a4653524",
+
+//  "treatment_Date" : "2019-12-23T00:21:39.033+00:00",
 	
 // 	"departure_one":"2019-12-23T00:21:39.033+00:00",
 // 	"location_one":"Ankara, Otogar",
@@ -25,7 +27,6 @@
 // 	"currency":"Euro",
 // 	"checkIn":"2019-12-23T00:21:39.033+00:00",
 // 	"checkOut":"2019-12-23T00:21:39.033+00:00"
-	
 // }
 
 const express = require('express');
@@ -133,6 +134,7 @@ router.post('/newTour', (req, res) =>{
                     u_id: req.body.u_id,
                     t_id: req.body.t_id,
                     c_id: req.body.c_id,
+                    treatment_Date: req.body.treatment_Date,
                     transportation_Departure_id: transportation_one_id,
                     transportation_Return_id: transportation_two_id,
                     accomodation_id: acc._id
@@ -295,6 +297,7 @@ router.post('/newTour', (req, res) =>{
     .catch( err =>{ 
         res.status(400)
         .json({ 
+            error: err,
             transportation_One_Insertion: false 
         })
     })
