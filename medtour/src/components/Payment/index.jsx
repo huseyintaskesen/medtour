@@ -5,11 +5,16 @@ import Card from "./card.jsx";
 import Footer from "../Footer";
 
 class Payment extends Component {
+    constructor(props) {
+        super(props);
+        console.log(this.props.location.data);
+    }
+
     render() {
         return (
             <div>
                 <LandingNav />
-                <Card />
+                <Card informationToPass={this.props.location.data} />
                 <Footer />
             </div>
         );

@@ -11,7 +11,6 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import "./reservation.css";
 
-
 function goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReservedDate, selectedHotel, selectedFlight){
 
     var u_id = apiUserId;
@@ -36,7 +35,6 @@ function goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReserv
 
     var treatment_Date = tYear+ '-' + tMonth + '-' + tDay + "T00:00:00.000+00:00";
 
-
     if( t_id != ""){
         var departure_one = "";
         var location_one = "";
@@ -60,7 +58,7 @@ function goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReserv
         var checkOut = "";
 
         if( selectedFlight.length == 0){
-            alert("emptyFlight");
+            // alert("emptyFlight");
         }
         else{
             var i = 0;
@@ -78,7 +76,7 @@ function goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReserv
         }
 
         if( selectedHotel.length == 0){
-            alert("empty hotel");
+            // alert("empty hotel");
         }
         else{
             var i = 0;
@@ -93,7 +91,7 @@ function goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReserv
         }
     }
     else{
-        alert("No treatment selected");
+        // alert("No treatment selected");
     }
 
     //Headers
@@ -135,138 +133,12 @@ function goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReserv
 
     var infoPack =[ body, config ];
 
-    console.log( JSON.stringify(infoPack)  );
+    console.log( JSON.stringify(infoPack[0])  );
+    console.log(infoPack[0]);
+
+
     return infoPack;
-
 }
-
-// function filerWithNewDate(hotels, date, type, checkIn, checkOut){
-
-//     var u_id = apiUserId;
-//     var t_id = apiTreatmentId;
-//     var c_id = apiClinicId;
-
-//     var td = new Date(treatmentReservedDate);
-
-//     var tYear = td.getFullYear();
-//     var tMonth = td.getMonth();
-//     if( tMonth < 10){
-//         tMonth = "0" + (tMonth+1);
-//     }
-//     else{
-//         tMonth = tMonth +1;
-//     }
-
-//     var tDay = td.getDate();
-//     if( tDay < 10){
-//         tDay = "0" + (tDay);
-//     }
-
-//     var treatment_Date = tYear+ '-' + tMonth + '-' + tDay + "T00:00:00.000+00:00";
-
-
-//     if( t_id != ""){
-//         var departure_one = "";
-//         var location_one = "";
-//         var type_one = "";
-//         var price_one = "";
-//         var currency_one = "";
-
-//         var departure_two = "";
-//         var location_two = "";
-//         var type_two = "";
-//         var price_two = "";
-//         var currency_two = "";
-
-//         var name = "";
-//         var location = "";
-//         var type = "";
-//         var rating = "";
-//         var price = "";
-//         var currency = "";
-//         var checkIn = "";
-//         var checkOut = "";
-
-//         if( selectedFlight.length == 0){
-//             alert("emptyFlight");
-//         }
-//         else{
-//             var i = 0;
-//             departure_one = selectedFlight[i++];
-//             location_one = selectedFlight[i++];
-//             type_one = selectedFlight[i++];
-//             price_one = selectedFlight[i++];
-//             currency_one = selectedFlight[i++];
-
-//             departure_two = selectedFlight[i++];
-//             location_two = selectedFlight[i++];
-//             type_two = selectedFlight[i++];
-//             price_two = selectedFlight[i++];
-//             currency_two = selectedFlight[i++];
-//         }
-
-//         if( selectedHotel.length == 0){
-//             alert("empty hotel");
-//         }
-//         else{
-//             var i = 0;
-//             name = selectedHotel[i++];
-//             location = selectedHotel[i++];
-//             type = selectedHotel[i++];
-//             rating = selectedHotel[i++];
-//             price = selectedHotel[i++];
-//             currency = selectedHotel[i++];
-//             checkIn = selectedHotel[i++];
-//             checkOut = selectedHotel[i++];
-//         }
-//     }
-//     else{
-//         alert("No treatment selected");
-//     }
-
-//     //Headers
-//     const config = {
-//         headers:{
-//             "Content-type":"application/json"
-//         }
-//     }
-
-//     //Request body
-//     const body = JSON.stringify({
-//         u_id,
-//         t_id,
-//         c_id,
-
-//         treatment_Date,
-        
-//         departure_one,
-//         location_one,
-//         type_one,
-//         price_one,
-//         currency_one,
-        
-//         departure_two,
-//         location_two,
-//         type_two,
-//         price_two,
-//         currency_two,
-        
-//         name,
-//         location,
-//         type,
-//         rating,
-//         price,
-//         currency,
-//         checkIn,
-//         checkOut
-//     });
-
-//     var infoPack =[ body, config ];
-
-//     console.log( JSON.stringify(infoPack)  );
-//     return infoPack;
-
-// }
 
 function filerWithNewDate(hotels, date, type, checkIn, checkOut){
 
@@ -300,14 +172,12 @@ function filerWithNewDate(hotels, date, type, checkIn, checkOut){
     }
 }
 
-function filerWithNewDateFlights(flights, date, type, departure, returnD){
-
-
+function filerWithNewDateFlights(flights, date, type, departure, returnD)
+{
     if( date == null){
         return flights;
     }
-    else{
-
+    else {
         //alert( "[" + departure + "][" + returnD+ "]");
 
         var filteredFlights = flights.filter(function (flights) {
@@ -325,14 +195,12 @@ function filerWithNewDateFlights(flights, date, type, departure, returnD){
                 return ( returnDate.getTime() >= returnD.getTime() && departuretDate.getTime() <= departure.getTime() );
             }
         });
-
         return filteredFlights;
-       
     }
 }
 
-export default function ReservationUI(props) {
-
+export default function ReservationUI(props) 
+{
     const [treatment, setTreatmentValue] = useState(0);
     const [expanded, setExpanded] = useState(false);
     const [treatmentReservedDate, setTreatmentReservedDate] = useState(Date.now);
@@ -348,6 +216,8 @@ export default function ReservationUI(props) {
     const [showFlights, changeFlightsToggle] = useState( false );
     const [flights, filterFlights] = useState( filerWithNewDateFlights( flightData, null, null) );
     const [selectedFlight, changeSelectedFlight] = useState([]);
+
+    
 
     const useStyles = makeStyles(theme => ({
         root: {
@@ -381,17 +251,18 @@ export default function ReservationUI(props) {
         setExpanded(!expanded);
     };
 
-
     var apiUserId = props.userId;
     var apiClinicId = props.clinicInformation.clinicId;
     // var apiTreatmentDate = props.treatmentInformation.treatmentDateApi + "T" + props.treatmentInformation.appointmentTime + ":00.000+00:00";
 
     var treatments = props.treatmentsInformation;
    
-
     var clinicName = props.clinicInformation.clinicName;    
 
+
+
     return (
+
         <div>
             <div className="col-12 bg-dark title pt-4 pb-4 pl-5">
                 <h4>Set up your reservation for {clinicName}</h4>
@@ -467,7 +338,7 @@ export default function ReservationUI(props) {
                     <br></br>
 
                     <div class="row borderDown">
-                            <h3> Accomodation Information:</h3> &nbsp;&nbsp; &nbsp;&nbsp;
+                            <h3> Accomodation Information:</h3> &nbsp;&nbsp;&nbsp;&nbsp;
                             
                             {showHotels ? 
                                 <button type="button" class="btn btn-danger" onClick={ click => {
@@ -525,7 +396,6 @@ export default function ReservationUI(props) {
                                     </div>
                                     <div className="row pl-4 pt-4 pb-2">
                                         {hotels.map(hotel => {
-
                                             var fromDate = new Date(hotel.availableFrom);
                                             var from = fromDate.getDate() + "/" + (fromDate.getUTCMonth() + 1) + "/" + fromDate.getFullYear();
 
@@ -542,7 +412,6 @@ export default function ReservationUI(props) {
                                             var hotelCurrency = hotel.currency;
 
                                             return (
-
                                                 <div key={hotelId}>
                                                     <div
                                                         className="card mr-4 mb-4"
@@ -582,7 +451,6 @@ export default function ReservationUI(props) {
                                                                 <div data-toggle="buttons">
                                                                     <div className="checkbox">
                                                                         <label className="btn btn-primary" onClick={ click =>{ 
-                                                                        
                                                                             if( startCheckInDate!= undefined && setStartCheckOutDate != undefined){
 
                                                                                 var checkInDate =  new Date(startCheckInDate);
@@ -642,9 +510,6 @@ export default function ReservationUI(props) {
                                                                                 setTourPrice( newTourPrice  );
 
                                                                             }
-                                                                           
-
-
                                                                         } }>
                                                                             <input
                                                                                 type="checkbox"
@@ -671,7 +536,7 @@ export default function ReservationUI(props) {
                     <br></br>
 
                     <div class="row borderDown">
-                            <h3> Transportation Information:</h3> &nbsp;&nbsp; &nbsp;&nbsp;
+                            <h3> Transportation Information:</h3> &nbsp;&nbsp;&nbsp;&nbsp;
                             <br></br>
                             {showFlights ? 
                                 <button type="button" class="btn btn-danger" onClick={ click => {
@@ -692,7 +557,6 @@ export default function ReservationUI(props) {
 
                             {showFlights ? 
                                 <div class="container-fluid">
-                                    
                                     <div className="row">
                                         <div className="col-6">
                                             <div className="row borderDown">
@@ -754,7 +618,6 @@ export default function ReservationUI(props) {
                                                     var price_two = flight.returnPrice;
                                                     var currency_two = flight.returnCurrency;
 
-
                                                     return (
                                                         <div key={flight.id}>
                                                             <div className="col-3 pb-4">
@@ -807,9 +670,7 @@ export default function ReservationUI(props) {
                                                                         <li className="list-group-item">
                                                                             <div data-toggle="buttons">
                                                                                 <div className="checkbox">
-                                                                                    
                                                                                 <label className="btn btn-primary" onClick={ click =>{ 
-                                                                        
                                                                                     if( departureDate!= undefined && returnDate != undefined){
 
                                                                                         changeSelectedFlight( [
@@ -840,8 +701,6 @@ export default function ReservationUI(props) {
                                                                                     />
                                                                                     &nbsp;&nbsp; Select Flight
                                                                                 </label>
-
-
                                                                                 </div>
                                                                             </div>
                                                                         </li>
@@ -853,7 +712,6 @@ export default function ReservationUI(props) {
                                                 })}
                                             </div>
                                             <div className="row mt-4 pb-5">
-                                                
                                             </div>
                                         </div>
                                     </div>
@@ -866,22 +724,19 @@ export default function ReservationUI(props) {
                     <br></br>
                     <br></br>
                     <br></br>
-                    
-                    
                     <div class="row ">
                         <div class="col-6 text-center">
-                            
-                        <Link to={{ pathname: "/search", data: goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReservedDate, selectedHotel, selectedFlight) }} className="card-link">
+                        <button onClick={goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReservedDate, selectedHotel, selectedFlight)}>asdasda</button>
+                        <Link to={{ pathname: "/payment", data: goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReservedDate, selectedHotel, selectedFlight)  }} className="card-link">
                             Confirm Treatment Tour
                         </Link>
-
                         </div>
                     </div>
-                    <br></br><br></br><br></br>
-
+                    <br></br>
+                    <br></br>
+                    <br></br>
                 </div>
             </div>
-
         </div>
     );
 }
