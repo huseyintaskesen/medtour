@@ -1,0 +1,12 @@
+.card-info input {
+    margin-bottom: 13px;
+    width: 80%;
+}
+
+#button-pay {
+    width: 200px;
+}
+
+.reservation-details ul {
+    list-style-type: none;
+}

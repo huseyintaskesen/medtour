@@ -58,9 +58,18 @@ export default function ButtonAppBar(props) {
 
   const handleClose = () => {
     setAnchorEl(null);
-    console.log('handle close clicked')
-    window.open('http://localhost:3000/clinic-settings', "_self");
+  };
 
+  const handleSettings = () =>{
+    setAnchorEl(null);
+    console.log('handle close clicked')
+    props.changeView('settings')
+    // window.open('http://localhost:3000/clinic-settings', "_self");
+  };
+
+  const handleMessages = () => {
+    setAnchorEl(null);
+    props.changeView('messages');
   };
 
   return (
@@ -92,11 +101,8 @@ export default function ButtonAppBar(props) {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Account Settings</MenuItem>
-                <MenuItem onClick={handleClose}>Manage Treatments</MenuItem>
-                <MenuItem onClick={handleClose}>Add Treatment</MenuItem>
-                <MenuItem onClick={handleClose}>View Calendar</MenuItem>
-                <MenuItem onClick={handleClose}>View Enquiry Requests</MenuItem>
+                <MenuItem onClick={handleSettings}>Account Settings</MenuItem>
+                <MenuItem onClick={handleMessages}>Messages</MenuItem>
               </Menu>
         </div>
           <Typography variant="h6" className={classes.title}>

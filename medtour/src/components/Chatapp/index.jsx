@@ -6,8 +6,9 @@ import React, { Component } from "react";
 // import Chatapp from "./ChatApp"
 import { ChatManager, TokenProvider } from '@pusher/chatkit-client';
 import {default as Chatkit} from '@pusher/chatkit-server'; 
-// import MessageList from './MessageList';
-// import Input from './Input';
+import MessageList from './MessageList';
+import Input from './Input';
+import './index.css'
 
 const chatkit = new Chatkit({
     instanceLocator: 'v1:us1:b0f369e5-f3fa-4e2f-ac37-538ce3bd5e62',
@@ -18,6 +19,12 @@ var u_id = String(sessionStorage.getItem('userID'));
 var c_id = String(sessionStorage.getItem('clinicID'));
 
 var room_id = String(u_id + c_id)
+
+// setter
+localStorage.setItem('chatID', room_id);
+
+
+
 
 console.log("Room id is:"+room_id)
 
@@ -132,10 +139,12 @@ componentDidMount(){
 
     render() {
         return (
-            <div>
-                Hello
-                {/* <Chatapp></Chatapp> */}
-            </div>
+           
+                <div >
+                    <h2 className="header">Live Support</h2>
+                    <MessageList messages={this.state.messages} />
+                    <Input className="input-field" onSubmit={this.addMessage} />
+                </div>
         );
     }
 }
