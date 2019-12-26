@@ -2,9 +2,9 @@
 //  Posting to create new rating, body content
 // {
 // 	"u_id": "5dee271746069a305cde344f",
-	// "name": "Skerd",
-	// "comment": "very very good performance",
-	// "rating": 9
+// 	"name": "Skerd",
+// 	"comment": "very very good performance",
+// 	"rating": 9
 // }
 
 const express = require('express');
@@ -44,12 +44,18 @@ router.get('/', (req, res) =>{
 router.post('/:clinic_id', (req, res) =>{
 
     var id = req.params.clinic_id;
+    var ratingg = req.body.rating;
+
+    if( ratingg > 5 || ratingg < 1 ){
+        res.status(400).json({ rating_Within_Range: false, new_Rating_Insertion: false});
+        return;
+    }
 
     const newRating = new Ratings({
         u_id: req.body.u_id,
         name: req.body.name,
         comment: req.body.comment,
-        rating: req.body.rating
+        rating: ratingg
     });
 
     newRating.save()
@@ -59,9 +65,27 @@ router.post('/:clinic_id', (req, res) =>{
             { "_id": id },
             { $push: { "reviews": rating._id }   }
         ).then( () =>{
-            res.json({new_Rating_Insertion: true, updated_Clinics_Rating_References  :true})
+
+            Clinic.findById(id).select("ratingAverage").then( result =>{
+                var newAverage = (result.ratingAverage + ratingg) / 2 ;
+                Clinic.updateOne(
+                    {"_id" : id},
+                    { $set: { "ratingAverage":  newAverage } }
+                ).then(result =>{
+                    res.json({new_Rating_Insertion: true, updated_Clinics_Rating_References  :true})
+                })
+                .catch( error =>{
+                    console.log(error);
+                    Ratings.findById(  rating._id )
+                    .then( ratings => ratings.remove().then( ()=> res.status(404).json({new_Rating_Insertion: false,
+                                                                                        updated_Clinics_Rating_References  :true})))
+                    .catch(err => res.status(404).json({removed_New_Treatment_To_Perserve_Database: false}));
+                })
+            })
+ 
         })
-        .catch( ()=>{
+        .catch( error =>{
+            console.log(error);
             Ratings.findById(  rating._id )
             .then( ratings => ratings.remove().then( ()=> res.status(404).json({new_Rating_Insertion: false,
                                                                                 updated_Clinics_Rating_References  :true})))
