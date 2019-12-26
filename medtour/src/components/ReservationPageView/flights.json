@@ -1,70 +1,93 @@
-{
-    "flights": [
-        {
-            "id": "1",
-            "from": "Barcelona",
-            "to": "Ankara",
-            "outboundDate": "2019-01-23",
-            "returnDate": "2019-02-23",
-            "outTime": "13:05",
-            "returnTime": "01:05",
-            "class": "Economy",
-            "price": "250$"
-        },
-        {
-            "id": "2",
-            "from": "Taiwan",
-            "to": "Izmir",
-            "outboundDate": "2019-03-23",
-            "returnDate": "2019-04-23",
-            "outTime": "13:05",
-            "returnTime": "02:05",
-            "class": "Economy",
-            "price": "700$"
-        },
-        {
-            "id": "3",
-            "from": "Los Angles",
-            "to": "Istanbul",
-            "outboundDate": "2019-05-23",
-            "returnDate": "2019-06-23",
-            "outTime": "13:05",
-            "returnTime": "03:05",
-            "class": "Business",
-            "price": "1400$"
-        },
-        {
-            "id": "4",
-            "from": "Buenos Aires",
-            "to": "Ankara",
-            "outboundDate": "2019-07-23",
-            "returnDate": "2019-08-23",
-            "outTime": "13:05",
-            "returnTime": "04:05",
-            "class": "Economy",
-            "price": "1200$"
-        },
-        {
-            "id": "5",
-            "from": "Abu Dhabi",
-            "to": "Istanbul",
-            "outboundDate": "2019-09-23",
-            "returnDate": "2019-10-23",
-            "outTime": "13:05",
-            "returnTime": "05:05",
-            "class": "Business",
-            "price": "580$"
-        },
-        {
-            "id": "6",
-            "from": "Cape Town",
-            "to": "Izmir",
-            "outboundDate": "2019-11-23",
-            "returnDate": "2019-12-23",
-            "outTime": "13:05",
-            "returnTime": "06:05",
-            "class": "Economy",
-            "price": "1000$"
-        }
-    ]
-}
+[
+    {
+        "id": "1",
+        "from": "Barcelona",
+        "to": "Ankara",
+        "outboundDate": "Tue Dec 24 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "returnDate": "Sat Dec 28 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "outboundPrice": "550",
+        "outboundCurrency" : "USD",
+        "returnPrice" : "450",
+        "returnCurrency": "USD",
+        "outTime": "13:05",
+        "returnTime": "01:05",
+        "class": "Economy",
+        "price": "250$"
+    },
+    {
+        "id": "2",
+        "from": "Taiwan",
+        "to": "Izmir",
+        "outboundDate": "Wed Jan 01 2020 00:00:00 GMT+0300 (GMT+03:00)",
+        "returnDate": "Tue Jan 14 2020 00:00:00 GMT+0300 (GMT+03:00)",
+        "outboundPrice": "550",
+        "outboundCurrency" : "USD",
+        "returnPrice" : "450",
+        "returnCurrency": "USD",
+        "outTime": "13:05",
+        "returnTime": "02:05",
+        "class": "Economy",
+        "price": "700$"
+    },
+    {
+        "id": "3",
+        "from": "Los Angles",
+        "to": "Istanbul",
+        "outboundDate": "Wed Dec 25 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "returnDate": "Fri Dec 27 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "outboundPrice": "550",
+        "outboundCurrency" : "USD",
+        "returnPrice" : "450",
+        "returnCurrency": "USD",
+        "outTime": "13:05",
+        "returnTime": "03:05",
+        "class": "Business",
+        "price": "1400$"
+    },
+    {
+        "id": "4",
+        "from": "Buenos Aires",
+        "to": "Ankara",
+        "outboundDate": "Mon Dec 09 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "returnDate": "Fri Dec 13 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "outboundPrice": "550",
+        "outboundCurrency" : "USD",
+        "returnPrice" : "450",
+        "returnCurrency": "USD",
+        "outTime": "13:05",
+        "returnTime": "04:05",
+        "class": "Economy",
+        "price": "1200$"
+    },
+    {
+        "id": "5",
+        "from": "Abu Dhabi",
+        "to": "Istanbul",
+        "outboundDate": "Sun Dec 01 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "returnDate": "Sat Dec 28 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "outboundPrice": "550",
+        "outboundCurrency" : "USD",
+        "returnPrice" : "450",
+        "returnCurrency": "USD",
+        "outTime": "13:05",
+        "returnTime": "05:05",
+        "class": "Business",
+        "price": "580$"
+    },
+    {
+        "id": "6",
+        "from": "Cape Town",
+        "to": "Izmir",
+        "outboundDate": "Thu Dec 26 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "returnDate": "Thu Dec 26 2019 00:00:00 GMT+0300 (GMT+03:00)",
+        "outboundPrice": "550",
+        "outboundCurrency" : "USD",
+        "returnPrice" : "450",
+        "returnCurrency": "USD",
+        "outTime": "13:05",
+        "returnTime": "06:05",
+        "class": "Economy",
+        "price": "1000$"
+    }
+]
+
