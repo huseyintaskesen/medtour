@@ -38,8 +38,6 @@ export const loadUser = () => (dispatch, getState) => { //asynchron
 
 }
 
-
-
 //Register new User
 export const register = ({name, surname, userName, password, email}) => dispatch =>{
 
