@@ -195,7 +195,12 @@ export default function SimpleTabs(props) {
 
                         <div class="row">
                             <div class="col-2 offset-2">
-                                <Link className="btn btn-warning">Enquire</Link>
+                                
+                                <Link className="btn btn-warning" to={{
+                                    pathname:'/chat'
+                                }}
+                                >Enquire
+                                </Link>
                             </div>
                             <div class="col-4">
                                 <Link

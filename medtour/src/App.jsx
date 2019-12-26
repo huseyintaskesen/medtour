@@ -18,7 +18,7 @@ import ClinicProfilePatient from "./components/ClinicProfilePatient";
 import ReservationPageView from "./components/ReservationPageView";
 import ClinicProfileView from "./components/ClinicProfileView/ClinicProfileView.jsx";
 import ClinicSettings from "./components/ClinicSettings";
-import Payment from "./components/Payment";
+import Chat from "./components/Chatapp";
 
 //TODO Web Template Studio: Add routes for your new pages here.
 class App extends Component {
@@ -60,7 +60,7 @@ class App extends Component {
                         component={ClinicProfileView}
                     />
                     <Route path="/clinic-settings" component={ClinicSettings} />
-                    <Route path="/payment" component={Payment} />
+                    <Route path="/chat" component={Chat} />
                 </Switch>
             </React.Fragment>
         );

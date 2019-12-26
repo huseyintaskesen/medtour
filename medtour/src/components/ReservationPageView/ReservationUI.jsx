@@ -12,6 +12,134 @@ import { Link } from "react-router-dom";
 import "./reservation.css";
 
 
+function goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReservedDate, selectedHotel, selectedFlight){
+
+    var u_id = apiUserId;
+    var t_id = apiTreatmentId;
+    var c_id = apiClinicId;
+
+    var td = new Date(treatmentReservedDate);
+
+    var tYear = td.getFullYear();
+    var tMonth = td.getMonth();
+    if( tMonth < 10){
+        tMonth = "0" + (tMonth+1);
+    }
+    else{
+        tMonth = tMonth +1;
+    }
+
+    var tDay = td.getDate();
+    if( tDay < 10){
+        tDay = "0" + (tDay);
+    }
+
+    var treatment_Date = tYear+ '-' + tMonth + '-' + tDay + "T00:00:00.000+00:00";
+
+
+    if( t_id != ""){
+        var departure_one = "";
+        var location_one = "";
+        var type_one = "";
+        var price_one = "";
+        var currency_one = "";
+
+        var departure_two = "";
+        var location_two = "";
+        var type_two = "";
+        var price_two = "";
+        var currency_two = "";
+
+        var name = "";
+        var location = "";
+        var type = "";
+        var rating = "";
+        var price = "";
+        var currency = "";
+        var checkIn = "";
+        var checkOut = "";
+
+        if( selectedFlight.length == 0){
+            alert("emptyFlight");
+        }
+        else{
+            var i = 0;
+            departure_one = selectedFlight[i++];
+            location_one = selectedFlight[i++];
+            type_one = selectedFlight[i++];
+            price_one = selectedFlight[i++];
+            currency_one = selectedFlight[i++];
+
+            departure_two = selectedFlight[i++];
+            location_two = selectedFlight[i++];
+            type_two = selectedFlight[i++];
+            price_two = selectedFlight[i++];
+            currency_two = selectedFlight[i++];
+        }
+
+        if( selectedHotel.length == 0){
+            alert("empty hotel");
+        }
+        else{
+            var i = 0;
+            name = selectedHotel[i++];
+            location = selectedHotel[i++];
+            type = selectedHotel[i++];
+            rating = selectedHotel[i++];
+            price = selectedHotel[i++];
+            currency = selectedHotel[i++];
+            checkIn = selectedHotel[i++];
+            checkOut = selectedHotel[i++];
+        }
+    }
+    else{
+        alert("No treatment selected");
+    }
+
+    //Headers
+    const config = {
+        headers:{
+            "Content-type":"application/json"
+        }
+    }
+
+    //Request body
+    const body = JSON.stringify({
+        u_id,
+        t_id,
+        c_id,
+
+        treatment_Date,
+        
+        departure_one,
+        location_one,
+        type_one,
+        price_one,
+        currency_one,
+        
+        departure_two,
+        location_two,
+        type_two,
+        price_two,
+        currency_two,
+        
+        name,
+        location,
+        type,
+        rating,
+        price,
+        currency,
+        checkIn,
+        checkOut
+    });
+
+    var infoPack =[ body, config ];
+
+    console.log( JSON.stringify(infoPack)  );
+    return infoPack;
+
+}
+
 function filerWithNewDate(hotels, date, type, checkIn, checkOut){
 
 
@@ -612,143 +740,13 @@ export default function ReservationUI(props) {
                     <br></br>
                     
                     
-                    
                     <div class="row ">
                         <div class="col-6 text-center">
-                            <Link to="/pament" >
-                                <button class="btn btn-success" onClick={ click =>{
-                                    
-                                    var u_id = apiUserId;
-                                    var t_id = apiTreatmentId;
-                                    var c_id = apiClinicId;
+                            
+                        <Link to={{ pathname: "/payment", data: goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReservedDate, selectedHotel, selectedFlight) }} className="card-link">
+                            Confirm Treatment Tour
+                        </Link>
 
-                                    var td = new Date(treatmentReservedDate);
-
-                                    var tYear = td.getFullYear();
-                                    var tMonth = td.getMonth();
-                                    if( tMonth < 10){
-                                        tMonth = "0" + (tMonth+1);
-                                    }
-                                    else{
-                                        tMonth = tMonth +1;
-                                    }
-
-                                    var tDay = td.getDate();
-                                    if( tDay < 10){
-                                        tDay = "0" + (tDay);
-                                    }
-
-                                    var treatment_Date = tYear+ '-' + tMonth + '-' + tDay + "T00:00:00.000+00:00";
-
-
-                                    if( t_id != ""){
-                                        console.log("u_id:[" + u_id + "] t_id[" + t_id + "] c_id[" + c_id + "]");
-
-                                        var departure_one = "";
-                                        var location_one = "";
-                                        var type_one = "";
-                                        var price_one = "";
-                                        var currency_one = "";
-        
-                                        var departure_two = "";
-                                        var location_two = "";
-                                        var type_two = "";
-                                        var price_two = "";
-                                        var currency_two = "";
-        
-                                        var name = "";
-                                        var location = "";
-                                        var type = "";
-                                        var rating = "";
-                                        var price = "";
-                                        var currency = "";
-                                        var checkIn = "";
-                                        var checkOut = "";
-        
-                                        if( selectedFlight.length == 0){
-                                            alert("emptyFlight");
-                                        }
-                                        else{
-                                            var i = 0;
-                                            departure_one = selectedFlight[i++];
-                                            location_one = selectedFlight[i++];
-                                            type_one = selectedFlight[i++];
-                                            price_one = selectedFlight[i++];
-                                            currency_one = selectedFlight[i++];
-            
-                                            departure_two = selectedFlight[i++];
-                                            location_two = selectedFlight[i++];
-                                            type_two = selectedFlight[i++];
-                                            price_two = selectedFlight[i++];
-                                            currency_two = selectedFlight[i++];
-                                        }
-        
-                                        if( selectedHotel.length == 0){
-                                            alert("empty hotel");
-                                        }
-                                        else{
-                                            var i = 0;
-                                            name = selectedHotel[i++];
-                                            location = selectedHotel[i++];
-                                            type = selectedHotel[i++];
-                                            rating = selectedHotel[i++];
-                                            price = selectedHotel[i++];
-                                            currency = selectedHotel[i++];
-                                            checkIn = selectedHotel[i++];
-                                            checkOut = selectedHotel[i++];
-                                        }
-                                    }
-                                    else{
-                                        alert("No treatment selected");
-                                    }
-
-                                    //Headers
-                                    const config = {
-                                        headers:{
-                                            "Content-type":"application/json"
-                                        }
-                                    }
-
-                                    //Request body
-                                    const body = JSON.stringify({
-                                        u_id,
-                                        t_id,
-                                        c_id,
-
-                                        treatment_Date,
-                                        
-                                        departure_one,
-                                        location_one,
-                                        type_one,
-                                        price_one,
-                                        currency_one,
-                                        
-                                        departure_two,
-                                        location_two,
-                                        type_two,
-                                        price_two,
-                                        currency_two,
-                                        
-                                        name,
-                                        location,
-                                        type,
-                                        rating,
-                                        price,
-                                        currency,
-                                        checkIn,
-                                        checkOut
-                                    });
-
-                                    console.log(body);
-
-
-
-                                }}>
-                                    <h4 style={{ fontWeight: "bold" }} href="">
-                                        Confirm Treatment Tour
-                                    </h4>
-                                </button>
-                            </Link>
                         </div>
                     </div>
                     <br></br><br></br><br></br>
