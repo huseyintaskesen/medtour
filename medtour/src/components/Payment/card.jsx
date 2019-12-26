@@ -1,9 +1,17 @@
 import React from "react";
 import Cards from "react-credit-cards";
+import axios from "axios";
 import "react-credit-cards/es/styles-compiled.css";
 import "./card.css";
 
 export default class PaymentForm extends React.Component {
+    constructor(props) {
+        super(props);
+        console.log(this.props.informationToPass);
+        //console.log(this.props.location.data.information.treatments);
+        console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+    }
+
     state = {
         cvc: "",
         expiry: "",
@@ -46,6 +54,9 @@ export default class PaymentForm extends React.Component {
                                         </li>
                                         <li>
                                             <p>Clinic Adress: </p>
+                                        </li>
+                                        <li>
+                                            <p>Hotel Name: </p>
                                         </li>
                                         <li>
                                             <p>Check-In Date: </p>
@@ -145,8 +156,8 @@ export default class PaymentForm extends React.Component {
                                     axios
                                         .post(
                                             "http://localhost:3001/api/tourData/newTour",
-                                            props.body,
-                                            props.config
+                                            this.props.informationToPass[0],
+                                            this.props.informationToPass[1]
                                         )
                                         .then(res => {
                                             alert("SUCESS!!!");
