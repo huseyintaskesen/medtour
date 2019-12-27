@@ -202,6 +202,7 @@ function filerWithNewDateFlights(flights, date, type, departure, returnD)
 export default function ReservationUI(props) 
 {
     const [treatment, setTreatmentValue] = useState(0);
+    const [treatmentName, setTreatmentName] = useState();
     const [expanded, setExpanded] = useState(false);
     const [treatmentReservedDate, setTreatmentReservedDate] = useState(Date.now);
     const [apiTreatmentId, setApiTreatmentId] = useState("");
@@ -216,6 +217,8 @@ export default function ReservationUI(props)
     const [showFlights, changeFlightsToggle] = useState( false );
     const [flights, filterFlights] = useState( filerWithNewDateFlights( flightData, null, null) );
     const [selectedFlight, changeSelectedFlight] = useState([]);
+
+    
 
     
 
@@ -237,10 +240,11 @@ export default function ReservationUI(props)
 
         var oldTreatmentPrice = parseInt(treatment);
         var totalTourPrice = parseInt(tourPrice) - oldTreatmentPrice;
+        
         setTreatmentValue(valuesArray[0]);
-
+        setTreatmentName(event.target.key);
         setApiTreatmentId(valuesArray[1]);
-
+        
         //alert("[" + tourPrice + "][" + oldTreatmentPrice + "][" + treatment + "][" + valuesArray[1] + "]");
         totalTourPrice = parseInt(totalTourPrice) + parseInt(event.target.value);
         setTourPrice(totalTourPrice);
@@ -253,13 +257,8 @@ export default function ReservationUI(props)
 
     var apiUserId = props.userId;
     var apiClinicId = props.clinicInformation.clinicId;
-    // var apiTreatmentDate = props.treatmentInformation.treatmentDateApi + "T" + props.treatmentInformation.appointmentTime + ":00.000+00:00";
-
     var treatments = props.treatmentsInformation;
-   
     var clinicName = props.clinicInformation.clinicName;    
-
-
 
     return (
 
@@ -300,9 +299,8 @@ export default function ReservationUI(props)
                                             <TextField
                                                 id="outlined-select-currency-native"
                                                 select
-                                                label="Select treatment"
-                                                value=""
-                                                _id = {treatment._id}
+                                                label="Select Treatment"
+                                                value= {treatmentName}
                                                 onChange={handleChange}
                                                 SelectProps={{
                                                     native: true
@@ -642,6 +640,9 @@ export default function ReservationUI(props)
                                                                                 <br />
                                                                                 Time:{" "}
                                                                                 {flight.outTime}
+                                                                                <br></br>
+                                                                                Price:{"      "}
+                                                                                {price_one + " " + currency_one}
                                                                             </p>
                                                                         </li>
                                                                         <li className="list-group-item">
@@ -655,6 +656,9 @@ export default function ReservationUI(props)
                                                                                 {
                                                                                     flight.returnTime
                                                                                 }
+                                                                                <br></br>
+                                                                                Price:{" "}
+                                                                                {price_two + " " + currency_two}
                                                                             </p>
                                                                         </li>
                                                                         <li className="list-group-item">
@@ -664,7 +668,8 @@ export default function ReservationUI(props)
                                                                         </li>
                                                                         <li className="list-group-item">
                                                                             <p>
-                                                                                {flight.price}
+                                                                            Total Price: {" "}
+                                                                            { (parseInt(price_one) + parseInt(price_two)) + " " + currency_one}
                                                                             </p>
                                                                         </li>
                                                                         <li className="list-group-item">
@@ -724,11 +729,11 @@ export default function ReservationUI(props)
                     <br></br>
                     <br></br>
                     <br></br>
+
                     <div class="row ">
                         <div class="col-6 text-center">
-                        <button onClick={goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReservedDate, selectedHotel, selectedFlight)}>asdasda</button>
                         <Link to={{ pathname: "/payment", data: goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReservedDate, selectedHotel, selectedFlight)  }} className="card-link">
-                            Confirm Treatment Tour
+                            <button class="btn btn-success"> Confirm Treatment Tour</button>
                         </Link>
                         </div>
                     </div>
