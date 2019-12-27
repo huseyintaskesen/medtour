@@ -45,7 +45,10 @@ export default class PaymentForm extends React.Component {
                                         <li>
                                             <p>
                                                 Treatment Name:{" "}
-                                                {infoPack[0].treatmentName}
+                                                {
+                                                    infoPack[0]
+                                                        .treatment_Name_Send
+                                                }
                                             </p>
                                         </li>
                                         <li>
@@ -138,11 +141,27 @@ export default class PaymentForm extends React.Component {
                         </div>
                         <div className="row">
                             <div className="offset-1 col-10 pt-4">
-                                <h5>Total Price:</h5>
+                                <h5>
+                                    Total Price:{" "}
+                                    {parseInt(
+                                        infoPack[0].treatment_Price_Send
+                                    ) +
+                                        parseInt(infoPack[0].price) +
+                                        parseInt(infoPack[0].price_one) +
+                                        parseInt(infoPack[0].price_two)}
+                                    {" USD"}
+                                </h5>
                                 <div className="row pl-5 pt-4 reservation-details">
                                     <ul>
                                         <li>
-                                            <p>Treatment: </p>
+                                            <p>
+                                                Treatment:{" "}
+                                                {
+                                                    infoPack[0]
+                                                        .treatment_Price_Send
+                                                }
+                                                {" USD"}
+                                            </p>
                                         </li>
                                         <li>
                                             <p>
