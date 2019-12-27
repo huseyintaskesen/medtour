@@ -110,16 +110,15 @@ classInitialization()
         
 
     });
-    console.log("MY PROP:" + this.props.clinic)
     
- 
 
-    console.log("CLINICSTATE: " + this.state.clinicSide)
-    if(!this.props.clinic){
-        this.createUniqueUser(chatkit);
-    }
+
     if(this.props.clinic){
         this.createUniqueClinic(chatkit);
+    }
+
+    else{
+        this.createUniqueUser(chatkit);
     }
 
 

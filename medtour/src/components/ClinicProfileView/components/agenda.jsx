@@ -18,7 +18,7 @@ require('moment/locale/tr.js');
 var items = [
   {
    _id            :guid(),
-    name          : 'Meeting , dev staff!',
+    name          : "Meeting ,                                     dev staff!",
     startDateTime : new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 0),
     endDateTime   : new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12, 0),
     classes       : 'color-1 color-4'
@@ -101,6 +101,8 @@ this.handleCellSelection = this.handleCellSelection.bind(this)
   componentDidMount(){
 
     this.setState({items:items})
+    console.log(now)
+    
 
   }
 
