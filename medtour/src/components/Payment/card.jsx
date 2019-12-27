@@ -7,9 +7,7 @@ import "./card.css";
 export default class PaymentForm extends React.Component {
     constructor(props) {
         super(props);
-        console.log(this.props.informationToPass);
-        //console.log(this.props.location.data.information.treatments);
-        console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        var infoPack = this.props.informationToPass;
     }
 
     state = {
@@ -31,6 +29,7 @@ export default class PaymentForm extends React.Component {
     };
 
     render() {
+        var infoPack = this.props.informationToPass;
         return (
             <div>
                 <div className="container-fluid col-12 bg-white">
@@ -47,7 +46,13 @@ export default class PaymentForm extends React.Component {
                                             <p>Treatment Name: </p>
                                         </li>
                                         <li>
-                                            <p>Treatment Date: </p>
+                                            <p>
+                                                Treatment Date:{" "}
+                                                {infoPack[0].treatment_Date.slice(
+                                                    0,
+                                                    10
+                                                )}
+                                            </p>
                                         </li>
                                         <li>
                                             <p>Clinic Name: </p>
@@ -56,7 +61,9 @@ export default class PaymentForm extends React.Component {
                                             <p>Clinic Adress: </p>
                                         </li>
                                         <li>
-                                            <p>Hotel Name: </p>
+                                            <p>
+                                                Hotel Name: {infoPack[0].name}
+                                            </p>
                                         </li>
                                         <li>
                                             <p>Check-In Date: </p>
@@ -156,7 +163,9 @@ export default class PaymentForm extends React.Component {
                                     axios
                                         .post(
                                             "http://localhost:3001/api/tourData/newTour",
-                                            this.props.informationToPass[0],
+                                            JSON.stringify(
+                                                this.props.informationToPass[0]
+                                            ),
                                             this.props.informationToPass[1]
                                         )
                                         .then(res => {

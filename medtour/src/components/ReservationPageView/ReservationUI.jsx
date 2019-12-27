@@ -102,7 +102,7 @@ function goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReserv
     }
 
     //Request body
-    const body = JSON.stringify({
+    const body = {
         u_id,
         t_id,
         c_id,
@@ -129,13 +129,9 @@ function goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReserv
         currency,
         checkIn,
         checkOut
-    });
+    };
 
     var infoPack =[ body, config ];
-
-    console.log( JSON.stringify(infoPack[0])  );
-    console.log(infoPack[0]);
-
 
     return infoPack;
 }
