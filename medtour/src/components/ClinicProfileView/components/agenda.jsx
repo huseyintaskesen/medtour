@@ -14,60 +14,6 @@ require('moment/locale/tr.js');
       "color-5":"rgba(170, 59, 123, 1)"
     }
 
-
-var items = [
-  {
-   _id            :guid(),
-    name          : "Meeting ,                                     dev staff!",
-    startDateTime : new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 0),
-    endDateTime   : new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12, 0),
-    classes       : 'color-1 color-4'
-  },
-  {
-    _id            :'my-event-idid',
-     name          : 'Test event',
-     startDateTime : new Date(now.getFullYear(), now.getMonth(), now.getDate()+1, 10, 0),
-     endDateTime   : new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12, 0),
-     classes       : 'color-1 color-4'
-   },
-  
-  {
-   _id            :guid(),
-    name          : 'Working lunch , Holly',
-    startDateTime : new Date(now.getFullYear(), now.getMonth(), now.getDate()+1, 11, 0),
-    endDateTime   : new Date(now.getFullYear(), now.getMonth(), now.getDate()+1, 13, 0),
-    classes       : 'color-2'
-  },
-  {
-   _id            :guid(),
-    name          : 'Conference , plaza',
-    startDateTime : new Date(now.getFullYear(), now.getMonth(), now.getDate()+1, 11 , 0),
-    endDateTime   : new Date(now.getFullYear(), now.getMonth(), now.getDate()+1, 14 ,30),
-    classes       : 'color-4'
-  },
-  {
-   _id            :'event-4',
-    name          : 'Customers issues review',
-    startDateTime : new Date(now.getFullYear(), now.getMonth(), now.getDate()+2, 10, 0),
-    endDateTime   : new Date(now.getFullYear(), now.getMonth(), now.getDate()+2, 15, 0),
-    classes       : 'color-3'
-
-  },
-  {
-    _id           :'event-5',
-    name          : 'Group activity',
-    startDateTime : new Date(now.getFullYear(), now.getMonth(), now.getDate()+3, 10, 0),
-    endDateTime   : new Date(now.getFullYear(), now.getMonth(), now.getDate()+3, 16, 30),
-    classes       : 'color-4'
-  },
-  {
-    _id           :'event-6',
-    name          : 'Fun Day !',
-    startDateTime : new Date(now.getFullYear(), now.getMonth(), now.getDate()+7, 9, 14),
-    endDateTime   : new Date(now.getFullYear(), now.getMonth(), now.getDate()+7, 17),
-    classes       : 'color-3'
-  }
-];
 export default class Agenda extends Component {
   constructor(props){
   super(props);
@@ -76,6 +22,7 @@ export default class Agenda extends Component {
 
 this.state = {
   items:[],
+  treatment: {},
   selected:[],
   cellHeight:(60 / 4),
   showModal:false,
@@ -98,10 +45,65 @@ this.handleCellSelection = this.handleCellSelection.bind(this)
 
   }
 
+  initializeItems(){
+
+    var startTime = this.state.treatment.treatmentDate;
+    var treatment = [
+    {
+      _id: 'event-0',
+      name: 'Name Of The Patient: ' + this.state.treatment.userName + ' ' + 
+      this.state.treatment.surName + '\n' + 'Treatment For The Patient: ' + this.state.treatment.treatmentName + 
+      ' ' + '\n' + 'Treatment Price: ' + this.state.treatment.treatmentPrice + '',
+      
+      // startDateTime : new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate(), 8, 0),
+      // endDateTime   : new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate(), 15, 0),
+      startDateTime : new Date(now.getFullYear(), now.getMonth(), now.getDate()+1, 11, 0),
+      endDateTime   : new Date(now.getFullYear(), now.getMonth(), now.getDate()+1, 13, 0),
+      classes: 'color-3'
+
+    }
+    ]
+
+    this.setState({items:treatment})
+
+
+  }
+
   componentDidMount(){
 
-    this.setState({items:items})
-    console.log(now)
+    this.setState({
+      treatment: this.props.treatment_object
+    }, () => {
+      console.log(this.state.treatment)
+      this.initializeItems();
+    })
+
+    // this.setState({items:treatment})
+
+
+    // var data = this.props.treatment_object();
+    // var userName = data.userName
+    // console.log(data)
+    // console.log('USERNAME:'+ userName)
+
+
+
+    // var treatment = [
+    // {
+    //   _id: 'event-0',
+    //   name: 'Name Of The Patient: ' + this.props.treatment_object.userName + ' ' + 
+    //   this.props.treatment_object.surName + '\n' + 'Treatment For The Patient: ' + this.props.treatment_object.treatmentName + 
+    //   ' ' + '\n' + 'Treatment Price: ' + this.props.treatment_object.treatmentPrice + '',
+      // startDateTime : new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate(), 8, 0),
+      // endDateTime   : new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate(), 15, 0),
+    //   // classes       : 'color-3'
+    //   // this.props.treatment_object.treatmentDate.setTime(this.props.treatment_object.treatmentDate + (8*60*60*1000)),
+    //   // this.props.treatment_object.treatmentDate.setTime(this.props.treatment_object.treatmentDate + (13*60*60*1000)),
+    //   classes: 'color-3'
+
+    // }
+    // ]
+
     
 
   }

@@ -15,13 +15,13 @@ const chatkit = new Chatkit({
     key: 'c11a04fd-67ae-4836-886c-3a5bd3c4f806:AXcqLAAtjuqwoVPnK9OmC1RD4oLbclRdgkokeTDIo1w='
 })
 
-var u_id = String(sessionStorage.getItem('userID'));
-var c_id = String(sessionStorage.getItem('clinicID'));
+var u_id;
+var c_id;
 
-var room_id = String(u_id + c_id)
+var room_id;
 
 // setter
-localStorage.setItem('chatID', room_id);
+
 
 
 
@@ -39,9 +39,18 @@ class Chat extends Component {
             users: [],
             clinicSide: 0,
         }
+
         // this.create_room = this.create_room.bind(this);
         this.createUniqueUser = this.createUniqueUser.bind(this);
         this.addMessage = this.addMessage.bind(this);
+
+        u_id = String(localStorage.getItem('userID'));
+        c_id = String(localStorage.getItem('clinicID'));
+        room_id = String(u_id + c_id)
+        localStorage.setItem('chatID', room_id);
+
+       
+
     }
 
 createUniqueUser(chatkit){
@@ -166,6 +175,10 @@ classInitialization()
 }
     
 componentDidMount(){
+
+    
+
+
     if(this.props.clinic){
         console.log("CURRENT USER1" + this.state.currentUser)
         this.setState({

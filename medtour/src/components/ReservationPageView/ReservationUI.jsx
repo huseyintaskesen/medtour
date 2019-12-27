@@ -11,7 +11,7 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import "./reservation.css";
 
-function goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReservedDate, selectedHotel, selectedFlight){
+function goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReservedDate, selectedHotel, selectedFlight , clinicName, clinicAddress, tName, tPrice){
 
     var u_id = apiUserId;
     var t_id = apiTreatmentId;
@@ -101,13 +101,22 @@ function goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReserv
         }
     }
 
+    var treatment_Name_Send = tName;
+    var treatment_Price_Send = tPrice;
+
+    //alert( treatment_Name_Send + " = " + treatment_Price_Send );
+
     //Request body
-    const body = JSON.stringify({
+    const body = {
         u_id,
         t_id,
         c_id,
 
         treatment_Date,
+        treatment_Name_Send,
+        treatment_Price_Send,
+        clinicName, 
+        clinicAddress,
         
         departure_one,
         location_one,
@@ -129,13 +138,9 @@ function goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReserv
         currency,
         checkIn,
         checkOut
-    });
+    };
 
     var infoPack =[ body, config ];
-
-    console.log( JSON.stringify(infoPack[0])  );
-    console.log(infoPack[0]);
-
 
     return infoPack;
 }
@@ -167,7 +172,6 @@ function filerWithNewDate(hotels, date, type, checkIn, checkOut){
                 );
             }
         });
-
         return filteredHotels;
     }
 }
@@ -202,6 +206,7 @@ function filerWithNewDateFlights(flights, date, type, departure, returnD)
 export default function ReservationUI(props) 
 {
     const [treatment, setTreatmentValue] = useState(0);
+    
     const [expanded, setExpanded] = useState(false);
     const [treatmentReservedDate, setTreatmentReservedDate] = useState(Date.now);
     const [apiTreatmentId, setApiTreatmentId] = useState("");
@@ -216,8 +221,14 @@ export default function ReservationUI(props)
     const [showFlights, changeFlightsToggle] = useState( false );
     const [flights, filterFlights] = useState( filerWithNewDateFlights( flightData, null, null) );
     const [selectedFlight, changeSelectedFlight] = useState([]);
+    const [flightId, setFlightId] = useState();
+    const [whatHotelIsSelectedCanIKnow, setWhatHotelIsSelectedCanIKnow] = useState(-1);
 
-    
+    const [treatmentNameS, setTreatmentNameS] = useState("");
+    const [treatmentNameS1, setTreatmentNameS1] = useState("");
+
+    const [treatment1, setTreatmentValue1] = useState(0);
+
 
     const useStyles = makeStyles(theme => ({
         root: {
@@ -234,12 +245,18 @@ export default function ReservationUI(props)
 
         var optionValue = event.target.value + "";
         var valuesArray = optionValue.split("~");
-
+        var aaa= valuesArray[2] + "";
+        setTreatmentNameS( aaa );
+        setTreatmentNameS1();
         var oldTreatmentPrice = parseInt(treatment);
         var totalTourPrice = parseInt(tourPrice) - oldTreatmentPrice;
+        
         setTreatmentValue(valuesArray[0]);
+        setTreatmentValue1( valuesArray[0] );
+        
+        setApiTreatmentId( valuesArray[1]);
 
-        setApiTreatmentId(valuesArray[1]);
+        //alert("[" + valuesArray[0]  + "][" + valuesArray[1] + "][" + valuesArray[2] + "]" + treatmentNameS);
 
         //alert("[" + tourPrice + "][" + oldTreatmentPrice + "][" + treatment + "][" + valuesArray[1] + "]");
         totalTourPrice = parseInt(totalTourPrice) + parseInt(event.target.value);
@@ -253,13 +270,9 @@ export default function ReservationUI(props)
 
     var apiUserId = props.userId;
     var apiClinicId = props.clinicInformation.clinicId;
-    // var apiTreatmentDate = props.treatmentInformation.treatmentDateApi + "T" + props.treatmentInformation.appointmentTime + ":00.000+00:00";
-
+    var clinicAddress = props.clinicInformation.clinicAddress;
     var treatments = props.treatmentsInformation;
-   
     var clinicName = props.clinicInformation.clinicName;    
-
-
 
     return (
 
@@ -300,9 +313,8 @@ export default function ReservationUI(props)
                                             <TextField
                                                 id="outlined-select-currency-native"
                                                 select
-                                                label="Select treatment"
-                                                value=""
-                                                _id = {treatment._id}
+                                                label="Select Treatment"
+                                                value= {treatmentNameS1}
                                                 onChange={handleChange}
                                                 SelectProps={{
                                                     native: true
@@ -312,7 +324,7 @@ export default function ReservationUI(props)
                                                 {treatments.map(option => (
                                                     <option
                                                         key={option.name}
-                                                        value={option.priceLow + "~" + option._id}
+                                                        value={option.priceLow + "~" + option._id + "~" + option.name}
                                                     >
                                                         {option.name}
                                                     </option>
@@ -353,6 +365,8 @@ export default function ReservationUI(props)
                                     setTourPrice( newTourPrice );
 
                                     changeSelectedHotel([]);
+
+                                    setWhatHotelIsSelectedCanIKnow(-1);
                                             
                                 } }>Remove Hotel Selection</button>
                                 :
@@ -402,7 +416,7 @@ export default function ReservationUI(props)
                                             var toDate = new Date(hotel.availableTo);
                                             var to = toDate.getDate() + "/" + (toDate.getUTCMonth()+1 ) + "/" + toDate.getFullYear();
 
-                                            var hotelId = hotel.id;
+                                            var hotelIdSingle = hotel.id;
                                             var hotelName = hotel.name;
                                             var hotelRoom = hotel.room;
                                             var hotelPrice = hotel.price;
@@ -412,7 +426,7 @@ export default function ReservationUI(props)
                                             var hotelCurrency = hotel.currency;
 
                                             return (
-                                                <div key={hotelId}>
+                                                <div key={hotelIdSingle}>
                                                     <div
                                                         className="card mr-4 mb-4"
                                                         style={{ width: "18rem" }}
@@ -448,77 +462,74 @@ export default function ReservationUI(props)
                                                                 </p>
                                                             </li>
                                                             <li className="list-group-item">
-                                                                <div data-toggle="buttons">
-                                                                    <div className="checkbox">
-                                                                        <label className="btn btn-primary" onClick={ click =>{ 
-                                                                            if( startCheckInDate!= undefined && setStartCheckOutDate != undefined){
+                                                                {whatHotelIsSelectedCanIKnow != hotelIdSingle ? 
+                                                                    <button type="button" class="btn btn-danger" onClick={ click => {
 
-                                                                                var checkInDate =  new Date(startCheckInDate);
-                                                                                var ciYear = checkInDate.getFullYear();
-                                                                                var ciMonth = checkInDate.getMonth();
-                                                                                if( ciMonth < 10){
-                                                                                    ciMonth = "0" + (ciMonth+1);
-                                                                                }
-                                                                                else{
-                                                                                    ciMonth = ciMonth +1;
-                                                                                }
+                                                                        if( startCheckInDate!= undefined && starCheckOutDate != undefined){
 
-                                                                                var ciDay = checkInDate.getDate();
-                                                                                if( ciDay < 10){
-                                                                                    ciDay = "0" + (ciDay);
-                                                                                }
-
-                                                                                var apiCheckInDate = ciYear+ '-' + ciMonth + '-' + ciDay + "T00:00:00.000+00:00";
-
-                                                                                var checkoutDate =  new Date(starCheckOutDate);
-                                                                                var coYear = checkoutDate.getFullYear();
-                                                                                var coMonth = checkoutDate.getMonth();
-                                                                                if( coMonth < 10){
-                                                                                    coMonth = "0" + (coMonth+1);
-                                                                                }
-                                                                                else{
-                                                                                    coMonth = coMonth +1;
-                                                                                }
-
-                                                                                var coDay = checkoutDate.getDate();
-                                                                                if( coDay < 10){
-                                                                                    coDay = "0" + (coDay);
-                                                                                }
-
-                                                                                var hotelStayDaysString = ( ( checkoutDate.getTime() - checkInDate.getTime() ) / ( 1000 * 3600 * 24)  ) + "" ;
-                                                                                var hotelStayDays = parseInt( hotelStayDaysString , 10 ) ;
-                                                                                var apiCheckOutDate = coYear+ '-' + coMonth + '-' + coDay + "T00:00:00.000+00:00";
-
-                                                                            //alert( JSON.stringify( selectedNewHotel) );
-                                                                            
-                                                                                changeSelectedHotel( [
-                                                                                    hotelName,
-                                                                                    hotelLocation,
-                                                                                    hotelType,
-                                                                                    hotelRating,
-                                                                                    hotelPrice,
-                                                                                    hotelCurrency,
-                                                                                    apiCheckInDate,
-                                                                                    apiCheckOutDate,
-                                                                                    hotelStayDays
-                                                                                ]
-                                                                                    
-                                                                                );
-
-                                                                                var newTourPrice = parseInt(tourPrice) + (hotelStayDays*parseInt(hotelPrice))/2;
-                                                                                //alert( hotelStayDays );
-                                                                                setTourPrice( newTourPrice  );
-
+                                                                            var checkInDate =  new Date(startCheckInDate);
+                                                                            var ciYear = checkInDate.getFullYear();
+                                                                            var ciMonth = checkInDate.getMonth();
+                                                                            if( ciMonth < 10){
+                                                                                ciMonth = "0" + (ciMonth+1);
                                                                             }
-                                                                        } }>
-                                                                            <input
-                                                                                type="checkbox"
-                                                                                value="1"
-                                                                            />
-                                                                            &nbsp;&nbsp; Select
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
+                                                                            else{
+                                                                                ciMonth = ciMonth +1;
+                                                                            }
+
+                                                                            var ciDay = checkInDate.getDate();
+                                                                            if( ciDay < 10){
+                                                                                ciDay = "0" + (ciDay);
+                                                                            }
+
+                                                                            var apiCheckInDate = ciYear+ '-' + ciMonth + '-' + ciDay + "T00:00:00.000+00:00";
+
+                                                                            var checkoutDate =  new Date(starCheckOutDate);
+                                                                            var coYear = checkoutDate.getFullYear();
+                                                                            var coMonth = checkoutDate.getMonth();
+                                                                            if( coMonth < 10){
+                                                                                coMonth = "0" + (coMonth+1);
+                                                                            }
+                                                                            else{
+                                                                                coMonth = coMonth +1;
+                                                                            }
+
+                                                                            var coDay = checkoutDate.getDate();
+                                                                            if( coDay < 10){
+                                                                                coDay = "0" + (coDay);
+                                                                            }
+
+                                                                            var hotelStayDaysString = ( ( checkoutDate.getTime() - checkInDate.getTime() ) / ( 1000 * 3600 * 24)  ) + "" ;
+                                                                            var hotelStayDays = parseInt( hotelStayDaysString , 10 ) ;
+                                                                            var apiCheckOutDate = coYear+ '-' + coMonth + '-' + coDay + "T00:00:00.000+00:00";
+
+                                                                        //alert( JSON.stringify( selectedNewHotel) );
+                                                                        
+                                                                            changeSelectedHotel( [
+                                                                                hotelName,
+                                                                                hotelLocation,
+                                                                                hotelType,
+                                                                                hotelRating,
+                                                                                hotelPrice,
+                                                                                hotelCurrency,
+                                                                                apiCheckInDate,
+                                                                                apiCheckOutDate,
+                                                                                hotelStayDays
+                                                                            ]
+                                                                                
+                                                                            );
+
+                                                                            var newTourPrice = parseInt(tourPrice) + (hotelStayDays*parseInt(hotelPrice));
+                                                                            //alert( hotelStayDays );
+                                                                            setTourPrice( newTourPrice  );
+                                                                            
+                                                                            setWhatHotelIsSelectedCanIKnow( hotelIdSingle );
+                                                                        }
+
+                                                                    } }>  Select Hotel </button>
+                                                                    :
+                                                                    <button type="button" class="btn btn-success" > Selected </button>
+                                                                }
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -541,6 +552,8 @@ export default function ReservationUI(props)
                             {showFlights ? 
                                 <button type="button" class="btn btn-danger" onClick={ click => {
                                     changeFlightsToggle( !showFlights ); 
+
+                                    setFlightId(-1);
 
                                     var departurePrice = selectedFlight[3];
                                     var returnPrice = selectedFlight[8];
@@ -600,6 +613,7 @@ export default function ReservationUI(props)
                                             <div className="row">
                                                 {flights.map(flight => {
 
+                                                    var flightIdSingle = flight.id;
                                                     var outboundDate = new Date(flight.outboundDate);
                                                     var outbound = outboundDate.getFullYear() + "-" + (outboundDate.getUTCMonth() + 1) + "-" + outboundDate.getDate();
 
@@ -642,6 +656,9 @@ export default function ReservationUI(props)
                                                                                 <br />
                                                                                 Time:{" "}
                                                                                 {flight.outTime}
+                                                                                <br></br>
+                                                                                Price:{"      "}
+                                                                                {price_one + " " + currency_one}
                                                                             </p>
                                                                         </li>
                                                                         <li className="list-group-item">
@@ -655,6 +672,9 @@ export default function ReservationUI(props)
                                                                                 {
                                                                                     flight.returnTime
                                                                                 }
+                                                                                <br></br>
+                                                                                Price:{" "}
+                                                                                {price_two + " " + currency_two}
                                                                             </p>
                                                                         </li>
                                                                         <li className="list-group-item">
@@ -664,43 +684,48 @@ export default function ReservationUI(props)
                                                                         </li>
                                                                         <li className="list-group-item">
                                                                             <p>
-                                                                                {flight.price}
+                                                                            Total Price: {" "}
+                                                                            { (parseInt(price_one) + parseInt(price_two)) + " " + currency_one}
                                                                             </p>
                                                                         </li>
                                                                         <li className="list-group-item">
                                                                             <div data-toggle="buttons">
                                                                                 <div className="checkbox">
-                                                                                <label className="btn btn-primary" onClick={ click =>{ 
-                                                                                    if( departureDate!= undefined && returnDate != undefined){
 
-                                                                                        changeSelectedFlight( [
-                                                                                            departure_one,
-                                                                                            location_one,
-                                                                                            type_one,
-                                                                                            price_one,
-                                                                                            currency_one,
-                                        
-                                                                                            departure_two,
-                                                                                            location_two,
-                                                                                            type_two,
-                                                                                            price_two,
-                                                                                            currency_two
-                                                                                        ]
-                                                                                            
-                                                                                        );
+                                                                                
+                                                                                {flightId != flightIdSingle ? 
+                                                                                    <button type="button" class="btn btn-danger" onClick={ click => {
 
-                                                                                        var newTourPrice = parseInt(tourPrice) + (parseInt(price_one) + parseInt(price_two))/2;
-                                                                                        setTourPrice( newTourPrice );
+                                                                                        if( departureDate!= undefined && returnDate != undefined){
 
-                                                                                    }
+                                                                                            changeSelectedFlight( [
+                                                                                                departure_one,
+                                                                                                location_one,
+                                                                                                type_one,
+                                                                                                price_one,
+                                                                                                currency_one,
+                                            
+                                                                                                departure_two,
+                                                                                                location_two,
+                                                                                                type_two,
+                                                                                                price_two,
+                                                                                                currency_two
+                                                                                            ]
+                                                                                                
+                                                                                            );
+    
+                                                                                            var newTourPrice = parseInt(tourPrice) + (parseInt(price_one) + parseInt(price_two));
+                                                                                            setTourPrice( newTourPrice );
+                                                                                            setFlightId( flightIdSingle);
 
-                                                                                } }>
-                                                                                    <input
-                                                                                        type="checkbox"
-                                                                                        value="1"
-                                                                                    />
-                                                                                    &nbsp;&nbsp; Select Flight
-                                                                                </label>
+                                                                                        }
+
+                                                                                    } }>  Select Flight </button>
+                                                                                    :
+                                                                                    <button type="button" class="btn btn-success" > Selected </button>
+                                                                                }
+
+                                                                                
                                                                                 </div>
                                                                             </div>
                                                                         </li>
@@ -724,11 +749,11 @@ export default function ReservationUI(props)
                     <br></br>
                     <br></br>
                     <br></br>
+
                     <div class="row ">
                         <div class="col-6 text-center">
-                        <button onClick={goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReservedDate, selectedHotel, selectedFlight)}>asdasda</button>
-                        <Link to={{ pathname: "/payment", data: goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReservedDate, selectedHotel, selectedFlight)  }} className="card-link">
-                            Confirm Treatment Tour
+                        <Link to={{ pathname: "/payment", data: goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReservedDate, selectedHotel, selectedFlight, clinicName, clinicAddress, treatmentNameS, treatment1)  }} className="card-link">
+                            <button class="btn btn-success"> Confirm Treatment Tour</button>
                         </Link>
                         </div>
                     </div>

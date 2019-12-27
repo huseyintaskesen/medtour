@@ -31,7 +31,7 @@ export default function ButtonAppBar(props) {
   const [clinic_name, setClinicName] = React.useState('')
   const open = Boolean(anchorEl);
 
-  var clinic_id = sessionStorage.getItem('clinicID');
+  var clinic_id = localStorage.getItem('clinicID');
 
     useEffect(() =>{
     fetch("http://localhost:3001/api/clinics/"+clinic_id, {
