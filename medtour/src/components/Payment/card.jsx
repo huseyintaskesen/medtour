@@ -30,6 +30,8 @@ export default class PaymentForm extends React.Component {
 
     render() {
         var infoPack = this.props.informationToPass;
+        var sendBody = JSON.stringify(infoPack[0]);
+        console.log(sendBody);
         return (
             <div>
                 <div className="container-fluid col-12 bg-white">
@@ -248,10 +250,8 @@ export default class PaymentForm extends React.Component {
                                     axios
                                         .post(
                                             "http://localhost:3001/api/tourData/newTour",
-                                            JSON.stringify(
-                                                this.props.informationToPass[0]
-                                            ),
-                                            this.props.informationToPass[1]
+                                            sendBody,
+                                            infoPack[1]
                                         )
                                         .then(res => {
                                             alert("SUCESS!!!");

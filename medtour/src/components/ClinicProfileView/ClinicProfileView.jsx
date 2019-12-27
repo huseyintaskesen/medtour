@@ -41,7 +41,6 @@ class ClinicProfileView extends Component {
         }).then(response => {
             return response.json();
         }).then(muutuja => {
-            console.log('RESPONSE'+muutuja.trans[0].u_id.name)
             this.setState({
                 userName: muutuja.trans[0].u_id.name,
                 surName: muutuja.trans[0].u_id.surname,
@@ -53,7 +52,11 @@ class ClinicProfileView extends Component {
               this.setState({currentView: 'calendar'})
             })
             
-        });
+        }).catch( err =>{
+          ('No tour data for clinic!!')
+          //this.setState({currentView: 'calendar'});
+          
+      });
   }
 
   changeView(view){

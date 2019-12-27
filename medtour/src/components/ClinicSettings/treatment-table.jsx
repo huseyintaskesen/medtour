@@ -1,36 +1,69 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import MaterialTable from "material-table";
+import cogoToast from 'cogo-toast';
+import axios from 'axios';
+
+
+var c_id;
+c_id = localStorage.getItem('clinicID')
 
 export default function MaterialTableDemo() {
+
+    
+    
+
     const [state, setState] = React.useState({
         columns: [
             { title: "Treatment Name", field: "name" },
             { title: "Treatment Info", field: "info" },
             { title: "Price Low", field: "plow" },
-            { title: "Price Low Currency", field: "plowcurrency" },
-            { title: "Price Low", field: "phigh" },
-            { title: "Price High Currency", field: "phighcurrency" }
+            { title: "Price High", field: "phigh" },
+            { title: "Price Currency", field: "phighcurrency" }
         ],
         data: [
-            {
-                name: "Hair Removal",
-                info: "Saçlar şekkkiiil",
-                plow: "100",
-                plowcurrency: "USD",
-                phigh: "250",
-                phighcurrency: "USD"
-            },
-            {
-                name: "Breast Implant",
-                info: "büyük iyidir",
-                plow: "250",
-                plowcurrency: "TL",
-                phigh: "500",
-                phighcurrency: "TL"
-            }
+            
         ]
     });
+
+    async function postToDB(newData){
+        console.log(newData)
+
+
+
+        var name = newData.newData.name;
+        
+        var info = newData.newData.info;
+        var priceLow = newData.newData.plow;
+        var priceHigh = newData.newData.phigh;
+        var currency = newData.newData.phighcurrency;
+
+        const body = JSON.stringify({
+            name,
+            info,
+            priceLow,
+            priceHigh,
+            currency
+        });
+    //     console.log(body);
+        //Headers
+        const config = {
+            headers: {
+                "Content-type": "application/json"
+            }
+        };
+    //Request body
+       var resp = await axios.post("api/treatments/newTreatment/"+c_id, body, config).then((res) => {
+            return res.data
+        }).catch(err => {
+        
+        console.log('error returned:'+err)
+        })
+        if(resp != undefined){
+            cogoToast.success("Successful!")
+        }
+
+    }
 
     return (
         <MaterialTable
@@ -46,8 +79,9 @@ export default function MaterialTableDemo() {
                             setState(prevState => {
                                 const data = [...prevState.data];
                                 data.push(newData);
+                                postToDB({newData})
                                 return { ...prevState, data };
-                            });
+                            })
                         }, 600);
                     }),
                 onRowUpdate: (newData, oldData) =>

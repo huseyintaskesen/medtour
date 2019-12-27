@@ -48,6 +48,16 @@ this.handleCellSelection = this.handleCellSelection.bind(this)
   initializeItems(){
 
     var startTime = this.state.treatment.treatmentDate;
+
+    var startTimeSplitted = startTime.split("-");
+    var startTimeYear = Number.parseInt(startTimeSplitted[0]);
+    var startTimeMonth = Number.parseInt(startTimeSplitted[1]);
+    console.log(startTimeSplitted)
+    var startTimeDay = startTimeSplitted[2].split("T");
+    startTimeDay = Number.parseInt(startTimeDay[0])
+    console.log(startTimeDay)
+    console.log(startTimeYear)
+    console.log(new Date(startTimeYear, startTimeMonth-1, startTimeDay, 8, 0))
     var treatment = [
     {
       _id: 'event-0',
@@ -57,12 +67,13 @@ this.handleCellSelection = this.handleCellSelection.bind(this)
       
       // startDateTime : new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate(), 8, 0),
       // endDateTime   : new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate(), 15, 0),
-      startDateTime : new Date(now.getFullYear(), now.getMonth(), now.getDate()+1, 11, 0),
-      endDateTime   : new Date(now.getFullYear(), now.getMonth(), now.getDate()+1, 13, 0),
+      startDateTime : new Date(startTimeYear, startTimeMonth - 1, startTimeDay, 8, 0),
+      endDateTime   : new Date(startTimeYear, startTimeMonth - 1, startTimeDay, 15, 0),
       classes: 'color-3'
 
     }
     ]
+
 
     this.setState({items:treatment})
 
@@ -227,7 +238,7 @@ this.setState({numberOfDays:days})
           startAtTime={8}
           endAtTime={23}
           cellHeight={this.state.cellHeight}
-          locale="fr"
+          locale="tr"
           items={this.state.items}
           numberOfDays={this.state.numberOfDays}
           headFormat={"ddd DD MMM"}
