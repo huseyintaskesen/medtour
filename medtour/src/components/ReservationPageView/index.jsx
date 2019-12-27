@@ -10,9 +10,9 @@ export default class ReservationPageView extends Component {
 
     render() {
         var clinicInformation = {
-            clinicName: "KARIII!!@#!@#!@#!@#!@3",
-            clinicAddress: "adasdasdasdasd",
-            clinicId: "5dfe3f6e79469144a4653524"
+            clinicName: this.props.location.data.information.name,
+            clinicAddress: this.props.location.data.information.location,
+            clinicId: this.props.location.data.information._id
         };
 
         return (
