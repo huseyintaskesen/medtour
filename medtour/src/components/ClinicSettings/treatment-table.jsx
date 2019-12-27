@@ -1,97 +1,67 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import MaterialTable from "material-table";
+import cogoToast from 'cogo-toast';
+import axios from 'axios';
+
+
+var c_id;
+c_id = localStorage.getItem('clinicID')
 
 export default function MaterialTableDemo() {
+
+    
+    
+
     const [state, setState] = React.useState({
         columns: [
             { title: "Treatment Name", field: "name" },
             { title: "Treatment Info", field: "info" },
             { title: "Price Low", field: "plow" },
-            { title: "Price Low Currency", field: "plowcurrency" },
-            { title: "Price Low", field: "phigh" },
-            { title: "Price High Currency", field: "phighcurrency" }
+            { title: "Price High", field: "phigh" },
+            { title: "Price Currency", field: "phighcurrency" }
         ],
         data: [
-            {
-                name: "Hair Removal",
-                info: "Saçlar şekkkiiil",
-                plow: "100",
-                plowcurrency: "USD",
-                phigh: "250",
-                phighcurrency: "USD"
-            },
-            {
-                name: "Breast Implant",
-                info: "büyük iyidir",
-                plow: "250",
-                plowcurrency: "TL",
-                phigh: "500",
-                phighcurrency: "TL"
-            }
+            
         ]
     });
 
+    async function postToDB(newData){
+        console.log(newData)
 
-    function postToDB()
-    {
 
-    }
 
-    function addDataDummy(name,info,plow,plowcurrency,phigh,phighcurrency)
-    {
+        var name = newData.newData.name;
+        
+        var info = newData.newData.info;
+        var priceLow = newData.newData.plow;
+        var priceHigh = newData.newData.phigh;
+        var currency = newData.newData.phighcurrency;
 
-        const options = {
-            headers: {'content-type': 'application/json'}
+        const body = JSON.stringify({
+            name,
+            info,
+            priceLow,
+            priceHigh,
+            currency
+        });
+    //     console.log(body);
+        //Headers
+        const config = {
+            headers: {
+                "Content-type": "application/json"
+            }
         };
-        // search/"+treatment_type
-        fetch("http://localhost:3001/api/tourData/clinic/5dfe3f6e79469144a4653524", {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        }).then(response => {
-            return response.json();
-        }).then(muutuja => {
-            console.log('RESPONSE'+muutuja.trans[0].u_id.name)
-            this.setState({
-                userName: muutuja.trans[0].u_id.name,
-                surName: muutuja.trans[0].u_id.surname,
-                treatmentName: muutuja.trans[0].t_id.name,
-                treatmentDate: muutuja.trans[0].treatment_Date,
-                treatmentPrice: muutuja.trans[0].t_id.priceLow
-            },()=>{
-              console.log(this.state)
-              this.setState({currentView: 'calendar'})
-            })
-            
-        });
-
-        var data= state.data
-        var newData = {
-            name: name,
-            info: info,
-            plow: plow,
-            plowcurrency: plowcurrency,
-            phigh: phigh,
-            phighcurrency: phighcurrency
+    //Request body
+       var resp = await axios.post("api/treatments/newTreatment/"+c_id, body, config).then((res) => {
+            return res.data
+        }).catch(err => {
+        
+        console.log('error returned:'+err)
+        })
+        if(resp != undefined){
+            cogoToast.success("Successful!")
         }
-
-        var test = new Promise(resolve => {
-            setTimeout(() => {
-                resolve();
-                setState(prevState => {
-                    const data = [...prevState.data];
-                    data.push(newData);
-                    return { ...prevState, data };
-                }).then(
-                    postToDB()
-                );
-            }, 600);
-        });
-
-
-
 
     }
 
@@ -109,9 +79,9 @@ export default function MaterialTableDemo() {
                             setState(prevState => {
                                 const data = [...prevState.data];
                                 data.push(newData);
-                                
+                                postToDB({newData})
                                 return { ...prevState, data };
-                            });
+                            })
                         }, 600);
                     }),
                 onRowUpdate: (newData, oldData) =>

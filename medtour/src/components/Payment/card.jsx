@@ -30,6 +30,8 @@ export default class PaymentForm extends React.Component {
 
     render() {
         var infoPack = this.props.informationToPass;
+        var sendBody = JSON.stringify(infoPack[0]);
+        console.log(sendBody);
         return (
             <div>
                 <div className="container-fluid col-12 bg-white">
@@ -45,7 +47,10 @@ export default class PaymentForm extends React.Component {
                                         <li>
                                             <p>
                                                 Treatment Name:{" "}
-                                                {infoPack[0].treatmentName}
+                                                {
+                                                    infoPack[0]
+                                                        .treatment_Name_Send
+                                                }
                                             </p>
                                         </li>
                                         <li>
@@ -138,11 +143,27 @@ export default class PaymentForm extends React.Component {
                         </div>
                         <div className="row">
                             <div className="offset-1 col-10 pt-4">
-                                <h5>Total Price:</h5>
+                                <h5>
+                                    Total Price:{" "}
+                                    {parseInt(
+                                        infoPack[0].treatment_Price_Send
+                                    ) +
+                                        parseInt(infoPack[0].price) +
+                                        parseInt(infoPack[0].price_one) +
+                                        parseInt(infoPack[0].price_two)}
+                                    {" USD"}
+                                </h5>
                                 <div className="row pl-5 pt-4 reservation-details">
                                     <ul>
                                         <li>
-                                            <p>Treatment: </p>
+                                            <p>
+                                                Treatment:{" "}
+                                                {
+                                                    infoPack[0]
+                                                        .treatment_Price_Send
+                                                }
+                                                {" USD"}
+                                            </p>
                                         </li>
                                         <li>
                                             <p>
@@ -229,10 +250,8 @@ export default class PaymentForm extends React.Component {
                                     axios
                                         .post(
                                             "http://localhost:3001/api/tourData/newTour",
-                                            JSON.stringify(
-                                                this.props.informationToPass[0]
-                                            ),
-                                            this.props.informationToPass[1]
+                                            sendBody,
+                                            infoPack[1]
                                         )
                                         .then(res => {
                                             alert("SUCESS!!!");
