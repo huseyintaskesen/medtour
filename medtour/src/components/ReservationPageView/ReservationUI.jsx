@@ -11,7 +11,7 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import "./reservation.css";
 
-function goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReservedDate, selectedHotel, selectedFlight , treatmentName, clinicName, clinicAddress){
+function goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReservedDate, selectedHotel, selectedFlight , clinicName, clinicAddress, tName, tPrice){
 
     var u_id = apiUserId;
     var t_id = apiTreatmentId;
@@ -101,6 +101,11 @@ function goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReserv
         }
     }
 
+    var treatment_Name_Send = tName;
+    var treatment_Price_Send = tPrice;
+
+    //alert( treatment_Name_Send + " = " + treatment_Price_Send );
+
     //Request body
     const body = {
         u_id,
@@ -108,7 +113,8 @@ function goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReserv
         c_id,
 
         treatment_Date,
-        treatmentName, 
+        treatment_Name_Send,
+        treatment_Price_Send,
         clinicName, 
         clinicAddress,
         
@@ -204,7 +210,7 @@ function filerWithNewDateFlights(flights, date, type, departure, returnD)
 export default function ReservationUI(props) 
 {
     const [treatment, setTreatmentValue] = useState(0);
-    const [treatmentName, setTreatmentName] = useState();
+    
     const [expanded, setExpanded] = useState(false);
     const [treatmentReservedDate, setTreatmentReservedDate] = useState(Date.now);
     const [apiTreatmentId, setApiTreatmentId] = useState("");
@@ -223,7 +229,11 @@ export default function ReservationUI(props)
     const [flightId, setFlightId] = useState();
     const [whatHotelIsSelectedCanIKnow, setWhatHotelIsSelectedCanIKnow] = useState(-1);
 
-    
+    const [treatmentNameS, setTreatmentNameS] = useState("");
+    const [treatmentNameS1, setTreatmentNameS1] = useState("");
+
+    const [treatment1, setTreatmentValue1] = useState(0);
+
 
     const useStyles = makeStyles(theme => ({
         root: {
@@ -240,14 +250,19 @@ export default function ReservationUI(props)
 
         var optionValue = event.target.value + "";
         var valuesArray = optionValue.split("~");
-
+        var aaa= valuesArray[2] + "";
+        setTreatmentNameS( aaa );
+        setTreatmentNameS1();
         var oldTreatmentPrice = parseInt(treatment);
         var totalTourPrice = parseInt(tourPrice) - oldTreatmentPrice;
         
         setTreatmentValue(valuesArray[0]);
-        setTreatmentName(event.target.key);
-        setApiTreatmentId(valuesArray[1]);
+        setTreatmentValue1( valuesArray[0] );
         
+        setApiTreatmentId( valuesArray[1]);
+
+        //alert("[" + valuesArray[0]  + "][" + valuesArray[1] + "][" + valuesArray[2] + "]" + treatmentNameS);
+
         //alert("[" + tourPrice + "][" + oldTreatmentPrice + "][" + treatment + "][" + valuesArray[1] + "]");
         totalTourPrice = parseInt(totalTourPrice) + parseInt(event.target.value);
         setTourPrice(totalTourPrice);
@@ -304,7 +319,7 @@ export default function ReservationUI(props)
                                                 id="outlined-select-currency-native"
                                                 select
                                                 label="Select Treatment"
-                                                value= {treatmentName}
+                                                value= {treatmentNameS1}
                                                 onChange={handleChange}
                                                 SelectProps={{
                                                     native: true
@@ -314,7 +329,7 @@ export default function ReservationUI(props)
                                                 {treatments.map(option => (
                                                     <option
                                                         key={option.name}
-                                                        value={option.priceLow + "~" + option._id}
+                                                        value={option.priceLow + "~" + option._id + "~" + option.name}
                                                     >
                                                         {option.name}
                                                     </option>
@@ -742,7 +757,7 @@ export default function ReservationUI(props)
 
                     <div class="row ">
                         <div class="col-6 text-center">
-                        <Link to={{ pathname: "/payment", data: goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReservedDate, selectedHotel, selectedFlight, treatmentName, clinicName, clinicAddress)  }} className="card-link">
+                        <Link to={{ pathname: "/payment", data: goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReservedDate, selectedHotel, selectedFlight, clinicName, clinicAddress, treatmentNameS, treatment1)  }} className="card-link">
                             <button class="btn btn-success"> Confirm Treatment Tour</button>
                         </Link>
                         </div>
