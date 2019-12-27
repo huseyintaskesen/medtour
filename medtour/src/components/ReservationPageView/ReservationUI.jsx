@@ -142,10 +142,6 @@ function goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReserv
 
     var infoPack =[ body, config ];
 
-    console.log( JSON.stringify(infoPack[0])  );
-    console.log(infoPack[0]);
-
-
     return infoPack;
 }
 
@@ -225,7 +221,6 @@ export default function ReservationUI(props)
     const [showFlights, changeFlightsToggle] = useState( false );
     const [flights, filterFlights] = useState( filerWithNewDateFlights( flightData, null, null) );
     const [selectedFlight, changeSelectedFlight] = useState([]);
-
     const [flightId, setFlightId] = useState();
     const [whatHotelIsSelectedCanIKnow, setWhatHotelIsSelectedCanIKnow] = useState(-1);
 
