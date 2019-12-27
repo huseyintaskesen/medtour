@@ -34,8 +34,8 @@ class SignUp extends Component {
             cogoToast.success("Your account has been created!");
         }
         
-        sessionStorage.setItem('userID', user.user.id);
-        const u_id = sessionStorage.getItem('userID');
+        localStorage.setItem('userID',user.user.id);
+        const u_id = localStorage.getItem('userID');
         console.log('USER ID FROM SESSION STORAGE:'+ u_id)
         setTimeout(function(){  window.open('http://localhost:3000/landing', "_self")}, 1000);    }
 

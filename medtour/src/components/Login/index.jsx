@@ -26,8 +26,8 @@ class Login extends Component {
         if (islogin != undefined) {
             if (islogin.isLoginSuccessful) {
                 var user_id = islogin.userr.id;
-                sessionStorage.setItem("userID", user_id);
-                const u_id = sessionStorage.getItem("userID");
+                localStorage.setItem("userID", user_id);
+                const u_id = localStorage.getItem("userID");
                 console.log("user id from session storage:" + u_id);
                 cogoToast.success("Success!");
                 setTimeout(function() {
