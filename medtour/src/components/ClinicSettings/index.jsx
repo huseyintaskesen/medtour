@@ -23,7 +23,7 @@ class ClinicSettings extends Component {
 
         this.handleSubmit = this.handleSubmit.bind(this)
 
-        c_id = sessionStorage.getItem('clinicID');
+        c_id = localStorage.getItem('clinicID');
         var clinic = {}
         this.state = {clinic: clinic};
     }

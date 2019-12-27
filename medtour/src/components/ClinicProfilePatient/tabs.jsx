@@ -64,10 +64,10 @@ export default function SimpleTabs(props) {
 
     console.log('CLINIC ID FROM PROPS:'+clinic_id)
 
-    sessionStorage.setItem("clinicID", clinic_id);
+    localStorage.setItem("clinicID", clinic_id);
 
-    const c_id = sessionStorage.getItem("clinicID");
-    console.log("clinic id from session storage:" + c_id);
+    const c_id = localStorage.getItem("clinicID");
+  
 
     const treatment_details = treatments.map(treatment => {
         return (
