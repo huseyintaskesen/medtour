@@ -68,6 +68,36 @@ router.get('/:id', (req, res) =>{
     .then( trans => {  res.send({ trans }) })
 });
 
+// @route   Get api/tourData/user/id
+// @desc    Get the tour data that matches the given user id
+// @access  Public
+
+router.get('/user/:id', (req, res) =>{
+    TourData.find({ u_id: req.params.id } )
+    .populate("u_id")
+    .populate("c_id")
+    .populate("t_id")
+    .populate("transportation_Departure_id")
+    .populate("transportation_Return_id")
+    .populate("accomodation_id")
+    .then( trans => {  res.send({ trans }) })
+});
+
+// @route   Get api/tourData/clinic/id
+// @desc    Get the tour data that matches the given clinic id
+// @access  Public
+
+router.get('/clinic/:id', (req, res) =>{
+    TourData.find({ c_id: req.params.id } )
+    .populate("u_id")
+    .populate("c_id")
+    .populate("t_id")
+    .populate("transportation_Departure_id")
+    .populate("transportation_Return_id")
+    .populate("accomodation_id")
+    .then( trans => {  res.send({ trans }) })
+});
+
 
 
 //==========================================================================================
