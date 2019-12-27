@@ -60,6 +60,15 @@ export default function SimpleTabs(props) {
     var ratingAverage = props.information.ratingAverage;
     var bio = props.bio;
 
+    var clinic_id = props.information.clinic_id
+
+    console.log('CLINIC ID FROM PROPS:'+clinic_id)
+
+    sessionStorage.setItem("clinicID", clinic_id);
+
+    const c_id = sessionStorage.getItem("clinicID");
+    console.log("clinic id from session storage:" + c_id);
+
     const treatment_details = treatments.map(treatment => {
         return (
             <div class="col-12">
