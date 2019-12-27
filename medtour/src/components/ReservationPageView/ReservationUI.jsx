@@ -11,7 +11,7 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import "./reservation.css";
 
-function goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReservedDate, selectedHotel, selectedFlight){
+function goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReservedDate, selectedHotel, selectedFlight , treatmentName, clinicName, clinicAddress){
 
     var u_id = apiUserId;
     var t_id = apiTreatmentId;
@@ -102,12 +102,15 @@ function goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReserv
     }
 
     //Request body
-    const body = JSON.stringify({
+    const body = {
         u_id,
         t_id,
         c_id,
 
         treatment_Date,
+        treatmentName, 
+        clinicName, 
+        clinicAddress,
         
         departure_one,
         location_one,
@@ -129,7 +132,7 @@ function goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReserv
         currency,
         checkIn,
         checkOut
-    });
+    };
 
     var infoPack =[ body, config ];
 
@@ -257,6 +260,7 @@ export default function ReservationUI(props)
 
     var apiUserId = props.userId;
     var apiClinicId = props.clinicInformation.clinicId;
+    var clinicAddress = props.clinicInformation.clinicAddress;
     var treatments = props.treatmentsInformation;
     var clinicName = props.clinicInformation.clinicName;    
 
@@ -738,7 +742,7 @@ export default function ReservationUI(props)
 
                     <div class="row ">
                         <div class="col-6 text-center">
-                        <Link to={{ pathname: "/payment", data: goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReservedDate, selectedHotel, selectedFlight)  }} className="card-link">
+                        <Link to={{ pathname: "/payment", data: goToPaymentPage(apiUserId, apiTreatmentId, apiClinicId, treatmentReservedDate, selectedHotel, selectedFlight, treatmentName, clinicName, clinicAddress)  }} className="card-link">
                             <button class="btn btn-success"> Confirm Treatment Tour</button>
                         </Link>
                         </div>
