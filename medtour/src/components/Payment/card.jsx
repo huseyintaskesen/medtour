@@ -43,7 +43,10 @@ export default class PaymentForm extends React.Component {
                                 <div className="row pl-5 pt-4 reservation-details">
                                     <ul>
                                         <li>
-                                            <p>Treatment Name: </p>
+                                            <p>
+                                                Treatment Name:{" "}
+                                                {infoPack[0].treatmentName}
+                                            </p>
                                         </li>
                                         <li>
                                             <p>
@@ -55,10 +58,16 @@ export default class PaymentForm extends React.Component {
                                             </p>
                                         </li>
                                         <li>
-                                            <p>Clinic Name: </p>
+                                            <p>
+                                                Clinic Name:{" "}
+                                                {infoPack[0].clinicName}
+                                            </p>
                                         </li>
                                         <li>
-                                            <p>Clinic Adress: </p>
+                                            <p>
+                                                Clinic Adress:{" "}
+                                                {infoPack[0].clinicAddress}
+                                            </p>
                                         </li>
                                         <li>
                                             <p>
@@ -66,16 +75,62 @@ export default class PaymentForm extends React.Component {
                                             </p>
                                         </li>
                                         <li>
-                                            <p>Check-In Date: </p>
+                                            <p>
+                                                Check-In Date:{" "}
+                                                {infoPack[0].checkIn.slice(
+                                                    0,
+                                                    10
+                                                )}
+                                            </p>
                                         </li>
                                         <li>
-                                            <p>Check-Out Date: </p>
+                                            <p>
+                                                Check-Out Date:{" "}
+                                                {infoPack[0].checkOut.slice(
+                                                    0,
+                                                    10
+                                                )}
+                                            </p>
                                         </li>
                                         <li>
-                                            <p>Outbound Date & Time: </p>
+                                            <p>
+                                                Outbound Flight Location, Date &
+                                                Time: {infoPack[0].location_one}
+                                                {" | "}
+                                                {infoPack[0].departure_one.substr(
+                                                    0,
+                                                    infoPack[0].departure_one.indexOf(
+                                                        "T"
+                                                    )
+                                                )}
+                                                {" | "}
+                                                {infoPack[0].departure_one.substr(
+                                                    infoPack[0].departure_one.indexOf(
+                                                        "T"
+                                                    ) + 1,
+                                                    5
+                                                )}
+                                            </p>
                                         </li>
                                         <li>
-                                            <p>Return Date & Time: </p>
+                                            <p>
+                                                Return Flight Location Date &
+                                                Time: {infoPack[0].location_two}
+                                                {" | "}
+                                                {infoPack[0].departure_two.substr(
+                                                    0,
+                                                    infoPack[0].departure_two.indexOf(
+                                                        "T"
+                                                    )
+                                                )}
+                                                {" | "}
+                                                {infoPack[0].departure_two.substr(
+                                                    infoPack[0].departure_two.indexOf(
+                                                        "T"
+                                                    ) + 1,
+                                                    5
+                                                )}
+                                            </p>
                                         </li>
                                     </ul>
                                 </div>
@@ -90,10 +145,21 @@ export default class PaymentForm extends React.Component {
                                             <p>Treatment: </p>
                                         </li>
                                         <li>
-                                            <p>Accomodation: </p>
+                                            <p>
+                                                Accomodation:{" "}
+                                                {infoPack[0].price}{" "}
+                                                {infoPack[0].currency}
+                                            </p>
                                         </li>
                                         <li>
-                                            <p>Transportation: </p>
+                                            <p>
+                                                Transportation:{" "}
+                                                {infoPack[0].price_one}{" "}
+                                                {infoPack[0].currency_one}
+                                                {" | "}
+                                                {infoPack[0].price_two}{" "}
+                                                {infoPack[0].currency_two}
+                                            </p>
                                         </li>
                                     </ul>
                                 </div>

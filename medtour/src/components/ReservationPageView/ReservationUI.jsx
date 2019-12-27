@@ -215,12 +215,9 @@ export default function ReservationUI(props)
     const [showFlights, changeFlightsToggle] = useState( false );
     const [flights, filterFlights] = useState( filerWithNewDateFlights( flightData, null, null) );
     const [selectedFlight, changeSelectedFlight] = useState([]);
-
     const [flightId, setFlightId] = useState();
     const [whatHotelIsSelectedCanIKnow, setWhatHotelIsSelectedCanIKnow] = useState(-1);
-
     
-
     const useStyles = makeStyles(theme => ({
         root: {
             "& .MuiTextField-root": {
