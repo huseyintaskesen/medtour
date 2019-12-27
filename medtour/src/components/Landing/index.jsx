@@ -202,7 +202,7 @@ class Landing extends Component {
                         </h4>
                     </div>
                     <div className="input mb-3">
-                        <div className="row borderUp">
+                        <div className="row">
                             <Autosuggest
                                 suggestions={suggestions}
                                 onSuggestionsFetchRequested={
