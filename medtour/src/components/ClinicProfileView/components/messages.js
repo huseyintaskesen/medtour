@@ -5,8 +5,8 @@ import ChatIcon from '@material-ui/icons/Chat';
 import IconButton from '@material-ui/core/IconButton';
 import Chat from '../../Chatapp/index'
 
-var u_id = String(sessionStorage.getItem('userID'));
-var c_id = String(sessionStorage.getItem('clinicID'));
+var u_id = String(localStorage.getItem('userID'));
+var c_id = String(localStorage.getItem('clinicID'));
 
 var room_id = String(u_id + c_id)
 

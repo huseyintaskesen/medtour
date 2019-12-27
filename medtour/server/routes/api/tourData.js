@@ -92,9 +92,6 @@ router.get('/clinic/:id', (req, res) =>{
     .populate("u_id")
     .populate("c_id")
     .populate("t_id")
-    .populate("transportation_Departure_id")
-    .populate("transportation_Return_id")
-    .populate("accomodation_id")
     .then( trans => {  res.send({ trans }) })
 });
 

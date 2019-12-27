@@ -43,8 +43,8 @@ class ClinicLoginAndRegister extends Component {
         if(clinic_after_register != undefined){
             if(clinic_after_register.isLoginSuccessful ){
                 var clinic_id = clinic_after_register.clinic.id
-                sessionStorage.setItem('clinicID', clinic_id);
-                const c_id = sessionStorage.getItem('clinicID');
+                localStorage.setItem('clinicID', clinic_id);
+                const c_id = localStorage.getItem('clinicID');
                 console.log('user id from session storage:'+ c_id)
                 cogoToast.success("Now you are being redirect to control page!");
                 
@@ -64,8 +64,8 @@ class ClinicLoginAndRegister extends Component {
         if(clinic != undefined){
             if(clinic.isLoginSuccessful ){
                 var clinic_id = clinic.clinic.id
-                sessionStorage.setItem('clinicID', clinic_id);
-                const c_id = sessionStorage.getItem('clinicID');
+                localStorage.setItem('clinicID', clinic_id);
+                const c_id = localStorage.getItem('clinicID');
                 console.log('user id from session storage:'+ c_id)
                 cogoToast.success("Success!");
                 
