@@ -6,13 +6,14 @@ import Footer from "../Footer";
 export default class ReservationPageView extends Component {
     constructor(props) {
         super(props);
+        console.log( this.props.location.data.information);
     }
 
     render() {
         var clinicInformation = {
             clinicName: this.props.location.data.information.name,
-            clinicAddress: this.props.location.data.information.address,
-            clinicId: this.props.location.data.information._id
+            clinicAddress: this.props.location.data.information.location,
+            clinicId: this.props.location.data.information.clinic_id
         };
 
         return (

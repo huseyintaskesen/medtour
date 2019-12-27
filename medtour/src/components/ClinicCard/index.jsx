@@ -16,6 +16,7 @@ export default function ClinicCardAsaf(props) {
             );
         }
         else if( treatmentLimit == 0 ){
+            treatmentLimit--;
             return(
                 <div>
                     <Link to={{ pathname: "/clinicdetails", data: props }} className="card-link">
