@@ -32,6 +32,69 @@ export default function MaterialTableDemo() {
         ]
     });
 
+
+    function postToDB()
+    {
+
+    }
+
+    function addDataDummy(name,info,plow,plowcurrency,phigh,phighcurrency)
+    {
+
+        const options = {
+            headers: {'content-type': 'application/json'}
+        };
+        // search/"+treatment_type
+        fetch("http://localhost:3001/api/tourData/clinic/5dfe3f6e79469144a4653524", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        }).then(response => {
+            return response.json();
+        }).then(muutuja => {
+            console.log('RESPONSE'+muutuja.trans[0].u_id.name)
+            this.setState({
+                userName: muutuja.trans[0].u_id.name,
+                surName: muutuja.trans[0].u_id.surname,
+                treatmentName: muutuja.trans[0].t_id.name,
+                treatmentDate: muutuja.trans[0].treatment_Date,
+                treatmentPrice: muutuja.trans[0].t_id.priceLow
+            },()=>{
+              console.log(this.state)
+              this.setState({currentView: 'calendar'})
+            })
+            
+        });
+
+        var data= state.data
+        var newData = {
+            name: name,
+            info: info,
+            plow: plow,
+            plowcurrency: plowcurrency,
+            phigh: phigh,
+            phighcurrency: phighcurrency
+        }
+
+        var test = new Promise(resolve => {
+            setTimeout(() => {
+                resolve();
+                setState(prevState => {
+                    const data = [...prevState.data];
+                    data.push(newData);
+                    return { ...prevState, data };
+                }).then(
+                    postToDB()
+                );
+            }, 600);
+        });
+
+
+
+
+    }
+
     return (
         <MaterialTable
             style={{ width: "100%" }}
@@ -46,6 +109,7 @@ export default function MaterialTableDemo() {
                             setState(prevState => {
                                 const data = [...prevState.data];
                                 data.push(newData);
+                                
                                 return { ...prevState, data };
                             });
                         }, 600);
