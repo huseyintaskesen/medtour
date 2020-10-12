@@ -1,4 +1,8 @@
-﻿## Getting Started
+## Introduction
+
+Medical tourism platform to help patients to find, compare and book the right clinics in Turkey. Web application built with React on NodeJs as our Senior Design Project.
+
+## Getting Started
 
 In the root directory of the project...
 
