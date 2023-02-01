@@ -16,7 +16,7 @@
     "http-errors": "~1.6.2",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.3.5",
-    "mongoose": "^5.8.1",
+    "mongoose": "^5.13.15",
     "morgan": "~1.9.0",
     "yarn": "^1.22.0"
   },
